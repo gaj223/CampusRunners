@@ -12,39 +12,28 @@ public class Orders {
     public int buyerId;
     public String buyerNote;
     public String date;
-    public ArrayList<String> items; // item names
-    public ArrayList<Integer> quantities; // quantity for each item
-    public ArrayList<Float> prices; // price for each item
+    public ArrayList<String> items = new ArrayList<String>(); // item names
+    public ArrayList<Integer> quantities = new ArrayList<Integer>(); // quantity for each item
+    public ArrayList<Float> prices = new ArrayList<Float>(); // price for each item
     public String status; // active or completed
 
     // constructor with API Calls
-    /*public OpenJob(int orderId){
+    public Orders(int orderId){
         this.orderId = orderId;
-        this.items = items; // API Call to Database
-        this.buyerId = buyerId; // API Call to Database
-        this.businessName = business; // API Call to Database
-        this.buyerNote = note; // API Call to Database (Not Sure)
-        this.quantities = quantities; // API Call to Database
-        this.prices = prices; // API Call to Database
-        this.date = date; // API Call\
-        this.st
-
-    }*/
-
-    // constructor - Temporary until API Calls are put
-    public Orders(int orderId, String business, int buyerId, String note,
-                   ArrayList<String> items, ArrayList<Integer> quantities,
-                   ArrayList<Float> prices, String date ){
-        this.orderId = orderId;
-        this.businessName = business;
-        this.buyerId = buyerId;
-        this.buyerNote = note;
-        this.items = items;
-        this.quantities = quantities;
-        this.prices = prices;
-        this.date = date;
+        this.items.add("Pen, Pack of 8"); // API Call to Database
+        this.items.add("Notebook");
+        this.buyerId = 5; // API Call to Database
+        this.businessName = "Bookstore"; // API Call to Database
+        this.buyerNote = "Text When Here"; // API Call to Database (Not Sure)
+        this.quantities.add(2); // API Call to Database
+        this.quantities.add(5);
+        this.prices.add(3.0f); // API Call to Database
+        this.prices.add(1.0f);
+        this.date = "3/15/2018"; // API Call\
 
     }
+
+
 
     // Returns the Total for the Order
     public float getTotal(){
@@ -53,6 +42,19 @@ public class Orders {
             total = total + quantities.get(i) * prices.get(i);
         }
         return total;
+
+    }
+
+    // Calculates the fee for the runner
+    public float getFee(){
+
+        float total = getTotal();
+        if (total > 15)
+            return 3;
+        else if (total > 10 )
+            return 2;
+        else
+            return 1;
 
     }
 }
