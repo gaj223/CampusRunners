@@ -2,16 +2,20 @@ package com.example.user.campusrunners;
 
 import java.util.ArrayList;
 
-// For all Open Orders
-public class OpenJob {
+/**
+ * Created by user on 3/10/18.
+ */
 
+public class Orders {
     public int orderId;
     public String businessName; // Name of the Business
+    public int buyerId;
+    public String buyerNote;
     public String date;
     public ArrayList<String> items; // item names
     public ArrayList<Integer> quantities; // quantity for each item
     public ArrayList<Float> prices; // price for each item
-    public int fee;
+    public String status; // active or completed
 
     // constructor with API Calls
     /*public OpenJob(int orderId){
@@ -22,16 +26,19 @@ public class OpenJob {
         this.buyerNote = note; // API Call to Database (Not Sure)
         this.quantities = quantities; // API Call to Database
         this.prices = prices; // API Call to Database
-        this.date = date; // API Call
+        this.date = date; // API Call\
+        this.st
 
     }*/
 
     // constructor - Temporary until API Calls are put
-    public OpenJob(int orderId, String business,
+    public Orders(int orderId, String business, int buyerId, String note,
                    ArrayList<String> items, ArrayList<Integer> quantities,
                    ArrayList<Float> prices, String date ){
         this.orderId = orderId;
         this.businessName = business;
+        this.buyerId = buyerId;
+        this.buyerNote = note;
         this.items = items;
         this.quantities = quantities;
         this.prices = prices;
@@ -46,19 +53,6 @@ public class OpenJob {
             total = total + quantities.get(i) * prices.get(i);
         }
         return total;
-
-    }
-
-    // Calculates the fee for the runner
-    public float getFee(){
-
-        float total = getTotal();
-        if (total > 15)
-            return 3;
-        else if (total > 10 )
-            return 2;
-        else
-            return 1;
 
     }
 }
