@@ -1,18 +1,15 @@
 package com.example.user.campusrunners;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-public class AcceptJob extends AppCompatActivity {
+public class RunnerDetailAccepted extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private Intent intent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,21 +34,15 @@ public class AcceptJob extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accept_job);
+        setContentView(R.layout.activity_runner_detail_accepted);
 
         // get RunnerId and OrderId
         Bundle bundle = getIntent().getExtras();
-        int orderId = bundle.getInt("OrderId");
+        int orderId = bundle.getInt("orderID");
         Orders order = new Orders(orderId);
-
-        // To allow info to pass to detail accepted job page
-        intent =new Intent(this, RunnerDetailAccepted.class);
-        intent.putExtra("RunnerId",bundle.getInt("RunnerId"));
-        intent.putExtra("OrderId",orderId);
 
         // Add Order Details to page
         addOrderDetail(order);
-
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -75,14 +66,6 @@ public class AcceptJob extends AppCompatActivity {
         detail = detail +"Total                      $" +order.getTotal() + "\n";
         detail = detail +"Money Made                 $" +order.getFee();
         textElement.setText(detail);
-
-    }
-
-    // When Fill Order Button pressed will change to the detail accepted order page
-    public void fillOrder(View v){
-
-        //API call to update order status
-        startActivity(intent);
 
     }
 

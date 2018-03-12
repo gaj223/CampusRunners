@@ -28,7 +28,10 @@
         </activity>
         <activity
             android:name=".AcceptJob"
-            android:label="@string/title_activity_accept_job"></activity>
+            android:label="@string/title_activity_accept_job" />
+        <activity
+            android:name=".RunnerDetailAccepted"
+            android:label="@string/title_activity_runner_detail_accepted"></activity>
     </application>
 
 </manifest>
