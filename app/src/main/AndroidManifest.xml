@@ -34,7 +34,10 @@
             android:label="@string/title_activity_runner_detail_accepted" />
         <activity
             android:name=".ViewAllRunnerOrders"
-            android:label="@string/title_activity_view_all_runner_orders"></activity>
+            android:label="@string/title_activity_view_all_runner_orders" />
+        <activity
+            android:name=".IndividualCompletedOrder"
+            android:label="@string/title_activity_individual_completed_order"></activity>
     </application>
 
 </manifest>

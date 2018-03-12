@@ -39,8 +39,7 @@ public class RunnerDetailAccepted extends AppCompatActivity {
 
         // get RunnerId and OrderId
         Bundle bundle = getIntent().getExtras();
-        int orderId = bundle.getInt("orderID");
-        Orders order = new Orders(orderId);
+        Orders order = (Orders) bundle.getSerializable("Order");
 
         // Add Order Details to page
         addOrderDetail(order);
@@ -77,8 +76,8 @@ public class RunnerDetailAccepted extends AppCompatActivity {
 
         TextView textElement = (TextView) findViewById(R.id.textViewStore);
         textElement.setText(order.businessName); // Add Bussiness Name
-        textElement = (TextView) findViewById(R.id.textViewDate);
-        textElement.setText(order.date); // Add Date
+        //textElement = (TextView) findViewById(R.id.textViewDate);
+        //textElement.setText(order.date); // Add Date
         textElement = (TextView) findViewById(R.id.textViewNote);
         textElement.setText(order.buyerNote); // Add Buyer's Note
         textElement = (TextView) findViewById(R.id.textViewDetails);

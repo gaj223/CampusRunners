@@ -6,13 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-public class AcceptJob extends AppCompatActivity {
+public class IndividualCompletedOrder extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private Intent intent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,19 +35,12 @@ public class AcceptJob extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accept_job);
+        setContentView(R.layout.activity_individual_completed_order);
 
-        // get Order
+        // get RunnerId and OrderId
         Bundle bundle = getIntent().getExtras();
+        int orderId = bundle.getInt("Order");
         Orders order = (Orders) bundle.getSerializable("Order");
-
-        // To allow info to pass to detail accepted job page
-        intent =new Intent(this, RunnerDetailAccepted.class);
-        intent.putExtra("Order", order);
-
-        // Add Order Details to page
-        addOrderDetail(order);
-
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -62,11 +53,11 @@ public class AcceptJob extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(AcceptJob.this, RunnerHome.class);
+                        i = new Intent(IndividualCompletedOrder.this, RunnerHome.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(AcceptJob.this, ViewAllRunnerOrders.class);
+                        i = new Intent(IndividualCompletedOrder.this, ViewAllRunnerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
@@ -78,7 +69,6 @@ public class AcceptJob extends AppCompatActivity {
         });
     }
 
-
     // Add Order Details
     public void addOrderDetail(Orders order){
 
@@ -86,8 +76,6 @@ public class AcceptJob extends AppCompatActivity {
         textElement.setText(order.businessName); // Add Bussiness Name
         //textElement = (TextView) findViewById(R.id.textViewDate);
         //textElement.setText(order.date); // Add Date
-        textElement = (TextView) findViewById(R.id.textViewNote);
-        textElement.setText(order.buyerNote); // Add Buyer's Note
         textElement = (TextView) findViewById(R.id.textViewDetails);
         String detail = "";
         for (int i = 0; i < order.items.size();i++){ // Add the list of item detail
@@ -96,14 +84,6 @@ public class AcceptJob extends AppCompatActivity {
         detail = detail +"Total                      $" +order.getTotal() + "\n";
         detail = detail +"Money Made                 $" +order.getFee();
         textElement.setText(detail);
-
-    }
-
-    // When Fill Order Button pressed will change to the detail accepted order page
-    public void fillOrder(View v){
-
-        //API call to update order status
-        startActivity(intent);
 
     }
 

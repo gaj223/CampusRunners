@@ -25,4 +25,6 @@
     <string name="title_activity_runner_orders">Orders</string>
     <string name="title_activity_runner_detail_accepted">Order Detail</string>
     <string name="title_activity_view_all_runner_orders">Orders</string>
+    <string name="title_activity_rate_buyer">Rate the Buyer</string>
+    <string name="title_activity_individual_completed_order">"Completed "</string>
 </resources>

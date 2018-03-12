@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class RunnerHome extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private int runnerID;
     public Intent intentAccept;
     public ArrayList<Orders> openOrders;
 
@@ -45,9 +44,6 @@ public class RunnerHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_runner_home);
-
-        // Get Runner Id (API Call)
-        runnerID = 12;
 
         // To allow info to pass to accept job page
         intentAccept =new Intent(this, AcceptJob.class);
@@ -118,7 +114,7 @@ public class RunnerHome extends AppCompatActivity {
             Button btnTag = new Button(this);
             btnTag.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
             String text = current.businessName + "\t\t\t$"
-                    + current.getTotal() + " | $" + current.getFee() + "\n" + current.date;
+                    + current.getTotal() + " | $" + current.getFee() + "\n 03/15/2018" ;//+ current.date;
             btnTag.setText(text);
             btnTag.setId(i);
             final int id_ = btnTag.getId();
@@ -129,8 +125,6 @@ public class RunnerHome extends AppCompatActivity {
 
             btnTag.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    intentAccept.putExtra("RunnerId",runnerID);
-                    //intentAccept.putExtra("OrderId",current.orderId);
                     intentAccept.putExtra("Order", openOrders.get(id_));
 
                     startActivity(intentAccept);

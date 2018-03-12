@@ -1,6 +1,7 @@
 package com.example.user.campusrunners;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,11 +14,12 @@ public class Orders implements Serializable {
     public String businessName; // Name of the Business
     public int buyerId;
     public String buyerNote;
-    public String date;
+    public Timestamp timePlaced;
     public ArrayList<String> items = new ArrayList<String>(); // item names
     public ArrayList<Integer> quantities = new ArrayList<Integer>(); // quantity for each item
     public ArrayList<Float> prices = new ArrayList<Float>(); // price for each item
-    public String status; // active or completed
+    public String status; // active or completed or open
+    public Timestamp timeCompleted;
     public int amountItems = 4; // Temporary
     public String listItems[] = {"Pens, Pack of 8", "Pencils, Pack of 8",
             "Composition Notebook", "Spiral Notebook", "Red Scrantron, 100 questions",
@@ -32,7 +34,7 @@ public class Orders implements Serializable {
         this.buyerId = 5; // Add API Call to Database
         this.businessName = "Bookstore"; // Add API Call to Database
         this.buyerNote = "Text When Here"; // Add API Call to Database (Not Sure)
-        this.date = "3/15/2018"; //Add API Call
+        //this.timePlaced = ; //Add API Call
 
     }
 
