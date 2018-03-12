@@ -23,11 +23,11 @@ public class AcceptJob extends AppCompatActivity {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_orders:
+                    mTextMessage.setText(R.string.title_orders);
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                case R.id.navigation_profile:
+                    mTextMessage.setText(R.string.title_profile);
                     return true;
             }
             return false;
@@ -42,12 +42,12 @@ public class AcceptJob extends AppCompatActivity {
         // get RunnerId and OrderId
         Bundle bundle = getIntent().getExtras();
         int orderId = bundle.getInt("OrderId");
-        Orders order = new Orders(orderId);
+        Orders order = (Orders) bundle.getSerializable("Order");
 
         // To allow info to pass to detail accepted job page
         intent =new Intent(this, RunnerDetailAccepted.class);
         intent.putExtra("RunnerId",bundle.getInt("RunnerId"));
-        intent.putExtra("OrderId",orderId);
+        intent.putExtra("Order", order);
 
         // Add Order Details to page
         addOrderDetail(order);
@@ -56,7 +56,30 @@ public class AcceptJob extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        // Allow user to navigate between activities
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent i;
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        i = new Intent(AcceptJob.this, RunnerHome.class);
+                        startActivity(i);
+                        break;
+                    case R.id.navigation_orders:
+                        i = new Intent(AcceptJob.this, ViewAllRunnerOrders.class);
+                        startActivity(i);
+                        break;
+                    case R.id.navigation_profile:
+                        // add later when Yadira creates profile page
+                        break;
+                }
+                return false;
+            }
+        });
     }
+
 
     // Add Order Details
     public void addOrderDetail(Orders order){

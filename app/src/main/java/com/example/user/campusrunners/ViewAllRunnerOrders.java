@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class RunnerDetailAccepted extends AppCompatActivity {
+public class ViewAllRunnerOrders extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -35,15 +35,7 @@ public class RunnerDetailAccepted extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_runner_detail_accepted);
-
-        // get RunnerId and OrderId
-        Bundle bundle = getIntent().getExtras();
-        int orderId = bundle.getInt("orderID");
-        Orders order = new Orders(orderId);
-
-        // Add Order Details to page
-        addOrderDetail(order);
+        setContentView(R.layout.activity_view_all_runner_orders);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -56,11 +48,11 @@ public class RunnerDetailAccepted extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(RunnerDetailAccepted.this, RunnerHome.class);
+                        i = new Intent(ViewAllRunnerOrders.this, RunnerHome.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(RunnerDetailAccepted.this, ViewAllRunnerOrders.class);
+                        i = new Intent(ViewAllRunnerOrders.this, ViewAllRunnerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
@@ -72,24 +64,5 @@ public class RunnerDetailAccepted extends AppCompatActivity {
         });
     }
 
-    // Add Order Details
-    public void addOrderDetail(Orders order){
-
-        TextView textElement = (TextView) findViewById(R.id.textViewStore);
-        textElement.setText(order.businessName); // Add Bussiness Name
-        textElement = (TextView) findViewById(R.id.textViewDate);
-        textElement.setText(order.date); // Add Date
-        textElement = (TextView) findViewById(R.id.textViewNote);
-        textElement.setText(order.buyerNote); // Add Buyer's Note
-        textElement = (TextView) findViewById(R.id.textViewDetails);
-        String detail = "";
-        for (int i = 0; i < order.items.size();i++){ // Add the list of item detail
-            detail = detail +"\t"+ order.quantities.get(i) +" " + order.items.get(i) + "\n";
-        }
-        detail = detail +"Total                      $" +order.getTotal() + "\n";
-        detail = detail +"Money Made                 $" +order.getFee();
-        textElement.setText(detail);
-
-    }
 
 }

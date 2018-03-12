@@ -24,4 +24,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_runner_orders">Orders</string>
     <string name="title_activity_runner_detail_accepted">Order Detail</string>
+    <string name="title_activity_view_all_runner_orders">Orders</string>
 </resources>

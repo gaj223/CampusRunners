@@ -1,12 +1,14 @@
 package com.example.user.campusrunners;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by user on 3/10/18.
  */
 
-public class Orders {
+public class Orders implements Serializable {
     public int orderId;
     public String businessName; // Name of the Business
     public int buyerId;
@@ -16,20 +18,37 @@ public class Orders {
     public ArrayList<Integer> quantities = new ArrayList<Integer>(); // quantity for each item
     public ArrayList<Float> prices = new ArrayList<Float>(); // price for each item
     public String status; // active or completed
+    public int amountItems = 4; // Temporary
+    public String listItems[] = {"Pens, Pack of 8", "Pencils, Pack of 8",
+            "Composition Notebook", "Spiral Notebook", "Red Scrantron, 100 questions",
+            " Red Scrantron, 25 questions", "Bluebook"};
+    public float listPrices[] = {2.00f,1.50f,0.75f,1.00f,0.50f,0.25f,1.00f};
+    public Random rand = new Random(); // temporary, chose random numbers from item list
 
     // constructor with API Calls
     public Orders(int orderId){
         this.orderId = orderId;
-        this.items.add("Pen, Pack of 8"); // API Call to Database
-        this.items.add("Notebook");
-        this.buyerId = 5; // API Call to Database
-        this.businessName = "Bookstore"; // API Call to Database
-        this.buyerNote = "Text When Here"; // API Call to Database (Not Sure)
-        this.quantities.add(2); // API Call to Database
-        this.quantities.add(5);
-        this.prices.add(3.0f); // API Call to Database
-        this.prices.add(1.0f);
-        this.date = "3/15/2018"; // API Call\
+        setOrder();
+        this.buyerId = 5; // Add API Call to Database
+        this.businessName = "Bookstore"; // Add API Call to Database
+        this.buyerNote = "Text When Here"; // Add API Call to Database (Not Sure)
+        this.date = "3/15/2018"; //Add API Call
+
+    }
+
+    // Add API Call to Database here
+    // add all the parts of an order to its own arraylist
+    private void setOrder(){
+
+        for(int i = 0; i < amountItems; i++){
+
+            int n = rand.nextInt(7);
+            this.items.add(listItems[n]);
+            this.prices.add(listPrices[n]);
+            this.quantities.add(rand.nextInt(3) + 1);
+
+        }
+
 
     }
 
