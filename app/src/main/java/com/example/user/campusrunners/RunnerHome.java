@@ -89,7 +89,7 @@ public class RunnerHome extends AppCompatActivity {
     public ArrayList<Orders> addOrders(){
         ArrayList<Orders> orders = new ArrayList<Orders>();
         // API Call to get list of open orders
-        int orderNums[] = {200,201,202,203,204,205,206,207};
+        int orderNums[] = {200,201,202,203,204,205,206};
         for (int i = 0; i < orderNums.length; i++){
 
             Orders order = new Orders(orderNums[i]);
