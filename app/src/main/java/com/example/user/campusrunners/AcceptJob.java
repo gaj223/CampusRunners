@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class AcceptJob extends AppCompatActivity {
@@ -81,6 +82,9 @@ public class AcceptJob extends AppCompatActivity {
 
     // Add Order Details
     public void addOrderDetail(Orders order){
+
+        RatingBar buyerRate = (RatingBar) findViewById(R.id.ratingBar);
+        buyerRate.setRating(4.00f); // Get buyer rating through API Call
 
         TextView textElement = (TextView) findViewById(R.id.textViewStore);
         textElement.setText(order.businessName); // Add Bussiness Name

@@ -122,7 +122,7 @@ public class RunnerHome extends AppCompatActivity {
             btnTag.setHeight(200);
             btnTag.setTextSize(24);
 
-
+            // Takes the runner to detail about the order when button is pressed
             btnTag.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     intentAccept.putExtra("Order", openOrders.get(id_));

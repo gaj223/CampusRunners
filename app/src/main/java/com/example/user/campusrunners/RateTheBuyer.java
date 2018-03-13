@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class RunnerDetailAccepted extends AppCompatActivity {
+public class RateTheBuyer extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -37,14 +37,7 @@ public class RunnerDetailAccepted extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_runner_detail_accepted);
-
-        // get RunnerId and OrderId
-        Bundle bundle = getIntent().getExtras();
-        Orders order = (Orders) bundle.getSerializable("Order");
-
-        // Add Order Details to page
-        addOrderDetail(order);
+        setContentView(R.layout.activity_rate_the_buyer);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -57,11 +50,11 @@ public class RunnerDetailAccepted extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(RunnerDetailAccepted.this, RunnerHome.class);
+                        i = new Intent(RateTheBuyer.this, RunnerHome.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(RunnerDetailAccepted.this, ViewAllRunnerOrders.class);
+                        i = new Intent(RateTheBuyer.this, ViewAllRunnerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
@@ -73,36 +66,14 @@ public class RunnerDetailAccepted extends AppCompatActivity {
         });
     }
 
-    // Add Order Details
-    public void addOrderDetail(Orders order){
+    // Takes the runner to the homepage when they submit the buyer's rating
+    public void submitRate(View v){
+            // Update Buyer Rating by API Call
+            RatingBar buyerRate = (RatingBar) findViewById(R.id.ratingBar3);
+            Float buyerRating = buyerRate.getRating();
 
-        RatingBar buyerRate = (RatingBar) findViewById(R.id.ratingBar2);
-        buyerRate.setRating(4.00f); // Get buyer rating through API Call
-
-        TextView textElement = (TextView) findViewById(R.id.textViewStore);
-        textElement.setText(order.businessName); // Add Bussiness Name
-        //textElement = (TextView) findViewById(R.id.textViewDate);
-        //textElement.setText(order.date); // Add Date
-        textElement = (TextView) findViewById(R.id.textViewNote);
-        textElement.setText(order.buyerNote); // Add Buyer's Note
-        textElement = (TextView) findViewById(R.id.textViewDetails);
-        String detail = "";
-        for (int i = 0; i < order.items.size();i++){ // Add the list of item detail
-            detail = detail +"\t"+ order.quantities.get(i) +" " + order.items.get(i) + "\n";
-        }
-        detail = detail +"Total                      $" +order.getTotal() + "\n";
-        detail = detail +"Money Made                 $" +order.getFee();
-        textElement.setText(detail);
-
-    }
-
-    // Takes runner to rate the buyer when complete button is pressed
-    public void completeOrder(View v){
-
-        // Update Order status to completed by API Call
-        Intent submit = new Intent(RunnerDetailAccepted.this, RateTheBuyer.class);
-        startActivity(submit);
-
+            Intent submit = new Intent(RateTheBuyer.this, RunnerHome.class);
+            startActivity(submit);
     }
 
 }
