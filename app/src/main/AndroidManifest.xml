@@ -37,7 +37,10 @@
             android:label="@string/title_activity_view_all_runner_orders" />
         <activity
             android:name=".IndividualCompletedOrder"
-            android:label="@string/title_activity_individual_completed_order"></activity>
+            android:label="@string/title_activity_individual_completed_order" />
+        <activity
+            android:name=".ProfileSettingsActivity"
+            android:label="@string/title_activity_profile_settings"></activity>
     </application>
 
 </manifest>
