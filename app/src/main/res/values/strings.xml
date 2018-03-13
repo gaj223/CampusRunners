@@ -28,4 +28,5 @@
     <string name="title_activity_rate_buyer">Rate the Buyer</string>
     <string name="title_activity_individual_completed_order">"Completed "</string>
     <string name="title_activity_rate_the_buyer">Rate Buyer</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
