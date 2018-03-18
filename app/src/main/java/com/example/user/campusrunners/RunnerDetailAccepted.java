@@ -1,6 +1,7 @@
 package com.example.user.campusrunners;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -105,4 +106,14 @@ public class RunnerDetailAccepted extends AppCompatActivity {
 
     }
 
+    // Takes runner to call the buyer
+    public void callBuyer(View v){
+
+        String number = "8327164026"; // API call to get buyer's number
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        String phone = "tel:" + number;
+        callIntent.setData(Uri.parse(phone));
+        startActivity(callIntent);
+
+    }
 }
