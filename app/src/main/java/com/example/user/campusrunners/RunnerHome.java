@@ -40,7 +40,7 @@ public class RunnerHome extends AppCompatActivity {
         }
     };
 
-    // Refresh page each time page is called 
+    // Refresh page each time page is called
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
