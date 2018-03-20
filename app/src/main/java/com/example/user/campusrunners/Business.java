@@ -9,12 +9,21 @@ import java.io.Serializable;
 public class Business implements Serializable
 {
     // characteristics of business
-    int businessId;
-    String name;
-    String location;
-    String hours;
+    private int businessId;
+    private String name;
+    private String location;
+    private String hours;
 
     public Business(int businessId){
         this.businessId = businessId;
+    }
+
+    // GETTERS AND SETTERS
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 }

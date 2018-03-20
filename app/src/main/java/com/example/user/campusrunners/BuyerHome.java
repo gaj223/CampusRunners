@@ -110,9 +110,11 @@ public class BuyerHome extends AppCompatActivity {
 
         // CJM TODO This will be an API call to get all the businesses
         int businessId[] = {0, 1, 2, 3};
+        String businessName[] = {"Chick-Fil-A", "Papa John's", "UTSA Bookstore", "POD"};
 
         for (int i=0; i<businessId.length; i++){
             Business business = new Business(businessId[i]);
+            business.setName(businessName[i]);
             businesses.add(business);
         }
 
