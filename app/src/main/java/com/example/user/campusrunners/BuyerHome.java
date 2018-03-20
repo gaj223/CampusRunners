@@ -22,13 +22,14 @@ import java.util.ArrayList;
 public class BuyerHome extends AppCompatActivity {
     // bottom bar -- similar to runner but add button for cart
     // home page is simple -- four static businesses
-    /*         String var="hello";
+    /*  String var="hello";
         Log.e("myTag","I am here"+var);
-        */
+    */
 
     private TextView mTextMessage;
+    public Intent intentAccept;
 
-    // bottom navigation bar
+    // bottom runner_navigation bar
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -54,17 +55,43 @@ public class BuyerHome extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_runner_home);
+        setContentView(R.layout.activity_buyer_home);
 
         // To allow info to pass to accept job page
-        intentAccept =new Intent(this, AcceptJob.class);
-
-        // Gets list of Open Orders
-        openOrders = addOrders();
+        intentAccept = new Intent(this, AcceptJob.class);
 
         // Create bottom bar
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        // Allow user to navigate between activities
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent i;
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        i = new Intent(BuyerHome.this, BuyerHome.class);
+                        startActivity(i);
+                        break;
+                    case R.id.navigation_orders:
+                        i = new Intent(BuyerHome.this, ViewAllRunnerOrders.class);
+                        startActivity(i);
+                        break;
+                    case R.id.navigation_cart:
+                        i = new Intent( BuyerHome.this, BuyerCart.class);
+                        startActivity(i);
+                        break;
+                    case R.id.navigation_profile:
+                        // add later when Yadira creates profile page
+                        // CJM: changed this to redirect back to the buyer home (ie it does nothing)
+                        i = new Intent(BuyerHome.this, BuyerHome.class);
+                        startActivity(i);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 }
