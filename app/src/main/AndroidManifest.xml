@@ -12,10 +12,8 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-    <uses-permission
-        android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -51,8 +49,9 @@
         <activity
             android:name=".RateTheBuyer"
             android:label="@string/title_activity_rate_the_buyer" />
-
-
+        <activity
+            android:name=".FAQ"
+            android:label="@string/title_activity_faq"></activity>
     </application>
 
 </manifest>
