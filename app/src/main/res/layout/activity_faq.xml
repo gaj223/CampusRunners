@@ -97,7 +97,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="item" />
+                android:text="The item may no longer be offered by the business. If that is not the case, please nofity us by email and we will update the system." />
 
             <TextView
                 android:id="@+id/ques3"
@@ -118,7 +118,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="runner" />
+                android:text="If the runner does not show up, try to contact the runner by clicking the call button. If the runner does not answer, report the runner and we will refund you." />
 
             <TextView
                 android:id="@+id/ques4"
@@ -128,7 +128,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="What happens if the runner never showed up?" />
+                android:text="What if I cannot find the buyer?" />
 
 
             <TextView
@@ -139,7 +139,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="runner" />
+                android:text="Try to call the buyer two times then wait for 10 minutes before trying to call them again. If you are not still not able to make contact with buyer, then cancel the order and discard the items." />
 
             <TextView
                 android:id="@+id/ques5"
@@ -149,7 +149,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="What happens if the runner never showed up?" />
+                android:text="How do I make an order?" />
 
 
             <TextView
@@ -160,10 +160,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="runner" />
+                android:text="First, click on the business that you want to order from. Second, select the items that you would like to purchase and click add to cart. Then, go to your cart and click submit order." />
 
             <TextView
-                android:id="@+id/ques6"
+                android:id="@+id/contact"
                 android:layout_width="340dp"
                 android:layout_height="35dp"
                 android:layout_marginBottom="8dp"
