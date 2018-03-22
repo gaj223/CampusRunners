@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     public Intent intentRunnerHome ;
     private static String urlLogin ="http://13.59.142.19/CampusRunnerBack/Config/TestHiveStuff/userlogin.php";
     //JSON NODE Tags
-    private static final String TAG_SUCCESS  = "seccess";
+    private static final String TAG_SUCCESS  = "success";
     private static final String TAG_PRODUCTS = "products";
     private static final String TAG_PID      = "pid";
     private static final String TAG_NAME     = "name";
@@ -264,11 +264,20 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                     //int answerReturned;
                         // enter convert input into a hashmap to be read by the php file, via POST
                         HashMap<String, String> choice = new HashMap<String, String>();
-                        choice.put("abc123",abc123);
-                        choice.put("password",password);
+                        // choice.put("abc123",abc123);
+                        // choice.put("password",password);
+                        //Hardcoded for testing
+                        choice.put("abc123","abc321");
+                        choice.put("password","321CBA");
                     try {
                         JSONObject jsonObj = jsonParser.makeHttpRequest(urlLogin, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
+
+
+                        if( jsonObj.isNull(TAG_SUCCESS))
+                          Log.d("DoInBack","null all day");
+                            //JSONArray testJson = jsonObj.getJSONArray(TAG_SUCCESS);
+
                         answerReturned = jsonObj.getInt(TAG_SUCCESS);///////////////error is being thrown here, apparently nothing is inside the jsonObj
                     //Catch needed to use jsonObj.getInt....
                         if(answerReturned == 1){
