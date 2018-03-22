@@ -14,10 +14,12 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
+import android.os.StrictMode;//added via Yadddddi
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
@@ -50,7 +52,8 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     private static final String TAG_SUCCESS  = "success";
     private static final String TAG_PRODUCTS = "products";
     private static final String TAG_PID      = "pid";
-    private static final String TAG_NAME     = "name";
+    private static final String TAG_NAME_ARRAY  = "user";
+    JSONObject jsonObj;
     //come back to this
     DbVerify tempDbVerify = new DbVerify();
 
@@ -94,6 +97,16 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+        }
+
+
         // Set up the login form...
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -270,7 +283,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                         choice.put("abc123","abc321");
                         choice.put("password","321CBA");
                     try {
-                        JSONObject jsonObj = jsonParser.makeHttpRequest(urlLogin, "POST", choice);
+                        jsonObj = jsonParser.makeHttpRequest(urlLogin, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
 
 
@@ -279,6 +292,8 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                             //JSONArray testJson = jsonObj.getJSONArray(TAG_SUCCESS);
 
                         answerReturned = jsonObj.getInt(TAG_SUCCESS);///////////////error is being thrown here, apparently nothing is inside the jsonObj
+
+                        jsonObj.getJSONArray("user");
                     //Catch needed to use jsonObj.getInt....
                         if(answerReturned == 1){
                            //do I call the URL HERE?
@@ -303,6 +318,14 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     }
 
 
+    public JSONArray getUserId_Role(){
+        try {
+            return jsonObj.getJSONArray(TAG_NAME_ARRAY);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 
