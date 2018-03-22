@@ -49,10 +49,11 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     public Intent intentRunnerHome ;
     private static String urlLogin ="http://13.59.142.19/CampusRunnerBack/Config/TestHiveStuff/userlogin.php";
     //JSON NODE Tags
-    private static final String TAG_SUCCESS  = "success";
-    private static final String TAG_PRODUCTS = "products";
-    private static final String TAG_PID      = "pid";
+    private static final String TAG_SUCCESS     = "success";
+    private static final String TAG_PRODUCTS    = "products";
+    private static final String TAG_PID         = "pid";
     private static final String TAG_NAME_ARRAY  = "user";
+    private static final String TAG_USER_ROLE   = "role";
     JSONObject jsonObj;
     //come back to this
     DbVerify tempDbVerify = new DbVerify();
@@ -270,7 +271,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             final String  abc123  = inputUserName.getText().toString();
             final String password = mPasswordView.getText().toString();
             Log.d("DoInBack","past the convert");
-            runOnUiThread(new Runnable() {
+             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                         Log.d("DoInBack","before the try loop,and inside Run()");
@@ -287,8 +288,8 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                         Log.d("DoInBack", "jsonObj is good i think"  );
 
 
-                        if( jsonObj.isNull(TAG_SUCCESS))
-                          Log.d("DoInBack","null all day");
+                        //if( jsonObj.isNull(TAG_SUCCESS))
+                          //Log.d("DoInBack","null all day");
                             //JSONArray testJson = jsonObj.getJSONArray(TAG_SUCCESS);
 
                         answerReturned = jsonObj.getInt(TAG_SUCCESS);///////////////error is being thrown here, apparently nothing is inside the jsonObj
@@ -296,6 +297,16 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                         jsonObj.getJSONArray("user");
                     //Catch needed to use jsonObj.getInt....
                         if(answerReturned == 1){
+                            ///////////////////////////////
+
+
+                           //jsonObj.getJSONArray(TAG_NAME_ARRAY).get(1);
+                            //if(jsonObj.getJSONArray(TAG_NAME_ARRAY).getString(TAG_USER_ROLE) == "runner"){
+                            Log.d("DoInBack","heh " + jsonObj.getJSONArray(TAG_NAME_ARRAY).get(0).toString() );
+                          //  if(jsonObj.getJSONArray(TAG_NAME_ARRAY).get(0).        == "runner" ){
+                            //}else if(jsonObj.getJSONArray(TAG_NAME_ARRAY).get(1)  == "buyer"){
+
+                            //}
                            //do I call the URL HERE?
                             //getApplicationContext() is simlar to this, but used in Async
                             intentRunnerHome = new Intent(getApplicationContext(), RunnerHome.class);
@@ -309,7 +320,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                     }
                 }
             });
-            return "heh";
+            return "heeh";
         }
 
         public int getAnswerReturned() {
