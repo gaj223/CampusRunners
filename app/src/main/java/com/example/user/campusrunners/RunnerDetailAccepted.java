@@ -116,4 +116,12 @@ public class RunnerDetailAccepted extends AppCompatActivity {
         startActivity(callIntent);
 
     }
+
+    // Takes runner to map of UTSA
+    public void toMap(View v){
+
+        Intent mapIntent = new Intent(RunnerDetailAccepted.this, MapUTSA.class);
+        startActivity(mapIntent);
+
+    }
 }
