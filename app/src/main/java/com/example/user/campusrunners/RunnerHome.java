@@ -78,7 +78,7 @@ public class RunnerHome extends AppCompatActivity {
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
-                        i = new Intent(RunnerHome.this, MapsActivity.class);
+                        i = new Intent(RunnerHome.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                 }

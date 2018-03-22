@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class BuyerHome extends AppCompatActivity {
+public class BuyerHomes extends AppCompatActivity {
 
     private TextView mTextMessage;
     private ArrayList<Business> businesses;
@@ -44,7 +44,7 @@ public class BuyerHome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buyer_home);
+        setContentView(R.layout.activity_buyer_homes);
 
         // get all of the businesses as an arraylist
         // CJM this will be hard coded for now
@@ -62,7 +62,7 @@ public class BuyerHome extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(BuyerHome.this, BuyerHome.class);
+                        i = new Intent(BuyerHomes.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
@@ -76,7 +76,7 @@ public class BuyerHome extends AppCompatActivity {
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
                         // CJM: changed this to redirect back to the buyer home (ie it does nothing)
-                        i = new Intent(BuyerHome.this, BuyerHome.class);
+                        i = new Intent(BuyerHomes.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                 }
@@ -109,9 +109,9 @@ public class BuyerHome extends AppCompatActivity {
         Business bus = new Business(1);
         switch (b.getId()) {
             case R.id.podButton:
-                bus = businesses.get(1);
+                 bus = businesses.get(1);
             case R.id.chickfilaButton:
-                bus = businesses.get(2);
+                 bus = businesses.get(2);
             case R.id.papajohnsButton:
                 bus = businesses.get(3);
             case R.id.bookstoreButton:
@@ -119,7 +119,7 @@ public class BuyerHome extends AppCompatActivity {
         }
 
         // change RunnerHome.class to BusinessView.class
-        Intent bussinessIntent = new Intent(BuyerHome.this, RunnerHome.class);
+        Intent bussinessIntent = new Intent(BuyerHomes.this, RunnerHome.class);
         bussinessIntent.putExtra("Business", bus);
         startActivity(bussinessIntent);
 
