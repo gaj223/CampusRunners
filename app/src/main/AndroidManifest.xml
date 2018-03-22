@@ -27,7 +27,7 @@
             android:label="@string/app_name" />
         <activity
             android:name=".RunnerHome"
-            android:label="@string/title_activity_runner_home"></activity>
+            android:label="@string/title_activity_runner_home" />
         <activity
             android:name=".AcceptJob"
             android:label="@string/title_activity_accept_job" />
@@ -69,7 +69,10 @@
         </activity>
         <activity
             android:name=".BuyerCart"
-            android:label="@string/title_activity_buyer_cart"></activity>
+            android:label="@string/title_activity_buyer_cart" />
+        <activity
+            android:name=".BusinessView"
+            android:label="@string/title_activity_business_view"></activity>
     </application>
 
 </manifest>

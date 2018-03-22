@@ -1,22 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.example.user.campusrunners.RunnerHome">
 
+    <android.support.v7.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="444dp"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/pizzaButton"
+            android:layout_width="188dp"
+            android:layout_height="188dp"
+            android:contentDescription="Papa John's"
+            app:srcCompat="@drawable/pizza"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="500dp" />
+
+        <ImageButton
+            android:id="@+id/podButton"
+            android:layout_width="188dp"
+            android:layout_height="188dp"
+            android:contentDescription="POD"
+            app:srcCompat="@drawable/pod"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="206dp" />
+
+        <ImageButton
+            android:id="@+id/chickfilaButton"
+            android:layout_width="188dp"
+            android:layout_height="188dp"
+            android:contentDescription="@string/chick_fil_a"
+            app:srcCompat="@drawable/chickfila"
+            tools:layout_editor_absoluteX="62dp"
+            tools:layout_editor_absoluteY="30dp" />
+
+        <ImageButton
+            android:id="@+id/bookButton"
+            android:layout_width="188dp"
+            android:layout_height="188dp"
+            android:contentDescription="Bookstore"
+            app:srcCompat="@drawable/bookstore"
+            tools:layout_editor_absoluteX="250dp"
+            tools:layout_editor_absoluteY="218dp" />
+    </android.support.v7.widget.GridLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
         android:background="#ffcf9e"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/buyer_navigation" />
+
 
 </android.support.constraint.ConstraintLayout>

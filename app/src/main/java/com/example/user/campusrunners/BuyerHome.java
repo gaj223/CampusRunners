@@ -8,10 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -58,8 +59,8 @@ public class BuyerHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buyer_home);
 
-        // To allow info to pass to accept job page
-        intentAccept = new Intent(this, AcceptJob.class);
+        // To allow info to pass to business view page
+        intentAccept = new Intent(this, BusinessView.class);
 
         // get all of the businesses as an arraylist
         // CJM this will be hard coded for now
@@ -67,6 +68,7 @@ public class BuyerHome extends AppCompatActivity {
 
         // create buttons for each of the businesses
         createBusinessButtons(businesses);
+
 
         // Create bottom bar
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -124,6 +126,15 @@ public class BuyerHome extends AppCompatActivity {
     // Create and show all the buttons for the businesses
     public void createBusinessButtons(ArrayList<Business> businesses)
     {
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(this));
 
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Toast.makeText(BuyerHome.this, "" + position,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

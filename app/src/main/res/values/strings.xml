@@ -30,4 +30,7 @@
     <string name="title_activity_rate_the_buyer">Rate Buyer</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_buyer_cart">BuyerCart</string>
+    <string name="title_activity_business_view">BusinessView</string>
+    <string name="chick_fil_a">Chick-Fil-A</string>
+    <string name="chick_fil_a">Chick-Fil-A</string>
 </resources>
