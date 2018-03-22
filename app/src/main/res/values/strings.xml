@@ -32,4 +32,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_faq">FAQ</string>
     <string name="title_activity_map_uts">UTSA</string>
+    <string name="title_activity_buyer_homes">Home</string>
 </resources>

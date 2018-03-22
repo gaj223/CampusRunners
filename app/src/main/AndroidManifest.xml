@@ -66,7 +66,10 @@
 
         <activity
             android:name=".MapUTSA"
-            android:label="@string/title_activity_map_uts"></activity>
+            android:label="@string/title_activity_map_uts" />
+        <activity
+            android:name=".BuyerHomes"
+            android:label="@string/title_activity_buyer_homes"></activity>
     </application>
 
 </manifest>

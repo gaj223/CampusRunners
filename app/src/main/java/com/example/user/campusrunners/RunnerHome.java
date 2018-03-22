@@ -32,9 +32,6 @@ public class RunnerHome extends AppCompatActivity {
                 case R.id.navigation_orders:
                     mTextMessage.setText(R.string.title_orders);
                     return true;
-                case R.id.navigation_cart:
-                    mTextMessage.setText(R.string.title_cart);
-                    return true;
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
                     return true;
@@ -62,7 +59,6 @@ public class RunnerHome extends AppCompatActivity {
         // Create bottom bar
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        //BottomNavigationViewHelper.disableShiftMode(navigation); // this is added if 4 or more icons
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Allow user to navigate between activities
@@ -81,8 +77,8 @@ public class RunnerHome extends AppCompatActivity {
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
-                        //i = new Intent(RunnerHome.this, FAQ.class);
-                        //startActivity(i);
+                        i = new Intent(RunnerHome.this, BuyerHomes.class);
+                        startActivity(i);
                         break;
                 }
                 return false;
