@@ -131,15 +131,15 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-       // Button mRegesterButton = (Button) findViewById(R.id.reg_button);
-        /* mRegesterButton.setOnClickListener(new OnClickListener() {
+        Button mRegesterButton = (Button) findViewById(R.id.reg_button);
+         mRegesterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 intentCreateUser = new Intent(getApplicationContext(), CreateUser.class);
                 startActivity(intentCreateUser);
             }
         });
-        */
+
 
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
 
