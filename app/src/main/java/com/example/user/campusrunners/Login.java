@@ -131,14 +131,15 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        Button mRegesterButton = (Button) findViewById(R.id.reg_button);
-        mRegesterButton.setOnClickListener(new OnClickListener() {
+       // Button mRegesterButton = (Button) findViewById(R.id.reg_button);
+        /* mRegesterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 intentCreateUser = new Intent(getApplicationContext(), CreateUser.class);
                 startActivity(intentCreateUser);
             }
         });
+        */
 
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
 
@@ -150,8 +151,8 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView  = findViewById(R.id.login_progress);
+        // mLoginFormView = findViewById(R.id.login_form);
+        // mProgressView  = findViewById(R.id.login_progress);
     }
 
 
@@ -159,7 +160,6 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         if (!mayRequestContacts()) {
             return;
         }
-
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -270,10 +270,9 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
 
         return password.length() > 4;
     }
+    /////////////////////////////////////////////////////////// Inner Class
     class DbVerify extends AsyncTask<String,String,String>{
         private  int answerReturned;
-
-
         @Override
         protected  void onPreExecute(){
 
@@ -338,12 +337,13 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                                 // adding HashList to ArrayList, I do not need that here
                                // productsList.add(map);
 
-
-                           if(user_role.toLowerCase() == "runner"){
+                            Log.d("DoInBack",user_role.toLowerCase() );
+                            // this if loop is not working
+                           if(user_role.toLowerCase().compareTo("runner") == 0){
                             //getApplicationContext() is simlar to this, but used in Async
                             intentRunnerHome = new Intent(getApplicationContext(), RunnerHome.class);
                             startActivity(intentRunnerHome);
-                           }else if(user_role.toLowerCase() == "buyer"){
+                           }else if(user_role.toLowerCase().compareTo("runner") == 0){
                                Log.d("BuyerHome","a place holder for the intent for Buyer");
                                //intentRunnerHome = new Intent(getApplicationContext(), BuyerHomes.class);
                                //startActivity(intentRunnerHome);

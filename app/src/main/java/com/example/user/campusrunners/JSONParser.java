@@ -173,7 +173,8 @@ public class JSONParser {
                     os.close();
 
                     int responseCode = conn.getResponseCode();
-                    Log.e("responseError", "" + responseCode);
+
+                    // Log.e("JSONPaser http", "" + responseCode);
 
                     if (responseCode == HttpsURLConnection.HTTP_OK) {
                         BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -185,18 +186,19 @@ public class JSONParser {
                         }
                         reader.close();
                         json = sb.toString();
-
-                        Log.e("in json string", "Json:  " + json);
+                        // Log.e to debug
+                        //Log.e("JSON String value", "Json:  " + json);
                         try {
                             responseParm = new JSONObject(json);
                         } catch (JSONException e) {
-
+                            // Log.e to debug
                             Log.e("JSON Parser", "Error parsing data " + e.toString());
                         }
 
                         return responseParm;
                     } else {
-                        Log.e("responseError", "" + responseCode);
+                        //used for testing
+                        //Log.e("HTTP-ResponseError", "" + responseCode);
 
                         return postDataParams;
                         // }
