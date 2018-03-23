@@ -80,7 +80,10 @@
             android:label="@string/title_activity_buyer_place_order" />
         <activity
             android:name=".BuyerOrderPlaced"
-            android:label="@string/title_activity_buyer_order_placed"></activity>
+            android:label="@string/title_activity_buyer_order_placed" />
+        <activity
+            android:name=".ViewAllBuyerOrders"
+            android:label="@string/title_activity_view_all_buyer_orders"></activity>
     </application>
 
 </manifest>

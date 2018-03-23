@@ -92,12 +92,25 @@ public class BuyerOrderPlaced extends AppCompatActivity {
         });
     }
 
+
+
     // place order info on the view
     public void orderInfo(){
 
         TextView textElement = (TextView) findViewById(R.id.textBusName);
         textElement.setText(business);
-        textElement = (TextView) findViewById(R.id.textDetails);
+        order = "";
+        String line = "";
+        float total = 0;
+        for (int i = 0; i < listItems.length; i++){
+            if(quantities[i] > 0){
+                line = quantities[i] + " " + listItems[i] + "\n";
+                order = order + line;
+                total = total + quantities[i] * listPrices[i];
+            }
+        }
+        order = order + "-----------------------\n";
+        order = order + "Total:             $" + total;
         textElement.setText(order);
 
 

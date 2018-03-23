@@ -67,6 +67,8 @@ public class RunnerDetailAccepted extends AppCompatActivity {
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
+                        i = new Intent(RunnerDetailAccepted.this, RunnerProfile.class);
+                        startActivity(i);
                         break;
                 }
                 return false;
