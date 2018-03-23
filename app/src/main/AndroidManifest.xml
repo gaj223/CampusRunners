@@ -69,7 +69,10 @@
             android:label="@string/title_activity_map_uts" />
         <activity
             android:name=".BuyerHomes"
-            android:label="@string/title_activity_buyer_homes"></activity>
+            android:label="@string/title_activity_buyer_homes" />
+        <activity
+            android:name=".BusinessViews"
+            android:label="@string/title_activity_business_views"></activity>
     </application>
 
 </manifest>
