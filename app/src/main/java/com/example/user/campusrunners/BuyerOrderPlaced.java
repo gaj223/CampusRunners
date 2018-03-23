@@ -99,6 +99,7 @@ public class BuyerOrderPlaced extends AppCompatActivity {
 
         TextView textElement = (TextView) findViewById(R.id.textBusName);
         textElement.setText(business);
+        textElement = (TextView) findViewById(R.id.textDetails);
         order = "";
         String line = "";
         float total = 0;

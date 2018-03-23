@@ -47,7 +47,7 @@ public class ViewAllBuyerOrders extends AppCompatActivity {
 
         // To allow info to pass to active or completed order page
         intentActive =new Intent(this, BuyerOrderPlaced .class);
-        intentCompleted =new Intent(this, IndividualCompletedOrder.class);
+        intentCompleted =new Intent(this, IndividualCompletedOrderBuyer.class);
 
         //get all the active and completed orders
         active = getActiveOrders();
@@ -144,18 +144,19 @@ public class ViewAllBuyerOrders extends AppCompatActivity {
             btnTag.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    String business = active.get(id_).businessName;
-                    String listItems[] = active.get(id_).listItems;
-                    float listPrices[] = active.get(id_).listPrices;
-                    //ArrayList<Integer> quantities[] = active.get(id_).quantities;
-                    String order;
-                    Bundle bundle = new Bundle();
-                    bundle.putString("business", business);
-                    bundle.putStringArray("listItems", listItems);
-                    bundle.putFloatArray("listPrices", listPrices);
+                    Orders order = active.get(id_);
+                    //String business = order.businessName;
+                    //String items [] = new String[order.items.size()];
+                    //items = order.items.toArray();
+                    //float listPrices[] = active.get(id_).pricesrices;
+                    //int quantities[] = active.get(id_).quantities;
+                    //Bundle bundle = new Bundle();
+                    //bundle.putString("business", business);
+                    //bundle.putStringArray("listItems", listItems);
+                    //bundle.putFloatArray("listPrices", listPrices);
                     //bundle.putIntArray("quantities", quantities);
                     //bundle.putString("order",order);
-                    intentActive.putExtras(bundle);
+                    //intentActive.putExtras(bundle);
                     //intentActive.putExtra("Order", active.get(id_));
 
                     startActivity(intentActive);
