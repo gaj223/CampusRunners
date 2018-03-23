@@ -69,7 +69,7 @@ public class BuyerPlaceOrder extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(BuyerPlaceOrder.this, ViewAllRunnerOrders.class);
+                        i = new Intent(BuyerPlaceOrder.this, ViewAllBuyerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:

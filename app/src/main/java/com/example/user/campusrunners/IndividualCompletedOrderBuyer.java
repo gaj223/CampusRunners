@@ -53,16 +53,16 @@ public class IndividualCompletedOrderBuyer extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(IndividualCompletedOrderBuyer.this, RunnerHome.class);
+                        i = new Intent(IndividualCompletedOrderBuyer.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(IndividualCompletedOrderBuyer.this, ViewAllRunnerOrders.class);
+                        i = new Intent(IndividualCompletedOrderBuyer.this, ViewAllBuyerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
-                        i = new Intent(IndividualCompletedOrderBuyer.this, RunnerProfile.class);
+                        i = new Intent(IndividualCompletedOrderBuyer.this, BuyerProfile.class);
                         startActivity(i);
                         break;
                 }

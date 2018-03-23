@@ -64,7 +64,7 @@ public class BuyerHomes extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(BuyerHomes.this, ViewAllRunnerOrders.class);
+                        i = new Intent(BuyerHomes.this, ViewAllBuyerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
