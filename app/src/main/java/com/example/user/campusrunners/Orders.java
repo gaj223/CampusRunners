@@ -14,6 +14,7 @@ public class Orders implements Serializable {
     public String businessName; // Name of the Business
     public int buyerId;
     public String buyerNote;
+    public String buyerLocation;
     public Timestamp timePlaced;
     public ArrayList<String> items = new ArrayList<String>(); // item names
     public ArrayList<Integer> quantities = new ArrayList<Integer>(); // quantity for each item
@@ -34,6 +35,7 @@ public class Orders implements Serializable {
         this.buyerId = 5; // Add API Call to Database
         this.businessName = "Bookstore"; // Add API Call to Database
         this.buyerNote = "Text When Here"; // Add API Call to Database (Not Sure)
+        this.buyerLocation = "JPL Study Room 2";
         //this.timePlaced = ; //Add API Call
 
     }

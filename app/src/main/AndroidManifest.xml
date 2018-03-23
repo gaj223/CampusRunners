@@ -12,8 +12,10 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -27,7 +29,13 @@
             android:label="@string/app_name" />
         <activity
             android:name=".RunnerHome"
-            android:label="@string/title_activity_runner_home" />
+            android:label="@string/title_activity_runner_home">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
         <activity
             android:name=".AcceptJob"
             android:label="@string/title_activity_accept_job" />
@@ -43,6 +51,9 @@
         <activity
             android:name=".RateTheBuyer"
             android:label="@string/title_activity_rate_the_buyer" />
+        <activity
+            android:name=".FAQ"
+            android:label="@string/title_activity_faq" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -56,26 +67,25 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:name=".MapUTSA"
+            android:label="@string/title_activity_map_uts" />
         <activity
-            android:name=".Login"
-            android:label="@string/title_activity_login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".BuyerHomes"
+            android:label="@string/title_activity_buyer_homes" />
+        <activity android:name=".BuyerProfile" />
+        <activity android:name=".RunnerProfile" />
         <activity
-            android:name=".Registration"
-            android:label="@string/title_activity_registration"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".BusinessViews"
+            android:label="@string/title_activity_business_views" />
         <activity
-            android:name=".CreateUser"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_create_user"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:name=".BuyerPlaceOrder"
+            android:label="@string/title_activity_buyer_place_order" />
+        <activity
+            android:name=".BuyerOrderPlaced"
+            android:label="@string/title_activity_buyer_order_placed" />
+        <activity
+            android:name=".ViewAllBuyerOrders"
+            android:label="@string/title_activity_view_all_buyer_orders"></activity>
     </application>
 
 </manifest>

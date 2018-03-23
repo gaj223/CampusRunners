@@ -8,12 +8,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class RunnerDetailAccepted extends AppCompatActivity {
+public class BuyerOrderPlaced extends AppCompatActivity {
 
     private TextView mTextMessage;
+    public String business;
+    public String listItems[];
+    public float listPrices[];
+    public int quantities[];
+    public String order;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -38,14 +42,25 @@ public class RunnerDetailAccepted extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_runner_detail_accepted);
+        setContentView(R.layout.activity_buyer_order_placed);
 
-        // get RunnerId and OrderId
-        Bundle bundle = getIntent().getExtras();
-        Orders order = (Orders) bundle.getSerializable("Order");
+        // Order Info
+        Bundle bundle = this.getIntent().getExtras();
+        business = bundle.getString("business");
+        listItems = bundle.getStringArray("listItems");
+        listPrices = bundle.getFloatArray("listPrices");
+        quantities = bundle.getIntArray("quantities");
+        order = bundle.getString("order");
 
-        // Add Order Details to page
-        addOrderDetail(order);
+        // Puts the order info on the view
+        orderInfo();
+
+        // Show Runner name if the order becomes active
+        boolean active = false;
+        if (active){
+            TextView textElement = (TextView) findViewById(R.id.runnerName);
+            textElement.setText("John Doe");
+        }
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -58,16 +73,17 @@ public class RunnerDetailAccepted extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(RunnerDetailAccepted.this, RunnerHome.class);
+                        i = new Intent(BuyerOrderPlaced.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(RunnerDetailAccepted.this, ViewAllRunnerOrders.class);
+                        i = new Intent(BuyerOrderPlaced.this, ViewAllRunnerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
-                        i = new Intent(RunnerDetailAccepted.this, RunnerProfile.class);
+                        // CJM: changed this to redirect back to the buyer home (ie it does nothing)
+                        i = new Intent(BuyerOrderPlaced.this, BuyerProfile.class);
                         startActivity(i);
                         break;
                 }
@@ -76,40 +92,32 @@ public class RunnerDetailAccepted extends AppCompatActivity {
         });
     }
 
-    // Add Order Details
-    public void addOrderDetail(Orders order){
 
-        RatingBar buyerRate = (RatingBar) findViewById(R.id.ratingBar2);
-        buyerRate.setRating(4.00f); // Get buyer rating through API Call
 
-        TextView textElement = (TextView) findViewById(R.id.textViewStore);
-        textElement.setText(order.businessName); // Add Bussiness Name
-        //textElement = (TextView) findViewById(R.id.textViewDate);
-        //textElement.setText(order.date); // Add Date
-        textElement = (TextView) findViewById(R.id.textViewNote);
-        textElement.setText(order.buyerNote); // Add Buyer's Note
-        textElement = (TextView) findViewById(R.id.textViewDetails);
-        String detail = "";
-        for (int i = 0; i < order.items.size();i++){ // Add the list of item detail
-            detail = detail +"\t"+ order.quantities.get(i) +" " + order.items.get(i) + "\n";
+    // place order info on the view
+    public void orderInfo(){
+
+        TextView textElement = (TextView) findViewById(R.id.textBusName);
+        textElement.setText(business);
+        order = "";
+        String line = "";
+        float total = 0;
+        for (int i = 0; i < listItems.length; i++){
+            if(quantities[i] > 0){
+                line = quantities[i] + " " + listItems[i] + "\n";
+                order = order + line;
+                total = total + quantities[i] * listPrices[i];
+            }
         }
-        detail = detail +"Total                      $" +order.getTotal() + "\n";
-        detail = detail +"Money Made                 $" +order.getFee();
-        textElement.setText(detail);
+        order = order + "-----------------------\n";
+        order = order + "Total:             $" + total;
+        textElement.setText(order);
+
 
     }
 
-    // Takes runner to rate the buyer when complete button is pressed
-    public void completeOrder(View v){
-
-        // Update Order status to completed by API Call
-        Intent submit = new Intent(RunnerDetailAccepted.this, RateTheBuyer.class);
-        startActivity(submit);
-
-    }
-
-    // Takes runner to call the buyer
-    public void callBuyer(View v){
+    // Takes runner to call the runner
+    public void callRunner(View v){
 
         String number = "8327164026"; // API call to get buyer's number
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
@@ -122,8 +130,9 @@ public class RunnerDetailAccepted extends AppCompatActivity {
     // Takes runner to map of UTSA
     public void toMap(View v){
 
-        Intent mapIntent = new Intent(RunnerDetailAccepted.this, MapUTSA.class);
+        Intent mapIntent = new Intent(BuyerOrderPlaced.this, MapUTSA.class);
         startActivity(mapIntent);
 
     }
+
 }

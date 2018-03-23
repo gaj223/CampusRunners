@@ -42,6 +42,7 @@ public class IndividualCompletedOrder extends AppCompatActivity {
         int orderId = bundle.getInt("Order");
         Orders order = (Orders) bundle.getSerializable("Order");
 
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -62,6 +63,8 @@ public class IndividualCompletedOrder extends AppCompatActivity {
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
+                        i = new Intent(IndividualCompletedOrder.this, RunnerProfile.class);
+                        startActivity(i);
                         break;
                 }
                 return false;

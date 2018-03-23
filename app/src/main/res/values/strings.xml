@@ -19,6 +19,7 @@
     <string name="title_home">Home</string>
     <string name="title_orders">Orders</string>
     <string name="title_profile">Profile</string>
+    <string name="title_cart">Cart</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_accept_job">Accept Job</string>
@@ -44,4 +45,11 @@
     <string name="female">Female</string>
     <string name="btn_sign_up">Sign-Up</string>
     <string name="btn_link_login">Now Log In</string>
+    <string name="title_activity_faq">FAQ</string>
+    <string name="title_activity_map_uts">UTSA</string>
+    <string name="title_activity_buyer_homes">Home</string>
+    <string name="title_activity_business_views">Add to Cart</string>
+    <string name="title_activity_buyer_place_order">Place Order</string>
+    <string name="title_activity_buyer_order_placed">Order Details</string>
+    <string name="title_activity_view_all_buyer_orders">Orders</string>
 </resources>
