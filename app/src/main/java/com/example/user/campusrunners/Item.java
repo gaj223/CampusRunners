@@ -1,10 +1,12 @@
 package com.example.user.campusrunners;
 
+import java.io.Serializable;
+
 /**
  * Created by cassidy on 3/23/2018.
  */
 
-public class Item {
+public class Item implements Serializable {
 
     private int itemId;
     private String name;

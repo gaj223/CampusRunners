@@ -40,11 +40,16 @@ public class Business implements Serializable
         this.businessId = id;
     }
 
-    public void addItem(Item newItem){
-        this.items.add(newItem);
+    public void addItem(int index, Item newItem){
+
+        this.items.add(index, newItem);
     }
 
     public ArrayList<Item> getItems(){
         return this.items;
+    }
+
+    public Item getItem(int id){
+        return this.items.get(id);
     }
 }

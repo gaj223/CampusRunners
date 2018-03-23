@@ -124,14 +124,14 @@ public class BuyerHome extends AppCompatActivity {
     // TODO this should not be hard coded
     public void addChickFilAItems(Business b){
         int bid = b.getId();
-        Item item = new Item(1, "Chicken Sandwich", bid, 4.00);
-        b.addItem(item);
-        item = new Item(2, "Waffle Fries", bid, 2.00);
-        b.addItem(item);
-        item = new Item(3, "Lemonade", bid, 1.50);
-        b.addItem(item);
-        item = new Item(4, "Ice Cream Cone", bid, 1.50);
-        b.addItem(item);
+        Item item = new Item(0, "Chicken Sandwich", bid, 4.00);
+        b.addItem(0,item);
+        item = new Item(1, "Waffle Fries", bid, 2.00);
+        b.addItem(1,item);
+        item = new Item(2, "Lemonade", bid, 1.50);
+        b.addItem(2,item);
+        item = new Item(3, "Ice Cream Cone", bid, 1.50);
+        b.addItem(3,item);
     }
 
     // Takes User to business page
