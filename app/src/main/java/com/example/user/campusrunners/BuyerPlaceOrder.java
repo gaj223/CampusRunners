@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class BuyerPlaceOrder extends AppCompatActivity {
@@ -110,6 +111,11 @@ public class BuyerPlaceOrder extends AppCompatActivity {
     public void placeOrder(View v){
 
         //API Call to place order (insert into to database)
+
+        EditText edit  = (EditText)  findViewById(R.id.inputbuyernote);
+        String note = edit.getText().toString(); // holds the buyer input for their note
+        edit  = (EditText)  findViewById(R.id.inputbuyerlocation);
+        String location = edit.getText().toString(); // holds the buyer location
 
         // Change to add to BuyerCart.class
         Intent x = new Intent(BuyerPlaceOrder.this, BuyerOrderPlaced.class);

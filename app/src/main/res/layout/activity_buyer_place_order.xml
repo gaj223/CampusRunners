@@ -121,6 +121,7 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/inputbuyerlocation"
             android:hint="Enter your location (e.g. MH 3.202) " />
     </android.support.design.widget.TextInputLayout>
 
@@ -156,6 +157,7 @@
         app:layout_constraintVertical_bias="0.685">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/inputbuyernote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="e.g. Call when here" />
