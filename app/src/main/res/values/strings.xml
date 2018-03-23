@@ -8,7 +8,7 @@
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This user-name is invalid</string>
+    <string name="error_invalid_userName">This user-name is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
@@ -33,4 +33,15 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_registration">Registration</string>
+
+    <string name="title_activity_create_user">CreateUser</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="hint_gender">Gender</string>
+    <string name="hint_password">Password</string>
+    <string name="male">male</string>
+    <string name="hint_dob">hDOB</string>
+    <string name="female">Female</string>
+    <string name="btn_sign_up">Sign-Up</string>
+    <string name="btn_link_login">Now Log In</string>
 </resources>
