@@ -15,7 +15,9 @@ import java.util.ArrayList;
 public class BuyerHomes extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private ArrayList<Business> businesses;
+    public ArrayList<Business> businesses;
+
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -29,9 +31,6 @@ public class BuyerHomes extends AppCompatActivity {
                     return true;
                 case R.id.navigation_orders:
                     mTextMessage.setText(R.string.title_orders);
-                    return true;
-                case R.id.navigation_cart:
-                    mTextMessage.setText(R.string.title_cart);
                     return true;
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
@@ -52,7 +51,6 @@ public class BuyerHomes extends AppCompatActivity {
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        BottomNavigationViewHelper.disableShiftMode(navigation); // this is added if 4 or more icons
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Allow user to navigate between activities
@@ -66,12 +64,8 @@ public class BuyerHomes extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        //i = new Intent(BuyerHomes.this, ViewAllRunnerOrders.class);
-                        //startActivity(i);
-                        break;
-                    case R.id.navigation_cart:
-                        //i = new Intent( BuyerHomes.this, BuyerCart.class);
-                        //startActivity(i);
+                        i = new Intent(BuyerHomes.this, ViewAllRunnerOrders.class);
+                        startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
@@ -108,19 +102,19 @@ public class BuyerHomes extends AppCompatActivity {
         ImageButton b = new ImageButton(this);
         Business bus = new Business(1);
         switch (b.getId()) {
-            case R.id.podButton:
-                 bus = businesses.get(1);
             case R.id.chickfilaButton:
-                 bus = businesses.get(2);
+                 bus = businesses.get(1);
             case R.id.papajohnsButton:
-                bus = businesses.get(3);
+                 bus = businesses.get(2);
             case R.id.bookstoreButton:
+                bus = businesses.get(3);
+            case R.id.podButton:
                 bus = businesses.get(4);
         }
 
         // change RunnerHome.class to BusinessView.class
-        Intent bussinessIntent = new Intent(BuyerHomes.this, RunnerHome.class);
-        bussinessIntent.putExtra("Business", bus);
+        Intent bussinessIntent = new Intent(BuyerHomes.this, BusinessViews.class);
+        bussinessIntent.putExtra("Business", bus.getName());
         startActivity(bussinessIntent);
 
     }

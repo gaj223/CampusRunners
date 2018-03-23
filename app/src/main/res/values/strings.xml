@@ -33,4 +33,8 @@
     <string name="title_activity_faq">FAQ</string>
     <string name="title_activity_map_uts">UTSA</string>
     <string name="title_activity_buyer_homes">Home</string>
+    <string name="title_activity_business_views">Add to Cart</string>
+    <string name="title_activity_buyer_place_order">Place Order</string>
+    <string name="title_activity_buyer_order_placed">Order Details</string>
+    <string name="title_activity_view_all_buyer_orders">Orders</string>
 </resources>

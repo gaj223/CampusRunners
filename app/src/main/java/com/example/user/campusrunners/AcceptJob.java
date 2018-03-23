@@ -76,6 +76,8 @@ public class AcceptJob extends AppCompatActivity {
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
+                        i = new Intent(AcceptJob.this, RunnerProfile.class);
+                        startActivity(i);
                         break;
                 }
                 return false;
