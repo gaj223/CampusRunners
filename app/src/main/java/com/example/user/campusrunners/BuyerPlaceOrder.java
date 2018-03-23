@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class BuyerPlaceOrder extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -18,6 +20,9 @@ public class BuyerPlaceOrder extends AppCompatActivity {
     public float listPrices[];
     public int quantities[];
     public String order;
+    public ArrayList<String> selectedItems = new ArrayList<String>();
+    public ArrayList<Integer> selectedQuantities = new ArrayList<Integer>();
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,9 +50,10 @@ public class BuyerPlaceOrder extends AppCompatActivity {
         setContentView(R.layout.activity_buyer_place_order);
 
         // Order Info
+        // gets info from business view
         Bundle bundle = this.getIntent().getExtras();
-        business = bundle.getString("business");
-        listItems = bundle.getStringArray("listItems");
+        business = bundle.getString("business"); //business name
+        listItems = bundle.getStringArray("listItems"); //
         listPrices = bundle.getFloatArray("listPrices");
         quantities = bundle.getIntArray("quantities");
 
@@ -89,6 +95,7 @@ public class BuyerPlaceOrder extends AppCompatActivity {
 
         TextView textElement = (TextView) findViewById(R.id.businessName);
         textElement.setText(business);
+
         textElement = (TextView) findViewById(R.id.order);
         order = "";
         String line = "";
@@ -98,6 +105,8 @@ public class BuyerPlaceOrder extends AppCompatActivity {
                 line = quantities[i] + " " + listItems[i] + "\n";
                 order = order + line;
                 total = total + quantities[i] * listPrices[i];
+                selectedItems.add(listItems[i]);
+                selectedQuantities.add(quantities[i]);
             }
         }
         order = order + "-----------------------\n";

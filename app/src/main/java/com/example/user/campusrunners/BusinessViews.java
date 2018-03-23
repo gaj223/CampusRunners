@@ -204,6 +204,8 @@ public class BusinessViews extends AppCompatActivity {
 
     }
 
+
+    // sends order detail to buyer place order page
     public void toCart(View v){
 //        // Change to add to BuyerCart.class
 //        Intent x = new Intent(BusinessViews.this, BuyerPlaceOrder.class);
