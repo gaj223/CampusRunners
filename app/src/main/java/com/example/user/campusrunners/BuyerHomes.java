@@ -101,20 +101,26 @@ public class BuyerHomes extends AppCompatActivity {
     public void toBussiness(View v){
         ImageButton b = new ImageButton(this);
         Business bus = new Business(1);
+        int id = 0;
         switch (b.getId()) {
             case R.id.chickfilaButton:
+                id = 1;
                  bus = businesses.get(1);
             case R.id.papajohnsButton:
                  bus = businesses.get(2);
+                 id = 2;
             case R.id.bookstoreButton:
                 bus = businesses.get(3);
+                id = 3;
             case R.id.podButton:
                 bus = businesses.get(4);
+                id = 4;
         }
 
         // change RunnerHome.class to BusinessView.class
         Intent bussinessIntent = new Intent(BuyerHomes.this, BusinessViews.class);
         bussinessIntent.putExtra("Business", bus.getName());
+        bussinessIntent.putExtra("BusinessID", id);
         startActivity(bussinessIntent);
 
     }

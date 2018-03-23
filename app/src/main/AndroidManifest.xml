@@ -83,7 +83,10 @@
             android:label="@string/title_activity_buyer_order_placed" />
         <activity
             android:name=".ViewAllBuyerOrders"
-            android:label="@string/title_activity_view_all_buyer_orders"></activity>
+            android:label="@string/title_activity_view_all_buyer_orders" />
+        <activity
+            android:name=".IndividualCompletedOrderBuyer"
+            android:label="@string/title_activity_indvidual_completed_order_buyer"></activity>
     </application>
 
 </manifest>
