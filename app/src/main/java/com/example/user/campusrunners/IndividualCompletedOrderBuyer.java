@@ -6,19 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-public class BuyerHomes extends AppCompatActivity {
+public class IndividualCompletedOrderBuyer extends AppCompatActivity {
 
     private TextView mTextMessage;
-    public ArrayList<Business> businesses;
-
-
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,7 +26,6 @@ public class BuyerHomes extends AppCompatActivity {
                     return true;
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
-                    return true;
             }
             return false;
         }
@@ -43,11 +34,13 @@ public class BuyerHomes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buyer_homes);
+        setContentView(R.layout.activity_indvidual_completed_order_buyer);
 
-        // get all of the businesses as an arraylist
-        // CJM this will be hard coded for now
-        businesses = getBusinesses();
+        // get RunnerId and OrderId
+        Bundle bundle = getIntent().getExtras();
+        int orderId = bundle.getInt("Order");
+        Orders order = (Orders) bundle.getSerializable("Order");
+
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -60,17 +53,16 @@ public class BuyerHomes extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(BuyerHomes.this, BuyerHomes.class);
+                        i = new Intent(IndividualCompletedOrderBuyer.this, RunnerHome.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(BuyerHomes.this, ViewAllRunnerOrders.class);
+                        i = new Intent(IndividualCompletedOrderBuyer.this, ViewAllRunnerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
-                        // CJM: changed this to redirect back to the buyer home (ie it does nothing)
-                        i = new Intent(BuyerHomes.this, BuyerProfile.class);
+                        i = new Intent(IndividualCompletedOrderBuyer.this, RunnerProfile.class);
                         startActivity(i);
                         break;
                 }
@@ -79,49 +71,21 @@ public class BuyerHomes extends AppCompatActivity {
         });
     }
 
-    // Create an arraylist of all the known businesses
-    public ArrayList<Business> getBusinesses()
-    {
-        ArrayList<Business> businesses = new ArrayList<>();
+    // Add Order Details
+    public void addOrderDetail(Orders order){
 
-        // CJM TODO This will be an API call to get all the businesses
-        int businessId[] = {0, 1, 2, 3};
-        String businessName[] = {"Chick-Fil-A", "Papa John's", "UTSA Bookstore", "POD"};
-
-        for (int i=0; i<businessId.length; i++){
-            Business business = new Business(businessId[i]);
-            business.setName(businessName[i]);
-            businesses.add(business);
+        TextView textElement = (TextView) findViewById(R.id.textViewStore);
+        textElement.setText(order.businessName); // Add Bussiness Name
+        //textElement = (TextView) findViewById(R.id.textViewDate);
+        //textElement.setText(order.date); // Add Date
+        textElement = (TextView) findViewById(R.id.textViewDetails);
+        String detail = "";
+        for (int i = 0; i < order.items.size();i++){ // Add the list of item detail
+            detail = detail +"\t"+ order.quantities.get(i) +" " + order.items.get(i) + "\n";
         }
-
-        return businesses;
-    }
-
-    // Takes User to bussiness page
-    public void toBussiness(View v){
-        ImageButton b = new ImageButton(this);
-        Business bus = new Business(1);
-        int id = 0;
-        switch (b.getId()) {
-            case R.id.chickfilaButton:
-                id = 1;
-                 bus = businesses.get(1);
-            case R.id.papajohnsButton:
-                 bus = businesses.get(2);
-                 id = 2;
-            case R.id.bookstoreButton:
-                bus = businesses.get(3);
-                id = 3;
-            case R.id.podButton:
-                bus = businesses.get(4);
-                id = 4;
-        }
-
-        // change RunnerHome.class to BusinessView.class
-        Intent bussinessIntent = new Intent(BuyerHomes.this, BusinessViews.class);
-        bussinessIntent.putExtra("Business", bus.getName());
-        bussinessIntent.putExtra("BusinessID", id);
-        startActivity(bussinessIntent);
+        detail = detail +"Total                      $" +order.getTotal() + "\n";
+        detail = detail +"Money Made                 $" +order.getFee();
+        textElement.setText(detail);
 
     }
 

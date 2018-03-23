@@ -52,4 +52,5 @@
     <string name="title_activity_buyer_place_order">Place Order</string>
     <string name="title_activity_buyer_order_placed">Order Details</string>
     <string name="title_activity_view_all_buyer_orders">Orders</string>
+    <string name="title_activity_indvidual_completed_order_buyer">Completed Order</string>
 </resources>
