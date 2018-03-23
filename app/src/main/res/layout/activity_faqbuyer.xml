@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffcf9e"
+    tools:context="com.example.user.campusrunners.FAQBuyer">
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="#ffcf9e"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+    <ScrollView
+        android:layout_width="344dp"
+        android:layout_height="439dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/ques"
+                android:layout_width="340dp"
+                android:layout_height="15dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="What is Campus Runners?" />
+
+
+            <TextView
+                android:id="@+id/ans"
+                android:layout_width="340dp"
+                android:layout_height="52dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Campus Runners is our food delivery platform that makes getting food or items from your favorite restuarants or stores on UTSA campus very easy." />
+
+            <TextView
+                android:id="@+id/ques1"
+                android:layout_width="340dp"
+                android:layout_height="18dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="What happens if I forget my password?" />
+
+            <TextView
+                android:id="@+id/ans1"
+                android:layout_width="340dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="If you forget your password, click on the the 'Forgot Pasword?' button on the login screen. You will be prompted to enter in your email associated with your account and a reset password link will be sent to your email. Then you will go to your email and click on the reset password link. The link will take to app to enter in your new password. " />
+
+            <TextView
+                android:id="@+id/ques2"
+                android:layout_width="340dp"
+                android:layout_height="18dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="What if I don't see the item I want listed?" />
+
+            <TextView
+                android:id="@+id/ans2"
+                android:layout_width="340dp"
+                android:layout_height="92dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="The item may no longer be offered by the business. If that is not the case, please nofity us by email and we will update the system." />
+
+            <TextView
+                android:id="@+id/ques3"
+                android:layout_width="340dp"
+                android:layout_height="15dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="What happens if the runner never showed up?" />
+
+
+            <TextView
+                android:id="@+id/ans3"
+                android:layout_width="340dp"
+                android:layout_height="92dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="If the runner does not show up, try to contact the runner by clicking the call button. If the runner does not answer, report the runner and we will refund you." />
+
+            <TextView
+                android:id="@+id/ques4"
+                android:layout_width="340dp"
+                android:layout_height="18dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="What if I cannot find the buyer?" />
+
+
+            <TextView
+                android:id="@+id/ans4"
+                android:layout_width="355dp"
+                android:layout_height="92dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Try to call the buyer two times then wait for 10 minutes before trying to call them again. If you are not still not able to make contact with buyer, then cancel the order and discard the items." />
+
+            <TextView
+                android:id="@+id/ques5"
+                android:layout_width="340dp"
+                android:layout_height="18dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="How do I make an order?" />
+
+
+            <TextView
+                android:id="@+id/ans5"
+                android:layout_width="340dp"
+                android:layout_height="92dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="First, click on the business that you want to order from. Second, select the items that you would like to purchase and click add to cart. Then, go to your cart and click submit order." />
+
+            <TextView
+                android:id="@+id/contact"
+                android:layout_width="340dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="If you have any other question that is not listed, contact us at campusrunner@gmail.com  "
+                android:textAlignment="center" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

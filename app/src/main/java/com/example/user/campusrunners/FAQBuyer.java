@@ -6,13 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-public class BuyerProfile extends AppCompatActivity {
+public class FAQBuyer extends AppCompatActivity {
 
     private TextView mTextMessage;
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,12 +35,11 @@ public class BuyerProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buyer_profile);
+        setContentView(R.layout.activity_faqbuyer);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         // Allow user to navigate between activities
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -50,17 +47,16 @@ public class BuyerProfile extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(BuyerProfile.this, BuyerHomes.class);
+                        i = new Intent(FAQBuyer.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(BuyerProfile.this, ViewAllBuyerOrders.class);
+                        i = new Intent(FAQBuyer.this, ViewAllBuyerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
-                        // CJM: changed this to redirect back to the buyer home (ie it does nothing)
-                        i = new Intent(BuyerProfile.this, BuyerProfile.class);
+                        i = new Intent(FAQBuyer.this, BuyerProfile.class);
                         startActivity(i);
                         break;
                 }
@@ -69,9 +65,4 @@ public class BuyerProfile extends AppCompatActivity {
         });
     }
 
-    public void goToFAQBuyer(View v){
-
-        Intent i = new Intent(BuyerProfile.this, FAQBuyer.class);
-        startActivity(i);
-    }
 }
