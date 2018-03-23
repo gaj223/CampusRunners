@@ -48,6 +48,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     public Intent intentRunnerHome ;
+    public Intent intentBuyerHome;
+    public Intent intentCreateUser;
     private static String urlLogin ="http://13.59.142.19/CampusRunnerBack/Config/TestHiveStuff/userlogin.php";
     //JSON NODE Tags
     private static final String TAG_SUCCESS     = "success";
@@ -129,6 +131,14 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mRegesterButton = (Button) findViewById(R.id.reg_button);
+        mRegesterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intentCreateUser = new Intent(getApplicationContext(), CreateUser.class);
+                startActivity(intentCreateUser);
+            }
+        });
 
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
 
@@ -143,6 +153,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView  = findViewById(R.id.login_progress);
     }
+
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -186,8 +197,6 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         }
     }
-
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
