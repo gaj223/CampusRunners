@@ -59,8 +59,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-<<<<<<< HEAD
-            android:name=".MapsActivity"
+            android:name=".MapUTSA"
             android:label="@string/title_activity_maps" />
         <activity android:name=".BuyerHome">
 
@@ -76,14 +75,14 @@
             android:label="@string/title_activity_buyer_cart" />
         <activity
             android:name=".BusinessView"
-            android:label="@string/title_activity_business_view"></activity>
-=======
-            android:name=".MapUTSA"
-            android:label="@string/title_activity_map_uts" />
+            android:label="@string/title_activity_business_view" />
+        =======
+        android:name=".MapUTSA"
+        android:label="@string/title_activity_map_uts" />
         <activity
             android:name=".BuyerHomes"
-            android:label="@string/title_activity_buyer_homes"></activity>
->>>>>>> 89c8d244167047fcef02945e2d4d08ac296bee6a
+            android:label="@string/title_activity_buyer_homes" />
+        <activity android:name=".ChickFilAView"></activity>
     </application>
 
 </manifest>

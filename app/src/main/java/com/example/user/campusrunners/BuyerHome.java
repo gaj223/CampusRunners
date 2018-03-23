@@ -119,7 +119,7 @@ public class BuyerHome extends AppCompatActivity {
         }
 
         // change RunnerHome.class to BusinessView.class
-        Intent bussinessIntent = new Intent(BuyerHome.this, RunnerHome.class);
+        Intent bussinessIntent = new Intent(BuyerHome.this, BusinessView.class);
         bussinessIntent.putExtra("Business", bus);
         startActivity(bussinessIntent);
 

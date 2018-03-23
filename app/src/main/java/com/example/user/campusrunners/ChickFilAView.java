@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class BusinessView extends AppCompatActivity {
+public class ChickFilAView extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -39,7 +39,7 @@ public class BusinessView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_view);
+        setContentView(R.layout.activity_chickfila_view);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -53,7 +53,7 @@ public class BusinessView extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(BusinessView.this, BuyerHome.class);
+                        i = new Intent(ChickFilAView.this, BuyerHome.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
@@ -67,7 +67,7 @@ public class BusinessView extends AppCompatActivity {
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
                         // CJM: changed this to redirect back to the buyer home (ie it does nothing)
-                        i = new Intent(BusinessView.this, BuyerHome.class);
+                        i = new Intent(ChickFilAView.this, ChickFilAView.class);
                         startActivity(i);
                         break;
                 }

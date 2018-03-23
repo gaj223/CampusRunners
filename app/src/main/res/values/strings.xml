@@ -30,16 +30,13 @@
     <string name="title_activity_individual_completed_order">"Completed "</string>
     <string name="title_activity_rate_the_buyer">Rate Buyer</string>
     <string name="title_activity_maps">Map</string>
-<<<<<<< HEAD
     <string name="title_activity_buyer_cart">BuyerCart</string>
     <string name="title_activity_business_view">BusinessView</string>
     <string name="chick_fil_a">Chick-Fil-A</string>
     <string name="bookstore">Bookstore</string>
     <string name="papa_john_s">Papa John\'s</string>
     <string name="pod">POD</string>
-=======
     <string name="title_activity_faq">FAQ</string>
     <string name="title_activity_map_uts">UTSA</string>
     <string name="title_activity_buyer_homes">Home</string>
->>>>>>> 89c8d244167047fcef02945e2d4d08ac296bee6a
 </resources>

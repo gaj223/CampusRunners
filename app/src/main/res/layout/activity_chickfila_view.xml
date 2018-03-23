@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffcf9e"
-    tools:context="com.example.user.campusrunners.BusinessView">
+    tools:context="com.example.user.campusrunners.ChickFilAView">
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
