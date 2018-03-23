@@ -125,7 +125,7 @@ public class ViewAllBuyerOrders extends AppCompatActivity {
     // Adds the active orders to the view
     public void addActiveOrder(ArrayList<Orders> orders){
 
-        LinearLayout layout = (LinearLayout)findViewById(R.id.active);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.activeBuyer);
         for (int i = 0; i < orders.size(); i++) {
             Orders current = orders.get(i);
 
@@ -182,7 +182,7 @@ public class ViewAllBuyerOrders extends AppCompatActivity {
     // Add to completed orders to the view
     public void addCompletedOrders(ArrayList<Orders> orders){
 
-        LinearLayout layout = (LinearLayout)findViewById(R.id.completed);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.completedBuyer);
         for (int i = 0; i < orders.size(); i++) {
             Orders current = orders.get(i);
 
