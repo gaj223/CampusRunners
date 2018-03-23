@@ -1,30 +1,33 @@
+
 package com.example.user.campusrunners;
 
 /**
  * Created by Yadi on 3/16/18.
  */
 
-        import org.json.JSONException;
-        import org.json.JSONObject;
-        import java.io.BufferedOutputStream;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import java.io.BufferedReader;
-        import java.io.InputStreamReader;
-        import java.io.OutputStream;
-        import java.io.UnsupportedEncodingException;
-        import java.net.HttpURLConnection;
-        import java.net.MalformedURLException;
-        import java.net.ProtocolException;
-        import java.net.URL;
-        import java.net.URLEncoder;
-        import java.util.HashMap;
-        import java.util.Iterator;
-        import java.util.LinkedHashMap;
-        import java.util.Map;
-        import java.util.Set;
-        import android.util.Log;
-        import javax.net.ssl.HttpsURLConnection;
+
+    import org.json.JSONException;
+    import org.json.JSONObject;
+    import java.io.BufferedOutputStream;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.io.BufferedReader;
+    import java.io.InputStreamReader;
+    import java.io.OutputStream;
+    import java.io.UnsupportedEncodingException;
+    import java.net.HttpURLConnection;
+    import java.net.MalformedURLException;
+    import java.net.ProtocolException;
+    import java.net.URL;
+    import java.net.URLEncoder;
+    import java.util.HashMap;
+    import java.util.Iterator;
+    import java.util.LinkedHashMap;
+    import java.util.Map;
+    import java.util.Set;
+    import android.util.Log;
+    import javax.net.ssl.HttpsURLConnection;
+
 
 public class JSONParser {
 
@@ -46,7 +49,9 @@ public class JSONParser {
                                       HashMap<String,String> params) {
 
         // Making HTTP request
+
         switch (method){
+
             case "GET":
                 try {
                     String encodedParm;
@@ -118,17 +123,16 @@ public class JSONParser {
                 } catch (IOException e) {
                     Log.e("i/o error", "" + e.getMessage());
                     e.printStackTrace();
-                }  catch (Exception e) {
+
+
+                } catch (Exception e) {
                     Log.e("encode error", "" + e.getMessage());
                     e.printStackTrace();
                 }
                 if (conn != null) {
                     conn.disconnect();
                 }
-//                } catch (Exception e) {
-//                    String error = new String("Exception: " + e.getMessage());
-//                    Log.e("Connection error", "Exception" + e.getMessage());
-//                }
+
                 break;
             case "POST":
                 try {
@@ -154,7 +158,9 @@ public class JSONParser {
                     conn.setRequestProperty("cache-control", "no-cache");
 
                     //other site stuff
+
                     message =postDataParams.toString();
+
                     conn.setFixedLengthStreamingMode(message.getBytes().length);
                     conn.connect();
 
@@ -166,7 +172,9 @@ public class JSONParser {
                     os.close();
 
                     int responseCode = conn.getResponseCode();
+
                     Log.e("responseError", "" + responseCode);
+
 
                     if (responseCode == HttpsURLConnection.HTTP_OK) {
                         BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -179,6 +187,7 @@ public class JSONParser {
                         reader.close();
                         json = sb.toString();
 
+
                         Log.e("in json string", "Json:  " + json);
                         try {
                             responseParm = new JSONObject(json);
@@ -190,11 +199,14 @@ public class JSONParser {
 
                         return responseParm;
                     } else {
+
                         Log.e("responseError", "" + responseCode);
+
 
                         return postDataParams;
                         // }
                     }
+
                 } catch (Exception e) {
                     String error = new String("Exception: " + e.getMessage());
                     Log.e("Connection error", "Exception" + e.getMessage());

@@ -48,9 +48,12 @@ public class BusinessViews extends AppCompatActivity {
 
         // Business Name
         Bundle bundle = getIntent().getExtras();
-        business = bundle.getString("business");
+        business = bundle.getString("Business");
         TextView textElement = (TextView) findViewById(R.id.busName);
         textElement.setText(business);
+        int id =  bundle.getInt("BusinessID");
+
+
 
         // Add Business Items to view
         addItemsPage();
