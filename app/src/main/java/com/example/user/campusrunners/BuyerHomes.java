@@ -76,7 +76,7 @@ public class BuyerHomes extends AppCompatActivity {
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
                         // CJM: changed this to redirect back to the buyer home (ie it does nothing)
-                        i = new Intent(BuyerHomes.this, BuyerHomes.class);
+                        i = new Intent(BuyerHomes.this, BuyerProfile.class);
                         startActivity(i);
                         break;
                 }
