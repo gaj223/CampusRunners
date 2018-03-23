@@ -14,11 +14,12 @@ import android.widget.TextView;
 public class BusinessViews extends AppCompatActivity {
 
     private TextView mTextMessage;
-    public int quantities[];
     public String listItems[] = {"Pens, Pack of 8", "Pencils, Pack of 8",
             "Composition Notebook", "Spiral Notebook", "Red Scrantron, 100 questions",
             " Red Scrantron, 25 questions", "Bluebook"};
     public float listPrices[] = {2.00f,1.50f,0.75f,1.00f,0.50f,0.25f,1.00f};
+    public int quantities[] = new int[listItems.length];
+    public String business;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -31,9 +32,6 @@ public class BusinessViews extends AppCompatActivity {
                     return true;
                 case R.id.navigation_orders:
                     mTextMessage.setText(R.string.title_orders);
-                    return true;
-                case R.id.navigation_cart:
-                    mTextMessage.setText(R.string.title_cart);
                     return true;
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
@@ -48,12 +46,17 @@ public class BusinessViews extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_views);
 
+        // Business Name
+        Bundle bundle = getIntent().getExtras();
+        business = bundle.getString("business");
+        TextView textElement = (TextView) findViewById(R.id.busName);
+        textElement.setText(business);
+
         // Add Business Items to view
         addItemsPage();
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        BottomNavigationViewHelper.disableShiftMode(navigation); // this is added if 4 or more icons
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Allow user to navigate between activities
@@ -67,12 +70,8 @@ public class BusinessViews extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        //i = new Intent(BuyerHomes.this, ViewAllRunnerOrders.class);
-                        //startActivity(i);
-                        break;
-                    case R.id.navigation_cart:
-                        //i = new Intent( BuyerHomes.this, BuyerCart.class);
-                        //startActivity(i);
+                        i = new Intent(BusinessViews.this, ViewAllRunnerOrders.class);
+                        startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
@@ -99,6 +98,8 @@ public class BusinessViews extends AppCompatActivity {
 
         // List each item on to the screen
         for(int i = 0; i < listItems.length; i++ ){
+
+            quantities[i] = 0;
 
             // Add Item name
             TextView item = new TextView(this);
@@ -168,10 +169,13 @@ public class BusinessViews extends AppCompatActivity {
 
     public void toCart(View v){
         // Change to add to BuyerCart.class
-        Intent x = new Intent(BusinessViews.this, RunnerHome.class);
-        x.putExtra("listItems", listItems);
-        x.putExtra("listPrices", listPrices);
-        x.putExtra("quantities", quantities);
+        Intent x = new Intent(BusinessViews.this, BuyerPlaceOrder.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("business", business);
+        bundle.putStringArray("listItems", listItems);
+        bundle.putFloatArray("listPrices", listPrices);
+        bundle.putIntArray("quantities", quantities);
+        x.putExtras(bundle);
         startActivity(x);
 
     }

@@ -6,19 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-public class BuyerHomes extends AppCompatActivity {
+public class BuyerOrderPlaced extends AppCompatActivity {
 
     private TextView mTextMessage;
-    public ArrayList<Business> businesses;
-
-
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,11 +35,7 @@ public class BuyerHomes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buyer_homes);
-
-        // get all of the businesses as an arraylist
-        // CJM this will be hard coded for now
-        businesses = getBusinesses();
+        setContentView(R.layout.activity_buyer_order_placed);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -60,63 +48,23 @@ public class BuyerHomes extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(BuyerHomes.this, BuyerHomes.class);
+                        i = new Intent(BuyerOrderPlaced.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(BuyerHomes.this, ViewAllRunnerOrders.class);
+                        i = new Intent(BuyerOrderPlaced.this, ViewAllRunnerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
                         // CJM: changed this to redirect back to the buyer home (ie it does nothing)
-                        i = new Intent(BuyerHomes.this, BuyerProfile.class);
+                        i = new Intent(BuyerOrderPlaced.this, BuyerProfile.class);
                         startActivity(i);
                         break;
                 }
                 return false;
             }
         });
-    }
-
-    // Create an arraylist of all the known businesses
-    public ArrayList<Business> getBusinesses()
-    {
-        ArrayList<Business> businesses = new ArrayList<>();
-
-        // CJM TODO This will be an API call to get all the businesses
-        int businessId[] = {0, 1, 2, 3};
-        String businessName[] = {"Chick-Fil-A", "Papa John's", "UTSA Bookstore", "POD"};
-
-        for (int i=0; i<businessId.length; i++){
-            Business business = new Business(businessId[i]);
-            business.setName(businessName[i]);
-            businesses.add(business);
-        }
-
-        return businesses;
-    }
-
-    // Takes User to bussiness page
-    public void toBussiness(View v){
-        ImageButton b = new ImageButton(this);
-        Business bus = new Business(1);
-        switch (b.getId()) {
-            case R.id.chickfilaButton:
-                 bus = businesses.get(1);
-            case R.id.papajohnsButton:
-                 bus = businesses.get(2);
-            case R.id.bookstoreButton:
-                bus = businesses.get(3);
-            case R.id.podButton:
-                bus = businesses.get(4);
-        }
-
-        // change RunnerHome.class to BusinessView.class
-        Intent bussinessIntent = new Intent(BuyerHomes.this, BusinessViews.class);
-        bussinessIntent.putExtra("Business", bus.getName());
-        startActivity(bussinessIntent);
-
     }
 
 }

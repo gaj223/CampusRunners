@@ -7,18 +7,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-public class BuyerHomes extends AppCompatActivity {
+public class BuyerPlaceOrder extends AppCompatActivity {
 
     private TextView mTextMessage;
-    public ArrayList<Business> businesses;
-
-
-
+    public String business;
+    public String listItems[];
+    public float listPrices[];
+    public int quantities[];
+    public String order;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,11 +41,17 @@ public class BuyerHomes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buyer_homes);
+        setContentView(R.layout.activity_buyer_place_order);
 
-        // get all of the businesses as an arraylist
-        // CJM this will be hard coded for now
-        businesses = getBusinesses();
+        // Order Info
+        Bundle bundle = this.getIntent().getExtras();
+        business = bundle.getString("business");
+        listItems = bundle.getStringArray("listItems");
+        listPrices = bundle.getFloatArray("listPrices");
+        quantities = bundle.getIntArray("quantities");
+
+        // Puts the order info on the view
+        orderInfo();
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -60,17 +64,17 @@ public class BuyerHomes extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(BuyerHomes.this, BuyerHomes.class);
+                        i = new Intent(BuyerPlaceOrder.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(BuyerHomes.this, ViewAllRunnerOrders.class);
+                        i = new Intent(BuyerPlaceOrder.this, ViewAllRunnerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
                         // CJM: changed this to redirect back to the buyer home (ie it does nothing)
-                        i = new Intent(BuyerHomes.this, BuyerProfile.class);
+                        i = new Intent(BuyerPlaceOrder.this, BuyerProfile.class);
                         startActivity(i);
                         break;
                 }
@@ -79,43 +83,43 @@ public class BuyerHomes extends AppCompatActivity {
         });
     }
 
-    // Create an arraylist of all the known businesses
-    public ArrayList<Business> getBusinesses()
-    {
-        ArrayList<Business> businesses = new ArrayList<>();
+    // place order info on the view
+    public void orderInfo(){
 
-        // CJM TODO This will be an API call to get all the businesses
-        int businessId[] = {0, 1, 2, 3};
-        String businessName[] = {"Chick-Fil-A", "Papa John's", "UTSA Bookstore", "POD"};
-
-        for (int i=0; i<businessId.length; i++){
-            Business business = new Business(businessId[i]);
-            business.setName(businessName[i]);
-            businesses.add(business);
+        TextView textElement = (TextView) findViewById(R.id.businessName);
+        textElement.setText(business);
+        textElement = (TextView) findViewById(R.id.order);
+        order = "";
+        String line = "";
+        float total = 0;
+        for (int i = 0; i < listItems.length; i++){
+            if(quantities[i] > 0){
+                line = quantities[i] + " " + listItems[i] + "\n";
+                order = order + line;
+                total = total + quantities[i] * listPrices[i];
+            }
         }
+        order = order + "-----------------------\n";
+        order = order + "Total:             $" + total;
+        textElement.setText(order);
 
-        return businesses;
+
     }
 
-    // Takes User to bussiness page
-    public void toBussiness(View v){
-        ImageButton b = new ImageButton(this);
-        Business bus = new Business(1);
-        switch (b.getId()) {
-            case R.id.chickfilaButton:
-                 bus = businesses.get(1);
-            case R.id.papajohnsButton:
-                 bus = businesses.get(2);
-            case R.id.bookstoreButton:
-                bus = businesses.get(3);
-            case R.id.podButton:
-                bus = businesses.get(4);
-        }
+    // place order when button pressed
+    public void placeOrder(View v){
 
-        // change RunnerHome.class to BusinessView.class
-        Intent bussinessIntent = new Intent(BuyerHomes.this, BusinessViews.class);
-        bussinessIntent.putExtra("Business", bus.getName());
-        startActivity(bussinessIntent);
+        //API Call to place order (insert into to database)
+
+        // Change to add to BuyerCart.class
+        Intent x = new Intent(BuyerPlaceOrder.this, BuyerOrderPlaced.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("business", business);
+        bundle.putStringArray("listItems", listItems);
+        bundle.putFloatArray("listPrices", listPrices);
+        bundle.putIntArray("quantities", quantities);
+        x.putExtras(bundle);
+        startActivity(x);
 
     }
 
