@@ -12,10 +12,8 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-    <uses-permission
-        android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -33,11 +31,13 @@
         <activity
             android:name=".RunnerHome"
             android:label="@string/title_activity_runner_home">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".Login"
@@ -48,7 +48,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".AcceptJob"
             android:label="@string/title_activity_accept_job" />
@@ -101,7 +100,10 @@
             android:label="@string/title_activity_view_all_buyer_orders" />
         <activity
             android:name=".IndividualCompletedOrderBuyer"
-            android:label="@string/title_activity_indvidual_completed_order_buyer"></activity>
+            android:label="@string/title_activity_indvidual_completed_order_buyer" />
+        <activity
+            android:name=".FAQBuyer"
+            android:label="@string/title_activity_faqbuyer"></activity>
     </application>
 
 </manifest>

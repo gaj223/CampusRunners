@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class IndividualCompletedOrderBuyer extends AppCompatActivity {
+public class FAQBuyer extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -26,6 +26,7 @@ public class IndividualCompletedOrderBuyer extends AppCompatActivity {
                     return true;
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
+                    return true;
             }
             return false;
         }
@@ -34,18 +35,11 @@ public class IndividualCompletedOrderBuyer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_indvidual_completed_order_buyer);
-
-        // get RunnerId and OrderId
-        Bundle bundle = getIntent().getExtras();
-        int orderId = bundle.getInt("Order");
-        Orders order = (Orders) bundle.getSerializable("Order");
-
+        setContentView(R.layout.activity_faqbuyer);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         // Allow user to navigate between activities
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -53,40 +47,22 @@ public class IndividualCompletedOrderBuyer extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(IndividualCompletedOrderBuyer.this, BuyerHomes.class);
+                        i = new Intent(FAQBuyer.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(IndividualCompletedOrderBuyer.this, ViewAllBuyerOrders.class);
+                        i = new Intent(FAQBuyer.this, ViewAllBuyerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
-                        i = new Intent(IndividualCompletedOrderBuyer.this, BuyerProfile.class);
+                        i = new Intent(FAQBuyer.this, BuyerProfile.class);
                         startActivity(i);
                         break;
                 }
                 return false;
             }
         });
-    }
-
-    // Add Order Details
-    public void addOrderDetail(Orders order){
-
-        TextView textElement = (TextView) findViewById(R.id.textViewStore);
-        textElement.setText(order.businessName); // Add Bussiness Name
-        //textElement = (TextView) findViewById(R.id.textViewDate);
-        //textElement.setText(order.date); // Add Date
-        textElement = (TextView) findViewById(R.id.textViewDetails);
-        String detail = "";
-        for (int i = 0; i < order.items.size();i++){ // Add the list of item detail
-            detail = detail +"\t"+ order.quantities.get(i) +" " + order.items.get(i) + "\n";
-        }
-        detail = detail +"Total                      $" +order.getTotal() + "\n";
-        detail = detail +"Money Made                 $" +order.getFee();
-        textElement.setText(detail);
-
     }
 
 }
