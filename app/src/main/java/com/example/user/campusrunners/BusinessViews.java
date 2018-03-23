@@ -107,7 +107,7 @@ public class BusinessViews extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(BusinessViews.this, ViewAllRunnerOrders.class);
+                        i = new Intent(BusinessViews.this, ViewAllBuyerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:

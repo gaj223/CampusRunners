@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.lang.*;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class ViewAllBuyerOrders extends AppCompatActivity {
         setContentView(R.layout.activity_view_all_buyer_orders);
 
         // To allow info to pass to active or completed order page
-        intentActive =new Intent(this, BuyerOrderPlaced .class);
+        intentActive =new Intent(this, BuyerOrderPlaced.class);
         intentCompleted =new Intent(this, IndividualCompletedOrderBuyer.class);
 
         //get all the active and completed orders
@@ -69,11 +70,11 @@ public class ViewAllBuyerOrders extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(ViewAllBuyerOrders.this, RunnerHome.class);
+                        i = new Intent(ViewAllBuyerOrders.this, BuyerHomes.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(ViewAllBuyerOrders.this, ViewAllRunnerOrders.class);
+                        i = new Intent(ViewAllBuyerOrders.this, ViewAllBuyerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
@@ -124,7 +125,7 @@ public class ViewAllBuyerOrders extends AppCompatActivity {
     // Adds the active orders to the view
     public void addActiveOrder(ArrayList<Orders> orders){
 
-        LinearLayout layout = (LinearLayout)findViewById(R.id.active);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.activeBuyer);
         for (int i = 0; i < orders.size(); i++) {
             Orders current = orders.get(i);
 
@@ -145,18 +146,26 @@ public class ViewAllBuyerOrders extends AppCompatActivity {
                 public void onClick(View v) {
 
                     Orders order = active.get(id_);
-                    //String business = order.businessName;
-                    //String items [] = new String[order.items.size()];
-                    //items = order.items.toArray();
-                    //float listPrices[] = active.get(id_).pricesrices;
-                    //int quantities[] = active.get(id_).quantities;
-                    //Bundle bundle = new Bundle();
-                    //bundle.putString("business", business);
-                    //bundle.putStringArray("listItems", listItems);
-                    //bundle.putFloatArray("listPrices", listPrices);
-                    //bundle.putIntArray("quantities", quantities);
-                    //bundle.putString("order",order);
-                    //intentActive.putExtras(bundle);
+                    String business = order.businessName;
+                    String items [] = new String[order.items.size()];
+                    order.items.toArray(items);
+                    Float p [] = new Float[order.items.size()];
+                    order.prices.toArray(p);
+                    Integer q[] = new Integer[order.items.size()];
+                    order.quantities.toArray(q);
+                    float prices [] = new float[order.items.size()];
+                    int quantities [] = new int[order.items.size()];
+                    // Convert Integer and Float arrays to primitive arrays
+                    for(int i = 0; i < order.items.size(); i++ ){
+                        prices[i] = p[i].floatValue();
+                        quantities[i] = q[i].intValue();
+                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putString("business", business);
+                    bundle.putStringArray("listItems", items);
+                    bundle.putFloatArray("listPrices", prices);
+                    bundle.putIntArray("quantities", quantities);
+                    intentActive.putExtras(bundle);
                     //intentActive.putExtra("Order", active.get(id_));
 
                     startActivity(intentActive);
@@ -173,7 +182,7 @@ public class ViewAllBuyerOrders extends AppCompatActivity {
     // Add to completed orders to the view
     public void addCompletedOrders(ArrayList<Orders> orders){
 
-        LinearLayout layout = (LinearLayout)findViewById(R.id.completed);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.completedBuyer);
         for (int i = 0; i < orders.size(); i++) {
             Orders current = orders.get(i);
 

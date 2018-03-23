@@ -292,7 +292,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                         // enter convert input into a hashmap to be read by the php file, via POST
                         // choice.put("abc123",abc123);
                         // choice.put("password",password);
-                        //////Hardcoded for testing////////////////////
+                       ////////////////////// //////Hardcoded for testing////////////////////
                         // choice.put("abc123","abc321");
                         // choice.put("password","321CBA");
                                //////Buyer hardcoded///////

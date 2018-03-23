@@ -50,7 +50,7 @@ public class BuyerOrderPlaced extends AppCompatActivity {
         listItems = bundle.getStringArray("listItems");
         listPrices = bundle.getFloatArray("listPrices");
         quantities = bundle.getIntArray("quantities");
-        order = bundle.getString("order");
+        //order = bundle.getString("order");
 
         // Puts the order info on the view
         orderInfo();
@@ -77,7 +77,7 @@ public class BuyerOrderPlaced extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(BuyerOrderPlaced.this, ViewAllRunnerOrders.class);
+                        i = new Intent(BuyerOrderPlaced.this, ViewAllBuyerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
@@ -120,7 +120,7 @@ public class BuyerOrderPlaced extends AppCompatActivity {
     // Takes runner to call the runner
     public void callRunner(View v){
 
-        String number = "8327164026"; // API call to get buyer's number
+        String number = "2102343323"; // API call to get buyer's number
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
         String phone = "tel:" + number;
         callIntent.setData(Uri.parse(phone));
