@@ -41,7 +41,7 @@
     <string name="hint_gender">Gender</string>
     <string name="hint_password">Password</string>
     <string name="male">male</string>
-    <string name="hint_dob">hDOB</string>
+    <string name="hint_dob">DOB</string>
     <string name="female">Female</string>
     <string name="btn_sign_up">Sign-Up</string>
     <string name="btn_link_login">Now Log In</string>
