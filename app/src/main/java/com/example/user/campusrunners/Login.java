@@ -44,7 +44,7 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via username/password.
  */
 public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     public Intent intentRunnerHome ;
@@ -133,17 +133,15 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         Button mRegesterButton = (Button) findViewById(R.id.reg_button);
          mRegesterButton.setOnClickListener(new OnClickListener() {
-            @Override
+//            @Override
             public void onClick(View v) {
                 intentCreateUser = new Intent(getApplicationContext(), CreateUser.class);
                 startActivity(intentCreateUser);
+                //new DbVerify().execute();
             }
         });
 
-
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
-
-
             @Override//premade function...i did not mess with
             public void onClick(View view) {
                 new DbVerify().execute();
@@ -275,6 +273,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         private  int answerReturned;
         @Override
         protected  void onPreExecute(){
+         Log.d("DoInBack","onPreExecute");
 
         }
         //Required Abstract Method
@@ -293,9 +292,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                         // enter convert input into a hashmap to be read by the php file, via POST
                         // choice.put("abc123",abc123);
                         // choice.put("password",password);
-                        //Hardcoded for testing
-                        choice.put("abc123","abc321");
-                        choice.put("password","321CBA");
+                        //////Hardcoded for testing////////////////////
+                        // choice.put("abc123","abc321");
+                        // choice.put("password","321CBA");
+                               //////Buyer hardcoded///////
+                        choice.put("abc123","fox007");
+                        choice.put("password","foxme");
                     try {
                         jsonObj = jsonParser.makeHttpRequest(urlLogin, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
@@ -340,13 +342,13 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                             Log.d("DoInBack",user_role.toLowerCase() );
                             // this if loop is not working
                            if(user_role.toLowerCase().compareTo("runner") == 0){
-                            //getApplicationContext() is simlar to this, but used in Async
-                            intentRunnerHome = new Intent(getApplicationContext(), RunnerHome.class);
-                            startActivity(intentRunnerHome);
-                           }else if(user_role.toLowerCase().compareTo("runner") == 0){
+                                //getApplicationContext() is simlar to this, but used in Async
+                                intentRunnerHome = new Intent(getApplicationContext(), RunnerHome.class);
+                                startActivity(intentRunnerHome);
+                           }else if(user_role.toLowerCase().compareTo("buyer") == 0){
                                Log.d("BuyerHome","a place holder for the intent for Buyer");
-                               //intentRunnerHome = new Intent(getApplicationContext(), BuyerHomes.class);
-                               //startActivity(intentRunnerHome);
+                               intentBuyerHome = new Intent(getApplicationContext(), BuyerHomes.class);
+                               startActivity(intentBuyerHome);
                            }
                         }else{
                             //throw a loop back, instance of correct creds not valid.
