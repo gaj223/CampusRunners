@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffcf9e"
-    tools:context="com.example.user.campusrunners.BuyerHomes">
+    tools:context="com.example.user.campusrunners.BuyerHome">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -29,7 +29,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="#ffcf9e"
-        android:onClick="toBussiness"
+        android:onClick="toBusiness"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
         android:layout_marginTop="8dp"
         android:background="#ffcf9e"
         android:scaleType="fitCenter"
-        android:onClick="toBussiness"
+        android:onClick="toBusiness"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.04"
@@ -67,7 +67,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="#ffcf9e"
-        android:onClick="toBussiness"
+        android:onClick="toBusiness"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="#ffcf9e"
-        android:onClick="toBussiness"
+        android:onClick="toBusiness"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

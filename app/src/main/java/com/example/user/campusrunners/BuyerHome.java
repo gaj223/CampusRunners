@@ -17,7 +17,7 @@ public class BuyerHome extends AppCompatActivity {
     private TextView mTextMessage;
     private ArrayList<Business> businesses;
 
-
+    // listener for the bottom navigation bar
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -95,33 +95,67 @@ public class BuyerHome extends AppCompatActivity {
         String businessName[] = {"Chick-Fil-A", "Papa John's", "UTSA Bookstore", "POD"};
 
         for (int i=0; i<businessId.length; i++){
+            // create a new business
             Business business = new Business(businessId[i]);
             business.setName(businessName[i]);
+            // get all the items associated with this business
+            createBusinessItems(business);
+            // add business to arraylist
             businesses.add(business);
         }
-
+        // this is the arraylist of businesses
         return businesses;
     }
 
-    // Takes User to bussiness page
-    public void toBussiness(View v){
-        ImageButton b = new ImageButton(this);
-        Business bus = new Business(1);
-        switch (b.getId()) {
+    // creates the items for a given business and adds them to business arraylist
+    public void createBusinessItems(Business business){
+        // TODO should be API calls to get all the items for a business from the DB
+        // TODO right now will only add items for chickfila
+        switch (business.getId()){
+            case 0: // chick-fil-a
+                addChickFilAItems(business);
+                break;
+            default:
+                break;
+        }
+    }
+
+    // add the items to the chickfila business
+    // TODO this should not be hard coded
+    public void addChickFilAItems(Business b){
+        int bid = b.getId();
+        Item item = new Item(1, "Chicken Sandwich", bid, 4.00);
+        b.addItem(item);
+        item = new Item(2, "Waffle Fries", bid, 2.00);
+        b.addItem(item);
+        item = new Item(3, "Lemonade", bid, 1.50);
+        b.addItem(item);
+        item = new Item(4, "Ice Cream Cone", bid, 1.50);
+        b.addItem(item);
+    }
+
+    // Takes User to business page
+    // this is an OnClick function for the buttons on the view
+    public void toBusiness(android.view.View v){
+        Business bus = new Business();
+        switch (v.getId()) {
             case R.id.podButton:
-                bus = businesses.get(1);
-            case R.id.chickfilaButton:
-                bus = businesses.get(2);
-            case R.id.papajohnsButton:
                 bus = businesses.get(3);
+                break;
+            case R.id.chickfilaButton:
+                bus = businesses.get(0);
+                break;
+            case R.id.papajohnsButton:
+                bus = businesses.get(1);
+                break;
             case R.id.bookstoreButton:
-                bus = businesses.get(4);
+                bus = businesses.get(2);
+                break;
         }
 
-        // change RunnerHome.class to BusinessView.class
-        Intent bussinessIntent = new Intent(BuyerHome.this, BusinessView.class);
-        bussinessIntent.putExtra("Business", bus);
-        startActivity(bussinessIntent);
+        Intent businessIntent = new Intent(BuyerHome.this, BusinessView.class);
+        businessIntent.putExtra("Business", bus);
+        startActivity(businessIntent);
 
     }
 
