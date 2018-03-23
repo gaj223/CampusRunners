@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -52,15 +53,17 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     private static final String TAG_SUCCESS     = "success";
     private static final String TAG_PRODUCTS    = "products";
     private static final String TAG_PID         = "pid";
+    private static final String TAG_USER_ID     = "userId";
     private static final String TAG_NAME_ARRAY  = "user";
     private static final String TAG_USER_ROLE   = "role";
     JSONObject jsonObj;
-    //come back to this
-    DbVerify tempDbVerify = new DbVerify();
-
+    HashMap<String, String> userInfoMap;
     //Product JSONArray
     JSONArray products = null;
     JSONParser jsonParser = new JSONParser();
+    //come back to this
+    DbVerify tempDbVerify = new DbVerify();
+
     //= new Intent(this, RunnerHome.class);
     // not imported yet public Intent intentBuyerHome  = new Intent(this, BuyerHome.class);;
 
@@ -274,10 +277,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
              runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                        Log.d("DoInBack","before the try loop,and inside Run()");
-                    //int answerReturned;
-                        // enter convert input into a hashmap to be read by the php file, via POST
+                        Log.d("DoInBack","inside runOnUiThread()");
+                    String user_role = " ";
+                    String user_ID   = " ";
                         HashMap<String, String> choice = new HashMap<String, String>();
+                        int answerReturned =0;
+                        // enter convert input into a hashmap to be read by the php file, via POST
                         // choice.put("abc123",abc123);
                         // choice.put("password",password);
                         //Hardcoded for testing
@@ -287,19 +292,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                         jsonObj = jsonParser.makeHttpRequest(urlLogin, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
 
-
-                        //if( jsonObj.isNull(TAG_SUCCESS))
-                          //Log.d("DoInBack","null all day");
-                            //JSONArray testJson = jsonObj.getJSONArray(TAG_SUCCESS);
-
-                        answerReturned = jsonObj.getInt(TAG_SUCCESS);///////////////error is being thrown here, apparently nothing is inside the jsonObj
-
+                        answerReturned = jsonObj.getInt(TAG_SUCCESS);
+                        Log.d("DoInBack", "answerReturned "+ answerReturned  );
                         jsonObj.getJSONArray("user");
                     //Catch needed to use jsonObj.getInt....
                         if(answerReturned == 1){
                             ///////////////////////////////
-
-
                            //jsonObj.getJSONArray(TAG_NAME_ARRAY).get(1);
                             //if(jsonObj.getJSONArray(TAG_NAME_ARRAY).getString(TAG_USER_ROLE) == "runner"){
                             Log.d("DoInBack","heh " + jsonObj.getJSONArray(TAG_NAME_ARRAY).get(0).toString() );
@@ -307,10 +305,40 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                             //}else if(jsonObj.getJSONArray(TAG_NAME_ARRAY).get(1)  == "buyer"){
 
                             //}
-                           //do I call the URL HERE?
+
+                            // products found
+                            // Getting Array of Products
+                            //products = json.getJSONArray(TAG_PRODUCTS);
+                            JSONArray userJsonArray = jsonObj.getJSONArray(TAG_NAME_ARRAY);
+
+                            Log.d("DoInBack","message user_role="+userJsonArray.getString(0));
+                            userJsonArray.getString(0) ;
+                            for(int i = 0; i < userJsonArray.length(); i++){
+                                JSONObject temparyJsonObj = userJsonArray.getJSONObject(i);
+                                user_role = temparyJsonObj.getString(TAG_USER_ROLE);
+                                user_ID   = temparyJsonObj.getString(TAG_USER_ID);
+                            }
+                            Log.d("DoInBack","user_ID: "   + user_ID);
+                            Log.d("DoInBack","user_role: " + user_role);
+                            userInfoMap = new HashMap<String, String>();
+
+                            // adding each child node to HashMap key => value, with supplied get call
+                            userInfoMap.put(TAG_USER_ID, user_ID);
+                            userInfoMap.put(TAG_USER_ROLE, user_role);
+
+                                // adding HashList to ArrayList, I do not need that here
+                               // productsList.add(map);
+
+
+                           if(user_role.toLowerCase() == "runner"){
                             //getApplicationContext() is simlar to this, but used in Async
                             intentRunnerHome = new Intent(getApplicationContext(), RunnerHome.class);
                             startActivity(intentRunnerHome);
+                           }else if(user_role.toLowerCase() == "buyer"){
+                               Log.d("BuyerHome","a place holder for the intent for Buyer");
+                               //intentRunnerHome = new Intent(getApplicationContext(), BuyerHomes.class);
+                               //startActivity(intentRunnerHome);
+                           }
                         }else{
                             //throw a loop back, instance of correct creds not valid.
                         }
@@ -327,7 +355,10 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             return answerReturned;
         }
     }
-
+    // this should be called when needed outside this class
+    public java.util.HashMap<String, String> getUserInfoMap() {
+        return userInfoMap;
+    }
 
     public JSONArray getUserId_Role(){
         try {
