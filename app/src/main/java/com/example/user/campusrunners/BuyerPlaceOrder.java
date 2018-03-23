@@ -124,6 +124,7 @@ public class BuyerPlaceOrder extends AppCompatActivity {
         bundle.putStringArray("listItems", listItems);
         bundle.putFloatArray("listPrices", listPrices);
         bundle.putIntArray("quantities", quantities);
+        bundle.putString("order",order);
         x.putExtras(bundle);
         startActivity(x);
 

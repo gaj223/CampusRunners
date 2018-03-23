@@ -1,16 +1,23 @@
 package com.example.user.campusrunners;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class BuyerOrderPlaced extends AppCompatActivity {
 
     private TextView mTextMessage;
+    public String business;
+    public String listItems[];
+    public float listPrices[];
+    public int quantities[];
+    public String order;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -36,6 +43,24 @@ public class BuyerOrderPlaced extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buyer_order_placed);
+
+        // Order Info
+        Bundle bundle = this.getIntent().getExtras();
+        business = bundle.getString("business");
+        listItems = bundle.getStringArray("listItems");
+        listPrices = bundle.getFloatArray("listPrices");
+        quantities = bundle.getIntArray("quantities");
+        order = bundle.getString("order");
+
+        // Puts the order info on the view
+        orderInfo();
+
+        // Show Runner name if the order becomes active
+        boolean active = false;
+        if (active){
+            TextView textElement = (TextView) findViewById(R.id.runnerName);
+            textElement.setText("John Doe");
+        }
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -65,6 +90,36 @@ public class BuyerOrderPlaced extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    // place order info on the view
+    public void orderInfo(){
+
+        TextView textElement = (TextView) findViewById(R.id.textBusName);
+        textElement.setText(business);
+        textElement = (TextView) findViewById(R.id.textDetails);
+        textElement.setText(order);
+
+
+    }
+
+    // Takes runner to call the runner
+    public void callRunner(View v){
+
+        String number = "8327164026"; // API call to get buyer's number
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        String phone = "tel:" + number;
+        callIntent.setData(Uri.parse(phone));
+        startActivity(callIntent);
+
+    }
+
+    // Takes runner to map of UTSA
+    public void toMap(View v){
+
+        Intent mapIntent = new Intent(BuyerOrderPlaced.this, MapUTSA.class);
+        startActivity(mapIntent);
+
     }
 
 }
