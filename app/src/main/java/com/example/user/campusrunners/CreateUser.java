@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -135,12 +134,12 @@ public class CreateUser extends AppCompatActivity {
         }
         JSONParser jsonParser = new JSONParser();
         button_makeUser = (Button) findViewById(R.id.btn_signup);
-        inputName     = (EditText)findViewById(R.id.input_userName);
-        inputLastName = (EditText)findViewById(R.id.input_userLastName);
+//        inputName     = findViewById(R.id.input_userName);
+//        inputLastName = (EditText)findViewById(R.id.input_userLastName);
         inputEmail    = (EditText)findViewById(R.id.input_email);
         inputPassword = (EditText)findViewById(R.id.input_password);
 
-        button_makeUser.setOnClickListener(new OnClickListener() {
+        button_makeUser.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
                 new UserCreated().execute();
@@ -182,14 +181,15 @@ public class CreateUser extends AppCompatActivity {
         }
         //Required Abstract Method
         protected String doInBackground(String...params){
-            final String  name    = inputName.getText().toString();
+//            final String  name    = inputName.getText().toString();
             final String password = inputPassword.getText().toString();
-            final String lastName = inputLastName.getText().toString();
+//            final String lastName = inputLastName.getText().toString();
             final String email    = inputEmail.getText().toString();
-            final String userRole = inputRole.getText().toString();
-            final String abc123   = inputABC123.getText().toString();
-            final String phoneNumber = inputPhoneNumber.getText().toString();
-//    {"abc123": "abc123",
+//            final String userRole = inputRole.getText().toString();
+//            final String abc123   = inputABC123.getText().toString();
+//            final String phoneNumber = inputPhoneNumber.getText().toString();
+//            Log.d("DoInBack"," " + name);
+// {"abc123": "abc123",
 //     "email": "abc123@my.utsa.edu",
 //      "name": "Yadi",
 // "user_role": "runner",
@@ -206,13 +206,13 @@ public class CreateUser extends AppCompatActivity {
                     HashMap<String, String> choice = new HashMap<String, String>();
                     int answerReturned =0;
                     // enter convert input into a hashmap to be read by the php file, via POST
-                     choice.put("name",name);
+//                     choice.put("name",name);
                      choice.put("password",password);
 //                     choice.put("  ",lastName);  ///not yet using lastName
                      choice.put("email",email);
-                     choice.put("user_role",userRole);
-                     choice.put("abc123",abc123);
-                     choice.put("user_role",phoneNumber);
+//                     choice.put("user_role",userRole);
+                     choice.put("abc123","hot321");
+//                     choice.put("user_role",phoneNumber);
 
                     //////Hardcoded for testing////////////////////
                     // choice.put("abc123","abc321");
@@ -234,6 +234,7 @@ public class CreateUser extends AppCompatActivity {
                             //finish();
                         }else{
                             //throw a loop back, instance of correct creds not valid.
+
                         }
                     }catch (JSONException jError){
                         jError.printStackTrace();
