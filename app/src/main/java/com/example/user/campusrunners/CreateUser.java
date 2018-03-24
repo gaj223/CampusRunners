@@ -210,16 +210,10 @@ public class CreateUser extends AppCompatActivity {
                      choice.put("password",password);
 //                     choice.put("  ",lastName);  ///not yet using lastName
                      choice.put("email",email);
+
 //                     choice.put("user_role",userRole);
                      choice.put("abc123","hot321");
 //                     choice.put("user_role",phoneNumber);
-
-                    //////Hardcoded for testing////////////////////
-                    // choice.put("abc123","abc321");
-                    // choice.put("password","321CBA");
-                    //////Buyer hardcoded///////
-                    choice.put("abc123","fox007");
-                    choice.put("password","foxme");
                     try {
                         jsonObj = jsonParser.makeHttpRequest(urlCreate, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
