@@ -95,9 +95,10 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    EditText inputUserName;
+
     private View mProgressView;
     private View mLoginFormView;
-    EditText inputUserName, editPsWd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -270,23 +271,23 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     }
     /////////////////////////////////////////////////////////// Inner Class
     class DbVerify extends AsyncTask<String,String,String>{
-        private  int answerReturned;
-        @Override
-        protected  void onPreExecute(){
-         Log.d("DoInBack","onPreExecute");
+            private  int answerReturned;
+            @Override
+            protected  void onPreExecute(){
+                Log.d("DoInBack","onPreExecute");
 
-        }
-        //Required Abstract Method
-        protected String doInBackground(String...params){
-            final String  abc123  = inputUserName.getText().toString();
-            final String password = mPasswordView.getText().toString();
-            Log.d("DoInBack","past the convert");
-             runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+            }
+            //Required Abstract Method
+            protected String doInBackground(String...params){
+                final String  abc123  = inputUserName.getText().toString();
+                final String password = mPasswordView.getText().toString();
+                Log.d("DoInBack","past the convert");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
                         Log.d("DoInBack","inside runOnUiThread()");
-                    String user_role = " ";
-                    String user_ID   = " ";
+                        String user_role = " ";
+                        String user_ID   = " ";
                         HashMap<String, String> choice = new HashMap<String, String>();
                         int answerReturned =0;
                         // enter convert input into a hashmap to be read by the php file, via POST
@@ -295,77 +296,80 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                        ////////////////////// //////Hardcoded for testing////////////////////
                         // choice.put("abc123","abc321");
                         // choice.put("password","321CBA");
-                               //////Buyer hardcoded///////
+                        //////Buyer hardcoded///////
                         choice.put("abc123","fox007");
                         choice.put("password","foxme");
-                    try {
-                        jsonObj = jsonParser.makeHttpRequest(urlLogin, "POST", choice);
-                        Log.d("DoInBack", "jsonObj is good i think"  );
+                        try {
+                            jsonObj = jsonParser.makeHttpRequest(urlLogin, "POST", choice);
+                            Log.d("DoInBack", "jsonObj is good i think"  );
 
-                        answerReturned = jsonObj.getInt(TAG_SUCCESS);
-                        Log.d("DoInBack", "answerReturned "+ answerReturned  );
-                        jsonObj.getJSONArray("user");
-                    //Catch needed to use jsonObj.getInt....
-                        if(answerReturned == 1){
-                            ///////////////////////////////
-                           //jsonObj.getJSONArray(TAG_NAME_ARRAY).get(1);
-                            //if(jsonObj.getJSONArray(TAG_NAME_ARRAY).getString(TAG_USER_ROLE) == "runner"){
-                            Log.d("DoInBack","heh " + jsonObj.getJSONArray(TAG_NAME_ARRAY).get(0).toString() );
-                          //  if(jsonObj.getJSONArray(TAG_NAME_ARRAY).get(0).        == "runner" ){
-                            //}else if(jsonObj.getJSONArray(TAG_NAME_ARRAY).get(1)  == "buyer"){
+                            answerReturned = jsonObj.getInt(TAG_SUCCESS);
+                            Log.d("DoInBack", "answerReturned "+ answerReturned  );
+                            jsonObj.getJSONArray("user");
+                            //Catch needed to use jsonObj.getInt....
+                            if(answerReturned == 1){
+                                ///////////////////////////////
+                                //jsonObj.getJSONArray(TAG_NAME_ARRAY).get(1);
+                                //if(jsonObj.getJSONArray(TAG_NAME_ARRAY).getString(TAG_USER_ROLE) == "runner"){
+                                Log.d("DoInBack","heh " + jsonObj.getJSONArray(TAG_NAME_ARRAY).get(0).toString() );
+                                //  if(jsonObj.getJSONArray(TAG_NAME_ARRAY).get(0).        == "runner" ){
+                                //}else if(jsonObj.getJSONArray(TAG_NAME_ARRAY).get(1)  == "buyer"){
 
-                            //}
+                                //}
 
-                            // products found
-                            // Getting Array of Products
-                            //products = json.getJSONArray(TAG_PRODUCTS);
-                            JSONArray userJsonArray = jsonObj.getJSONArray(TAG_NAME_ARRAY);
+                                // products found
+                                // Getting Array of Products
+                                //products = json.getJSONArray(TAG_PRODUCTS);
+                                JSONArray userJsonArray = jsonObj.getJSONArray(TAG_NAME_ARRAY);
 
-                            Log.d("DoInBack","message user_role="+userJsonArray.getString(0));
-                            userJsonArray.getString(0) ;
-                            for(int i = 0; i < userJsonArray.length(); i++){
-                                JSONObject temparyJsonObj = userJsonArray.getJSONObject(i);
-                                user_role = temparyJsonObj.getString(TAG_USER_ROLE);
-                                user_ID   = temparyJsonObj.getString(TAG_USER_ID);
-                            }
-                            Log.d("DoInBack","user_ID: "   + user_ID);
-                            Log.d("DoInBack","user_role: " + user_role);
-                            userInfoMap = new HashMap<String, String>();
+                                Log.d("DoInBack","message user_role="+userJsonArray.getString(0));
+                                userJsonArray.getString(0) ;
+                                for(int i = 0; i < userJsonArray.length(); i++){
+                                    JSONObject temparyJsonObj = userJsonArray.getJSONObject(i);
+                                    user_role = temparyJsonObj.getString(TAG_USER_ROLE);
+                                    user_ID   = temparyJsonObj.getString(TAG_USER_ID);
+                                }
+                                Log.d("DoInBack","user_ID: "   + user_ID);
+                                Log.d("DoInBack","user_role: " + user_role);
+                                userInfoMap = new HashMap<String, String>();
 
-                            // adding each child node to HashMap key => value, with supplied get call
-                            userInfoMap.put(TAG_USER_ID, user_ID);
-                            userInfoMap.put(TAG_USER_ROLE, user_role);
+                                // adding each child node to HashMap key => value, with supplied get call
+                                userInfoMap.put(TAG_USER_ID, user_ID);
+                                userInfoMap.put(TAG_USER_ROLE, user_role);
 
                                 // adding HashList to ArrayList, I do not need that here
-                               // productsList.add(map);
+                                // productsList.add(map);
 
-                            Log.d("DoInBack",user_role.toLowerCase() );
-                            // this if loop is not working
-                           if(user_role.toLowerCase().compareTo("runner") == 0){
-                                //getApplicationContext() is simlar to this, but used in Async
-                                intentRunnerHome = new Intent(getApplicationContext(), RunnerHome.class);
-                                startActivity(intentRunnerHome);
-                           }else if(user_role.toLowerCase().compareTo("buyer") == 0){
-                               Log.d("BuyerHome","a place holder for the intent for Buyer");
-                               intentBuyerHome = new Intent(getApplicationContext(), BuyerHomes.class);
-                               startActivity(intentBuyerHome);
-                           }
-                        }else{
-                            //throw a loop back, instance of correct creds not valid.
+                                Log.d("DoInBack",user_role.toLowerCase() );
+                                // this if loop is not working
+                                if(user_role.toLowerCase().compareTo("runner") == 0){
+                                    //getApplicationContext() is simlar to this, but used in Async
+                                    intentRunnerHome = new Intent(getApplicationContext(), RunnerHome.class);
+                                    startActivity(intentRunnerHome);
+                                }else if(user_role.toLowerCase().compareTo("buyer") == 0){
+                                    Log.d("BuyerHome","a place holder for the intent for Buyer");
+                                    intentBuyerHome = new Intent(getApplicationContext(), BuyerHomes.class);
+                                    startActivity(intentBuyerHome);
+                                }
+                            }else{
+                                //throw a loop back, instance of correct creds not valid.
+                            }
+                        }catch (JSONException jError){
+                            jError.printStackTrace();
+                            jError.getLocalizedMessage();
                         }
-                    }catch (JSONException jError){
-                        jError.printStackTrace();
-                        jError.getLocalizedMessage();
                     }
-                }
-            });
-            return "heeh";
-        }
+                });
+                return "heeh";
+            }
 
         public int getAnswerReturned() {
             return answerReturned;
         }
     }
+    /////////////////////////////End of inner Class////////////////////////////////////
+
+
     // this should be called when needed outside this class
     public java.util.HashMap<String, String> getUserInfoMap() {
         return userInfoMap;
