@@ -123,8 +123,6 @@ public class CreateUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        button_makeUser = (Button) findViewById(R.id.btn_signup);
-
         setContentView(R.layout.activity_create_user);
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
@@ -135,16 +133,19 @@ public class CreateUser extends AppCompatActivity {
 
         }
         JSONParser jsonParser = new JSONParser();
-        inputName     = (EditText)findViewById(R.id.input_userName);
-        inputLastName = (EditText)findViewById(R.id.input_userLastName);
+        button_makeUser = (Button) findViewById(R.id.btn_signup);
+//        inputName     = findViewById(R.id.input_userName);
+//        inputLastName = (EditText)findViewById(R.id.input_userLastName);
         inputEmail    = (EditText)findViewById(R.id.input_email);
+        inputPassword = (EditText)findViewById(R.id.input_password);
 
         button_makeUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new UserCreated.execute();
-            }
+          @Override
+          public void onClick(View v) {
+                new UserCreated().execute();
+          }
         });
+
 //        mVisible = true;
 //        mControlsView = findViewById(R.id.fullscreen_content_controls);
         //mContentView = findViewById(R.id.fullscreen_content);
@@ -171,23 +172,24 @@ public class CreateUser extends AppCompatActivity {
         @Override
         protected  void onPreExecute(){
             Log.d("DoInBack","onPreExecute");
-            super.onPreExecute();
-            pDialog = new ProgressDialog(CreateUser.this);
-            pDialog.setMessage("Creating Product..");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
+//            super.onPreExecute();
+//            pDialog = new ProgressDialog(CreateUser.this);
+//            pDialog.setMessage("Creating Product..");
+//            pDialog.setIndeterminate(false);
+//            pDialog.setCancelable(true);
+//            pDialog.show();
         }
         //Required Abstract Method
         protected String doInBackground(String...params){
-            final String  name    = inputName.getText().toString();
+//            final String  name    = inputName.getText().toString();
             final String password = inputPassword.getText().toString();
-            final String lastName = inputLastName.getText().toString();
+//            final String lastName = inputLastName.getText().toString();
             final String email    = inputEmail.getText().toString();
-            final String userRole = inputRole.getText().toString();
-            final String abc123   = inputABC123.getText().toString();
-            final String phoneNumber = inputPhoneNumber.getText().toString();
-//    {"abc123": "abc123",
+//            final String userRole = inputRole.getText().toString();
+//            final String abc123   = inputABC123.getText().toString();
+//            final String phoneNumber = inputPhoneNumber.getText().toString();
+//            Log.d("DoInBack"," " + name);
+// {"abc123": "abc123",
 //     "email": "abc123@my.utsa.edu",
 //      "name": "Yadi",
 // "user_role": "runner",
@@ -204,20 +206,14 @@ public class CreateUser extends AppCompatActivity {
                     HashMap<String, String> choice = new HashMap<String, String>();
                     int answerReturned =0;
                     // enter convert input into a hashmap to be read by the php file, via POST
-                     choice.put("name",name);
+//                     choice.put("name",name);
                      choice.put("password",password);
 //                     choice.put("  ",lastName);  ///not yet using lastName
                      choice.put("email",email);
-                     choice.put("user_role",userRole);
-                     choice.put("abc123",abc123);
-                     choice.put("user_role",phoneNumber);
 
-                    //////Hardcoded for testing////////////////////
-                    // choice.put("abc123","abc321");
-                    // choice.put("password","321CBA");
-                    //////Buyer hardcoded///////
-                    choice.put("abc123","fox007");
-                    choice.put("password","foxme");
+//                     choice.put("user_role",userRole);
+                     choice.put("abc123","hot321");
+//                     choice.put("user_role",phoneNumber);
                     try {
                         jsonObj = jsonParser.makeHttpRequest(urlCreate, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
@@ -232,6 +228,7 @@ public class CreateUser extends AppCompatActivity {
                             //finish();
                         }else{
                             //throw a loop back, instance of correct creds not valid.
+
                         }
                     }catch (JSONException jError){
                         jError.printStackTrace();
@@ -239,7 +236,7 @@ public class CreateUser extends AppCompatActivity {
                     }
                 }
             });
-            return "C-Ate-stuff";
+            return "blk";
         }
 
         public int getAnswerReturned() {
