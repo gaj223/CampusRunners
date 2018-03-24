@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -123,8 +124,6 @@ public class CreateUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        button_makeUser = (Button) findViewById(R.id.btn_signup);
-
         setContentView(R.layout.activity_create_user);
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
@@ -135,16 +134,19 @@ public class CreateUser extends AppCompatActivity {
 
         }
         JSONParser jsonParser = new JSONParser();
+        button_makeUser = (Button) findViewById(R.id.btn_signup);
         inputName     = (EditText)findViewById(R.id.input_userName);
         inputLastName = (EditText)findViewById(R.id.input_userLastName);
         inputEmail    = (EditText)findViewById(R.id.input_email);
+        inputPassword = (EditText)findViewById(R.id.input_password);
 
-        button_makeUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new UserCreated.execute();
-            }
+        button_makeUser.setOnClickListener(new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+                new UserCreated().execute();
+          }
         });
+
 //        mVisible = true;
 //        mControlsView = findViewById(R.id.fullscreen_content_controls);
         //mContentView = findViewById(R.id.fullscreen_content);
@@ -171,12 +173,12 @@ public class CreateUser extends AppCompatActivity {
         @Override
         protected  void onPreExecute(){
             Log.d("DoInBack","onPreExecute");
-            super.onPreExecute();
-            pDialog = new ProgressDialog(CreateUser.this);
-            pDialog.setMessage("Creating Product..");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
+//            super.onPreExecute();
+//            pDialog = new ProgressDialog(CreateUser.this);
+//            pDialog.setMessage("Creating Product..");
+//            pDialog.setIndeterminate(false);
+//            pDialog.setCancelable(true);
+//            pDialog.show();
         }
         //Required Abstract Method
         protected String doInBackground(String...params){
@@ -239,7 +241,7 @@ public class CreateUser extends AppCompatActivity {
                     }
                 }
             });
-            return "C-Ate-stuff";
+            return "blk";
         }
 
         public int getAnswerReturned() {
