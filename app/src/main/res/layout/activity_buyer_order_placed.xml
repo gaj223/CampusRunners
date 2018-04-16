@@ -172,4 +172,22 @@
         app:layout_constraintVertical_bias="0.766"
         app:srcCompat="@drawable/ic_map_black_24dp" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="77dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_dark"
+        android:onClick="orderCompleted"
+        android:text="Complete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.416" />
+
 </android.support.constraint.ConstraintLayout>
