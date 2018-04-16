@@ -1,6 +1,3 @@
-/**
- * Created by super and edit by Miguel on 3/21/2018.
- */
 
 package com.example.user.campusrunners;
 
@@ -8,29 +5,29 @@ package com.example.user.campusrunners;
  * Created by Yadi on 3/16/18.
  */
 
-import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+    import org.json.JSONException;
+    import org.json.JSONObject;
+    import java.io.BufferedOutputStream;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.io.BufferedReader;
+    import java.io.InputStreamReader;
+    import java.io.OutputStream;
+    import java.io.UnsupportedEncodingException;
+    import java.net.HttpURLConnection;
+    import java.net.MalformedURLException;
+    import java.net.ProtocolException;
+    import java.net.URL;
+    import java.net.URLEncoder;
+    import java.util.HashMap;
+    import java.util.Iterator;
+    import java.util.LinkedHashMap;
+    import java.util.Map;
+    import java.util.Set;
+    import android.util.Log;
+    import javax.net.ssl.HttpsURLConnection;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class JSONParser {
 
@@ -46,14 +43,15 @@ public class JSONParser {
     public JSONParser() {
 
     }
-
     // function get json from url
     // by making HTTP POST or GET mehtod
     public JSONObject makeHttpRequest(String stUrl, String method,
                                       HashMap<String,String> params) {
 
         // Making HTTP request
-        switch (method) {
+
+        switch (method){
+
             case "GET":
                 try {
                     String encodedParm;
@@ -125,6 +123,8 @@ public class JSONParser {
                 } catch (IOException e) {
                     Log.e("i/o error", "" + e.getMessage());
                     e.printStackTrace();
+
+
                 } catch (Exception e) {
                     Log.e("encode error", "" + e.getMessage());
                     e.printStackTrace();
@@ -132,10 +132,7 @@ public class JSONParser {
                 if (conn != null) {
                     conn.disconnect();
                 }
-//                } catch (Exception e) {
-//                    String error = new String("Exception: " + e.getMessage());
-//                    Log.e("Connection error", "Exception" + e.getMessage());
-//                }
+
                 break;
             case "POST":
                 try {
@@ -161,7 +158,9 @@ public class JSONParser {
                     conn.setRequestProperty("cache-control", "no-cache");
 
                     //other site stuff
-                    message = postDataParams.toString();
+
+                    message =postDataParams.toString();
+
                     conn.setFixedLengthStreamingMode(message.getBytes().length);
                     conn.connect();
 
@@ -174,7 +173,8 @@ public class JSONParser {
 
                     int responseCode = conn.getResponseCode();
 
-                    // Log.e("JSONPaser http", "" + responseCode);
+                    Log.e("responseError", "" + responseCode);
+
 
                     if (responseCode == HttpsURLConnection.HTTP_OK) {
                         BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -186,74 +186,41 @@ public class JSONParser {
                         }
                         reader.close();
                         json = sb.toString();
-                        // Log.e to debug
-                        //Log.e("JSON String value", "Json:  " + json);
+
+
+                        Log.e("in json string", "Json:  " + json);
                         try {
                             responseParm = new JSONObject(json);
-                        } catch (JSONException e) {
-                            // Log.e to debug
+                        }
+                        catch(JSONException e){
+
                             Log.e("JSON Parser", "Error parsing data " + e.toString());
                         }
 
                         return responseParm;
                     } else {
-                        //used for testing
-                        //Log.e("HTTP-ResponseError", "" + responseCode);
+
+                        Log.e("responseError", "" + responseCode);
+
 
                         return postDataParams;
                         // }
                     }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    String error = new String("Exception: " + e.getMessage());
+                    Log.e("Connection error", "Exception" + e.getMessage());
                 }
-
                 break;
+            default:
+        }
 
-            }
-            return responseParm;
-            }
+        return responseParm;
 
-    //    public String getPostDataString(JSONObject params) {
-//
-//        StringBuilder result = new StringBuilder();
-//        boolean first = true;
-//
-//        Iterator<String> itr = params.keys();
-//
-//        while(itr.hasNext()){
-//
-//            String key= itr.next();
-//            Object value = null;
-//            try {
-//                value = params.get(key);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//            if (first)
-//                first = false;
-//            else
-//                result.append("&");
-//
-//            try {
-//                result.append(URLEncoder.encode(key, "UTF-8"));
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
-//            result.append("=");
-//            try {
-//                result.append(URLEncoder.encode(value.toString(), "UTF-8"));
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//        Log.e("result in getpost",result.toString());
-//        return result.toString();
-//    }
+
+    }
+
+
     public static String buildQueryString(final HashMap<String, String> map) {
         try {
             final Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
@@ -284,3 +251,4 @@ public class JSONParser {
     }
 
 }
+

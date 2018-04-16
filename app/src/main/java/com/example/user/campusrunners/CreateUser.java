@@ -112,14 +112,14 @@ public class CreateUser extends AppCompatActivity {
 //        }
 //    };
 
-    EditText inputName;
-    EditText inputLastName;
-    EditText inputPassword;
-    EditText inputEmail;
-    EditText inputPhoneNumber;
-    EditText inputAddress;
-    EditText inputRole;
-    EditText inputABC123;
+        EditText inputName;
+        EditText inputLastName;
+        EditText inputPassword;
+        EditText inputEmail;
+        EditText inputPhoneNumber;
+        EditText inputAddress;
+        EditText inputRole;
+        EditText inputABC123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,16 +134,16 @@ public class CreateUser extends AppCompatActivity {
         }
         JSONParser jsonParser = new JSONParser();
         button_makeUser = (Button) findViewById(R.id.btn_signup);
-        inputName     = (EditText) findViewById(R.id.input_userName);
-        inputLastName = (EditText)findViewById(R.id.input_userLastName);
+//        inputName     = findViewById(R.id.input_userName);
+//        inputLastName = (EditText)findViewById(R.id.input_userLastName);
         inputEmail    = (EditText)findViewById(R.id.input_email);
         inputPassword = (EditText)findViewById(R.id.input_password);
 
         button_makeUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+          @Override
+          public void onClick(View v) {
                 new UserCreated().execute();
-            }
+          }
         });
 
 //        mVisible = true;
@@ -162,7 +162,7 @@ public class CreateUser extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        // findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+       // findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
     /////////////////////////////////////////////////////////// Inner Class
 
@@ -181,14 +181,14 @@ public class CreateUser extends AppCompatActivity {
         }
         //Required Abstract Method
         protected String doInBackground(String...params){
-            final String  name    = inputName.getText().toString();
+//            final String  name    = inputName.getText().toString();
             final String password = inputPassword.getText().toString();
-            final String lastName = inputLastName.getText().toString();
+//            final String lastName = inputLastName.getText().toString();
             final String email    = inputEmail.getText().toString();
-            final String userRole = inputRole.getText().toString();
-            final String abc123   = inputABC123.getText().toString();
-            final String phoneNumber = inputPhoneNumber.getText().toString();
-            Log.d("DoInBack"," " + name);
+//            final String userRole = inputRole.getText().toString();
+//            final String abc123   = inputABC123.getText().toString();
+//            final String phoneNumber = inputPhoneNumber.getText().toString();
+//            Log.d("DoInBack"," " + name);
 // {"abc123": "abc123",
 //     "email": "abc123@my.utsa.edu",
 //      "name": "Yadi",
@@ -206,20 +206,14 @@ public class CreateUser extends AppCompatActivity {
                     HashMap<String, String> choice = new HashMap<String, String>();
                     int answerReturned =0;
                     // enter convert input into a hashmap to be read by the php file, via POST
-                    choice.put("name",name);
-                    choice.put("password",password);
+//                     choice.put("name",name);
+                     choice.put("password",password);
 //                     choice.put("  ",lastName);  ///not yet using lastName
-                    choice.put("email",email);
-                    choice.put("user_role",userRole);
-                    choice.put("abc123",abc123);
-                    choice.put("user_role",phoneNumber);
+                     choice.put("email",email);
 
-                    //////Hardcoded for testing////////////////////
-                    // choice.put("abc123","abc321");
-                    // choice.put("password","321CBA");
-                    //////Buyer hardcoded///////
-                    choice.put("abc123","fox007");
-                    choice.put("password","foxme");
+//                     choice.put("user_role",userRole);
+                     choice.put("abc123","hot321");
+//                     choice.put("user_role",phoneNumber);
                     try {
                         jsonObj = jsonParser.makeHttpRequest(urlCreate, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
@@ -234,6 +228,7 @@ public class CreateUser extends AppCompatActivity {
                             //finish();
                         }else{
                             //throw a loop back, instance of correct creds not valid.
+
                         }
                     }catch (JSONException jError){
                         jError.printStackTrace();
@@ -275,7 +270,7 @@ public class CreateUser extends AppCompatActivity {
 //        if (actionBar != null) {
 //            actionBar.hide();
 //        }
-    // mControlsView.setVisibility(View.GONE);
+       // mControlsView.setVisibility(View.GONE);
 //        mVisible = false;
 //
 //        // Schedule a runnable to remove the status and navigation bar after a delay
