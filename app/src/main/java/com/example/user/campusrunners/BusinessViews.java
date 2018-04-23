@@ -12,12 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.ListView.*;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import static com.example.user.campusrunners.Constants.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,15 +21,38 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.example.user.campusrunners.Constants.SERVER_PATH;
+import static com.example.user.campusrunners.Constants.get_items_api;
+
 public class BusinessViews extends AppCompatActivity {
 
     private TextView mTextMessage;
-//    public String listItems[] = {"Pens, Pack of 8", "Pencils, Pack of 8",
-//            "Composition Notebook", "Spiral Notebook", "Red Scrantron, 100 questions",
-//            " Red Scrantron, 25 questions", "Bluebook"};
-//    public float listPrices[] = {2.00f,1.50f,0.75f,1.00f,0.50f,0.25f,1.00f};
-//    public int quantities[] = new int[listItems.length];
+    // Bookstore Info
+    public String listItemsBook[] = {"Pens, Pack of 8", "Pencils, Pack of 8",
+            "Composition Notebook", "Spiral Notebook", "Red Scrantron, 100 questions",
+            " Red Scrantron, 25 questions", "Bluebook"};
+    public float listPricesBook[] = {2.00f,1.50f,0.75f,1.00f,0.50f,0.25f,1.00f};
+    // Chick Fil A Info
+    public String listItemsChick[] = {"Spicy Chicken Sandwich", "Chick-fil-A Chicken Sandwich",
+            "Chick-fil-A Nuggets, 8ct", "Chick-fil-A Nuggets, 12ct", "Waffle Potato Fries, Medium",
+            " Waffle Potato Fries, Large", "Yogurt Parfait"};
+    public float listPricesChick[] = {3.29f,3.05f,3.05f,4.45f,1.65f,1.85f,2.45f};
+    // POD Info
+    public String listItemsPOD[] = {"Chocolate Chip Muffin", "Snickers",
+            "Cough Drop, Cherry", "Bottle of Water", "Mountain Dew",
+            "Pepsi", "Pack of spearmint"};
+    public float listPricesPOD[] = {2.00f,1.50f,1.75f,1.50f,1.75f,1.75f,1.00f};
+    // Papa Johns Info
+    public String listItemsPapa[] = {"Cheese Pizza", "Pepperoni Pizza",
+            "Meat Trio Pizza", "Hawaian Pizza", "Cheese BreadSticks", "Fountain Drink, Medium",
+            "Fountain Drink, Large"};
+    public float listPricesPapa[] = {4.00f,4.25f,4.50f,4.50f,2.50f,1.25f,1.75f};
+    // General Info
+    public String listItems[];
+    public float listPrices[];
+    public int quantities[];
     public String business;
+
     //New test code
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -84,12 +102,32 @@ public class BusinessViews extends AppCompatActivity {
         TextView textElement = (TextView) findViewById(R.id.busName);
         textElement.setText(business);
         id =  bundle.getInt("BusinessID");
+
+        // Set what Info should be used based on what the business that was chosen by the user
+        if (business.equals("UTSA Bookstore")){
+            quantities = new int[listItemsBook.length];
+            listItems = listItemsBook;
+            listPrices = listPricesBook;
+        } else if (business.equals("Chick-Fil-A")) {
+            quantities = new int[listItemsChick.length];
+            listItems = listItemsChick;
+            listPrices = listPricesChick;
+        } else if (business.equals("POD")) {
+            quantities = new int[listItemsPOD.length];
+            listItems = listItemsPOD;
+            listPrices = listPricesPOD;
+        } else if (business.equals("Papa John's")) {
+            quantities = new int[listItemsPapa.length];
+            listItems = listItemsPapa;
+            listPrices = listPricesPapa;
+        }
+
 //
 //        // Add Business Items to view
-//        addItemsPage();
+        addItemsPage();
         itemList= new ArrayList<HashMap<String, String>>();
         //load items in background thread
-        new LoadBusinessItems().execute();
+        //new LoadBusinessItems().execute();
 
         //nav stuff
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -130,92 +168,92 @@ public class BusinessViews extends AppCompatActivity {
     // Adds the items that business sells
     public void addItemsPage (){
 
-//        quantities = new int[listItems.length];
-//        LinearLayout layout = (LinearLayout)findViewById(R.id.scroll2);
-//
-//        // List each item on to the screen
-//        for(int i = 0; i < listItems.length; i++ ){
-//
-//            quantities[i] = 0;
-//
-//            // Add Item name
-//            TextView item = new TextView(this);
-//            item.setText("$" + listPrices[i] + " " + listItems[i]);
-//            item.setId((i + 1) * 1000);
-//            final int id_ = item.getId();
-//
-//            // Set the quantity to 0
-//            TextView quantity = new TextView(this);
-//            quantity.setText("0");
-//            quantity.setId((i + 1) * 2000);
-//            final int id2_ = quantity.getId();
-//
-//            // Plus Button
-//            Button plus = new Button(this);
-//            //plus.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-//            String text = "+";
-//            plus.setText(text);
-//            plus.setId(i + 1);
-//            plus.setMaxWidth(20);
-//            plus.setMaxHeight(20);
-//            final int id3_ = plus.getId();
-//
-//            // Minus Button
-//            Button minus = new Button(this);
-//            minus.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-//            text = "-";
-//            minus.setText(text);
-//            minus.setId((i + 1) * -1);
-//            minus.setMaxWidth(20);
-//            minus.setMaxWidth(20);
-//            final int id4_ = minus.getId();
-//
-//            // add to quantity
-//            plus.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View v) {
-//                    TextView x = (TextView) findViewById(id2_);
-//                    int q = Integer.parseInt((String)x.getText());
-//                    q = q + 1;
-//                    quantities[id3_ - 1] = q;
-//                    x.setText(q + "");
-//                }
-//            });
-//
-//            // subtract from quantity
-//            minus.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View v) {
-//                    TextView x = (TextView) findViewById(id2_);
-//                    int q = Integer.parseInt((String)x.getText());
-//                    if (q > 0) {
-//                        q = q - 1;
-//                        x.setText(q + "");
-//                    }
-//                    quantities[id3_ - 1] = q;
-//
-//                }
-//            });
-//
-//            // Add everything to the view
-//            layout.addView(item);
-//            layout.addView(plus);
-//            layout.addView(quantity);
-//            layout.addView(minus);
-//        }
+        quantities = new int[listItems.length];
+        LinearLayout layout = (LinearLayout)findViewById(R.id.scroll2);
+
+        // List each item on to the screen
+        for(int i = 0; i < listItems.length; i++ ){
+
+            quantities[i] = 0;
+
+            // Add Item name
+            TextView item = new TextView(this);
+            item.setText("$" + listPrices[i] + " " + listItems[i]);
+            item.setId((i + 1) * 1000);
+            final int id_ = item.getId();
+
+            // Set the quantity to 0
+            TextView quantity = new TextView(this);
+            quantity.setText("0");
+            quantity.setId((i + 1) * 2000);
+            final int id2_ = quantity.getId();
+
+            // Plus Button
+            Button plus = new Button(this);
+            //plus.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            String text = "+";
+            plus.setText(text);
+            plus.setId(i + 1);
+            plus.setMaxWidth(20);
+            plus.setMaxHeight(20);
+            final int id3_ = plus.getId();
+
+            // Minus Button
+            Button minus = new Button(this);
+            minus.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            text = "-";
+            minus.setText(text);
+            minus.setId((i + 1) * -1);
+            minus.setMaxWidth(20);
+            minus.setMaxWidth(20);
+            final int id4_ = minus.getId();
+
+            // add to quantity
+            plus.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    TextView x = (TextView) findViewById(id2_);
+                    int q = Integer.parseInt((String)x.getText());
+                    q = q + 1;
+                    quantities[id3_ - 1] = q;
+                    x.setText(q + "");
+                }
+            });
+
+            // subtract from quantity
+            minus.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    TextView x = (TextView) findViewById(id2_);
+                    int q = Integer.parseInt((String)x.getText());
+                    if (q > 0) {
+                        q = q - 1;
+                        x.setText(q + "");
+                    }
+                    quantities[id3_ - 1] = q;
+
+                }
+            });
+
+            // Add everything to the view
+            layout.addView(item);
+            layout.addView(plus);
+            layout.addView(quantity);
+            layout.addView(minus);
+        }
 
     }
 
 
     // sends order detail to buyer place order page
     public void toCart(View v){
-//        // Change to add to BuyerCart.class
-//        Intent x = new Intent(BusinessViews.this, BuyerPlaceOrder.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("business", business);
-//        bundle.putStringArray("listItems", listItems);
-//        bundle.putFloatArray("listPrices", listPrices);
-//        bundle.putIntArray("quantities", quantities);
-//        x.putExtras(bundle);
-//        startActivity(x);
+        // Change to add to BuyerCart.class
+        Intent x = new Intent(BusinessViews.this, BuyerPlaceOrder.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("business", business);
+        bundle.putStringArray("listItems", listItems);
+        bundle.putFloatArray("listPrices", listPrices);
+        bundle.putIntArray("quantities", quantities);
+        x.putExtras(bundle);
+        startActivity(x);
 
     }
     /**
