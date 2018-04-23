@@ -18,6 +18,8 @@ public class BuyerPlaceOrder extends AppCompatActivity {
     public float listPrices[];
     public int quantities[];
     public String order;
+    public EditText edit2;// might not need this, but I was going to use this to add info
+    //to the data base
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,8 +48,8 @@ public class BuyerPlaceOrder extends AppCompatActivity {
 
         // Order Info
         Bundle bundle = this.getIntent().getExtras();
-        business = bundle.getString("business");
-        listItems = bundle.getStringArray("listItems");
+        business   = bundle.getString("business");
+        listItems  = bundle.getStringArray("listItems");
         listPrices = bundle.getFloatArray("listPrices");
         quantities = bundle.getIntArray("quantities");
 
@@ -105,6 +107,7 @@ public class BuyerPlaceOrder extends AppCompatActivity {
         textElement.setText(order);
 
 
+
     }
 
     // place order when button pressed
@@ -120,6 +123,8 @@ public class BuyerPlaceOrder extends AppCompatActivity {
         // Change to add to BuyerCart.class
         Intent x = new Intent(BuyerPlaceOrder.this, BuyerOrderPlaced.class);
         Bundle bundle = new Bundle();
+        bundle.putString("buyerLocation", String.valueOf(edit));//had to wrap this to see if it works
+        bundle.putString("buyerNote",note);//added to have the note
         bundle.putString("business", business);
         bundle.putStringArray("listItems", listItems);
         bundle.putFloatArray("listPrices", listPrices);

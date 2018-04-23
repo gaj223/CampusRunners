@@ -223,6 +223,7 @@ public class CreateUser extends AppCompatActivity {
                         jsonObj.getJSONArray("user");
                         //Catch needed to use jsonObj.getInt....
                         if(answerReturned == 1){
+                            Log.d("logInReturn","should have return to home screen");
                             intentLogIn = new Intent(getApplicationContext(), Login.class);
                             startActivity(intentLogIn);
                             //finish();
