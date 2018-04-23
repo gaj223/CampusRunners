@@ -39,7 +39,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import static com.example.user.campusrunners.Constants.*;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -50,7 +50,8 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     public Intent intentRunnerHome ;
     public Intent intentBuyerHome;
     public Intent intentCreateUser;
-    private static String urlLogin ="http://13.59.142.19/CampusRunnerBack/Config/TestHiveStuff/userlogin.php";
+
+    private static String urlLogin = SERVER_PATH + login_api;
     //JSON NODE Tags
     private static final String TAG_SUCCESS     = "success";
     private static final String TAG_PRODUCTS    = "products";

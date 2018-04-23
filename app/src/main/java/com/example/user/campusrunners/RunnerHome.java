@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.user.campusrunners.Constants.*;
+
 public class RunnerHome extends AppCompatActivity {
 
     private TextView mTextMessage;

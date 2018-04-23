@@ -242,7 +242,7 @@ public class BusinessViews extends AppCompatActivity {
         protected String doInBackground(String... args) {
             // Pass hash map to store parameters to be passed
             HashMap<String, String> params = new HashMap<String, String>();
-            params.put("itemId", Integer.toString(id));
+            params.put("businessId", Integer.toString(id));
             // getting JSON string from URL
             JSONObject json = jParser.makeHttpRequest(SERVER_PATH+get_items_api, "GET", params);
 
@@ -296,7 +296,8 @@ public class BusinessViews extends AppCompatActivity {
         /**
          * After completing background task Dismiss the progress dialog
          * **/
-//        protected void onPostExecute(String file_url) {
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
 //            // dismiss the dialog after getting all products
 //            pDialog.dismiss();
 //            // updating UI from Background Thread
@@ -314,8 +315,7 @@ public class BusinessViews extends AppCompatActivity {
 //                    setListAdapter(adapter);
 //                }
 //            });
-//
-//        }
+       }
 
 }
 
