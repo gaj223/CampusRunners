@@ -106,7 +106,7 @@
             android:label="@string/title_activity_faqbuyer" />
         <activity
             android:name=".RateTheRunner"
-            android:label="@string/title_activity_rate_the_runner"></activity>
+            android:label="@string/title_activity_rate_the_runner" />
     </application>
 
 </manifest>

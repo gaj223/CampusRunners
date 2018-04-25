@@ -138,7 +138,7 @@ public class ViewAllRunnerOrders extends AppCompatActivity {
             final int id_ = btnTag.getId();
             btnTag.setWidth(1200);
             btnTag.setHeight(200);
-            btnTag.setTextSize(24);
+            btnTag.setTextSize(20);
 
 
             btnTag.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +173,7 @@ public class ViewAllRunnerOrders extends AppCompatActivity {
             final int id2_ = btnTag.getId();
             btnTag.setWidth(1200);
             btnTag.setHeight(200);
-            btnTag.setTextSize(24);
+            btnTag.setTextSize(20);
 
 
             btnTag.setOnClickListener(new View.OnClickListener() {
