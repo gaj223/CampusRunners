@@ -74,4 +74,10 @@ public class RunnerProfile extends AppCompatActivity {
         Intent i = new Intent(RunnerProfile.this, FAQ.class);
         startActivity(i);
     }
+
+    public void logoutRunner(View v) {
+
+        Intent i = new Intent(RunnerProfile.this, Login.class);
+        startActivity(i);
+    }
 }
