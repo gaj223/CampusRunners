@@ -292,14 +292,14 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                         HashMap<String, String> choice = new HashMap<String, String>();
                         int answerReturned =0;
                         // enter convert input into a hashmap to be read by the php file, via POST
-                        // choice.put("abc123",abc123);
-                        // choice.put("password",password);
+                         choice.put("abc123",abc123);
+                         choice.put("password",password);
                        ////////////////////// //////Hardcoded for testing////////////////////
                         // choice.put("abc123","abc321");
                         // choice.put("password","321CBA");
                         //////Buyer hardcoded///////
-                        choice.put("abc123","fox007");
-                        choice.put("password","foxme");
+                        //choice.put("abc123","fox007");
+                        //choice.put("password","foxme");
                         try {
                             jsonObj = jsonParser.makeHttpRequest(urlLogin, "POST", choice);
                             Log.d("DoInBack", "jsonObj is good i think"  );
