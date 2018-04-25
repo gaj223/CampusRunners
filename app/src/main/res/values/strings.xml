@@ -37,6 +37,7 @@
 
     <string name="title_activity_create_user">CreateUser</string>
     <string name="hint_gender">Gender</string>
+    <string name="hint_UserRoleStr">Role</string>
     <string name="hint_password">Password</string>
     <string name="male">male</string>
     <string name="hint_dob">DOB...</string>
