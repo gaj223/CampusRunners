@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class RateTheBuyer extends AppCompatActivity {
+public class RateTheRunner extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -37,7 +37,7 @@ public class RateTheBuyer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rate_the_buyer);
+        setContentView(R.layout.activity_rate_the_runner);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -50,16 +50,16 @@ public class RateTheBuyer extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(RateTheBuyer.this, RunnerHome.class);
+                        i = new Intent(RateTheRunner.this, RunnerHome.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(RateTheBuyer.this, ViewAllRunnerOrders.class);
+                        i = new Intent(RateTheRunner.this, ViewAllRunnerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
-                        i = new Intent(RateTheBuyer.this, RunnerProfile.class);
+                        i = new Intent(RateTheRunner.this, RunnerProfile.class);
                         startActivity(i);
                         break;
                 }
@@ -68,14 +68,14 @@ public class RateTheBuyer extends AppCompatActivity {
         });
     }
 
-    // Takes the runner to the homepage when they submit the buyer's rating
+    // Takes the buyer to the homepage when they submit the runner's rating
     public void submitRate(View v){
-            // Update Buyer Rating by API Call
-            RatingBar buyerRate = (RatingBar) findViewById(R.id.ratingBar3);
-            Float buyerRating = buyerRate.getRating();
+        // Update runner's Rating by API Call
+        RatingBar runnerRate = (RatingBar) findViewById(R.id.ratingBar3);
+        Float runnerRating = runnerRate.getRating();
 
-            Intent submit = new Intent(RateTheBuyer.this, BuyerHomes.class);
-            startActivity(submit);
+        Intent submit = new Intent(RateTheRunner.this, RunnerHome.class);
+        startActivity(submit);
     }
 
 }

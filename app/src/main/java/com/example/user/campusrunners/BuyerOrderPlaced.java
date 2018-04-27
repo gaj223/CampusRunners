@@ -136,4 +136,13 @@ public class BuyerOrderPlaced extends AppCompatActivity {
 
     }
 
+    // Takes buyer to rate the runner when complete button is pressed
+    public void orderCompleted(View v){
+
+        // Update Order status to completed by API Call
+        Intent submit = new Intent(BuyerOrderPlaced.this, RateTheRunner.class);
+        startActivity(submit);
+
+    }
+
 }
