@@ -53,6 +53,7 @@
     <string name="title_activity_indvidual_completed_order_buyer">Completed Order</string>
     <string name="title_activity_faqbuyer">FAQ</string>
     <string name="title_activity_rate_the_runner">Rate The Runner</string>
+    <string name="title_activity_items">ItemsActivity</string>
     <!--<string name="dummy_button">Dummy Button</string>-->
     <!--<string name="dummy_content">DUMMY\nCONTENT</string>-->
 </resources>

@@ -53,8 +53,8 @@ public class BuyerPlaceOrder extends AppCompatActivity {
         // gets info from business view
         Bundle bundle = this.getIntent().getExtras();
         business = bundle.getString("business"); //business name
-        listItems = bundle.getStringArray("listItems"); //
-        listPrices = bundle.getFloatArray("listPrices");
+        //listItems = bundle.getStringArray("listItems"); //
+        //listPrices = bundle.getFloatArray("listPrices");
         quantities = bundle.getIntArray("quantities");
 
         // Puts the order info on the view
@@ -100,15 +100,15 @@ public class BuyerPlaceOrder extends AppCompatActivity {
         order = "";
         String line = "";
         float total = 0;
-        for (int i = 0; i < listItems.length; i++){
-            if(quantities[i] > 0){
-                line = quantities[i] + " " + listItems[i] + "\n";
-                order = order + line;
-                total = total + quantities[i] * listPrices[i];
-                selectedItems.add(listItems[i]);
-                selectedQuantities.add(quantities[i]);
-            }
-        }
+//        for (int i = 0; i < listItems.length; i++){
+//            if(quantities[i] > 0){
+//                line = quantities[i] + " " + listItems[i] + "\n";
+//                order = order + line;
+//                total = total + quantities[i] * listPrices[i];
+//                selectedItems.add(listItems[i]);
+//                selectedQuantities.add(quantities[i]);
+//            }
+//        }
         order = order + "-----------------------\n";
         order = order + "Total:             $" + total;
         textElement.setText(order);
@@ -130,8 +130,8 @@ public class BuyerPlaceOrder extends AppCompatActivity {
         Intent x = new Intent(BuyerPlaceOrder.this, BuyerOrderPlaced.class);
         Bundle bundle = new Bundle();
         bundle.putString("business", business);
-        bundle.putStringArray("listItems", listItems);
-        bundle.putFloatArray("listPrices", listPrices);
+        //bundle.putStringArray("listItems", listItems);
+        //bundle.putFloatArray("listPrices", listPrices);
         bundle.putIntArray("quantities", quantities);
         bundle.putString("order",order);
         x.putExtras(bundle);

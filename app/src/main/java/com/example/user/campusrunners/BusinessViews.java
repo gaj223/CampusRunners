@@ -43,10 +43,13 @@ public class BusinessViews extends AppCompatActivity {
     ArrayList<HashMap<String, String>> itemList;
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_ITEM = "ITEM";
+    private static final String TAG_ITEM = "items";
     private static final String TAG_ITEMID = "itemId";
     private static final String TAG_NAME = "name";
+    private static final String TAG_BUSID = "businessId";
+    private static final String TAG_PRICE = "price";
     public int id;
+    public int quantities[];
 
     // products JSONArray
     JSONArray items = null;
@@ -125,6 +128,18 @@ public class BusinessViews extends AppCompatActivity {
     public void getItems(Business b){
         //Use API call to get Business items and prices
 
+    }
+    public static ArrayList<Item> fromJson(JSONArray jsonObjects) {
+        ArrayList<Item> items = new ArrayList<Item>();
+        //JSONArray item_array = jsonObjects.getJSONArray(TAG_ITEM);
+        for (int i = 0; i < jsonObjects.length(); i++) {
+            try {
+                items.add(new Item(jsonObjects.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return items;
     }
 
     // Adds the items that business sells
@@ -208,20 +223,20 @@ public class BusinessViews extends AppCompatActivity {
     // sends order detail to buyer place order page
     public void toCart(View v){
 //        // Change to add to BuyerCart.class
-//        Intent x = new Intent(BusinessViews.this, BuyerPlaceOrder.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("business", business);
+        Intent x = new Intent(BusinessViews.this, BuyerPlaceOrder.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("business", business);
 //        bundle.putStringArray("listItems", listItems);
 //        bundle.putFloatArray("listPrices", listPrices);
 //        bundle.putIntArray("quantities", quantities);
-//        x.putExtras(bundle);
-//        startActivity(x);
+        x.putExtras(bundle);
+        startActivity(x);
 
     }
     /**
      * Background Async Task to Load all product by making HTTP Request
      * */
-    class LoadBusinessItems extends AsyncTask<String, String, String> {
+    class LoadBusinessItems extends AsyncTask< ArrayList<Item>, Void,  ArrayList<Item>> {
 
         /**
          * Before starting background thread Show Progress Dialog
@@ -239,12 +254,17 @@ public class BusinessViews extends AppCompatActivity {
         /**
          * getting All products from url
          * */
-        protected String doInBackground(String... args) {
+
+        protected ArrayList<Item> doInBackground(ArrayList<Item>... parameter) {
             // Pass hash map to store parameters to be passed
             HashMap<String, String> params = new HashMap<String, String>();
             params.put("businessId", Integer.toString(id));
             // getting JSON string from URL
             JSONObject json = jParser.makeHttpRequest(SERVER_PATH+get_items_api, "GET", params);
+            // creating new HashMap
+            HashMap<String, String> map = new HashMap<String, String>();
+            ArrayList<Item> result = new ArrayList<Item>();
+
 
             // Check your log cat for JSON reponse
             Log.d("All Products: ", json.toString());
@@ -257,27 +277,12 @@ public class BusinessViews extends AppCompatActivity {
                     // products found
                     // Getting Array of Products
                     items = json.getJSONArray(TAG_ITEM);
+                    //new
+                    result = Item.fromJson(items);
 
-                    // looping through All Products
-                    for (int i = 0; i < items.length(); i++) {
-                        JSONObject c = items.getJSONObject(i);
 
-                        // Storing each json item in variable
-                        String id = c.getString(TAG_ITEMID);
-                        String name = c.getString(TAG_NAME);
-
-                        // creating new HashMap
-                        HashMap<String, String> map = new HashMap<String, String>();
-
-                        // adding each child node to HashMap key => value
-                        map.put(TAG_ITEMID, id);
-                        map.put(TAG_NAME, name);
-
-                        // adding HashList to ArrayList
-                        itemList.add(map);
-                        Log.e("testing", itemList.toString());
-                    }
                 } else {
+
                     // no products found
                     // Launch Add New product Activity
                     Intent i = new Intent(getApplicationContext(),
@@ -287,34 +292,100 @@ public class BusinessViews extends AppCompatActivity {
                     startActivity(i);
                 }
             } catch (JSONException e) {
+                Log.e("error happened", itemList.toString());
                 e.printStackTrace();
             }
-
-            return null;
+            //String result = map.toString();
+            Log.d("Result: ", result.toString());
+            //return result.toString();
+            return result;
         }
 
         /**
          * After completing background task Dismiss the progress dialog
          * **/
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(ArrayList<Item> result) {
+
             super.onPostExecute(result);
+            Log.d("data", result.toString());
 //            // dismiss the dialog after getting all products
-//            pDialog.dismiss();
-//            // updating UI from Background Thread
-//            runOnUiThread(new Runnable() {
-//                public void run() {
-//                    /**
-//                     * Updating parsed JSON data into ListView
-//                     * */
-//                    ListAdapter adapter = new SimpleAdapter(
-//                            BusinessViews.this, itemList,
-//                            R.layout.list_item, new String[] { TAG_ITEMID,
-//                            TAG_NAME},
-//                            new int[] { R.id.itemId, R.id.name });
-//                    // updating listview
-//                    setListAdapter(adapter);
-//                }
-//            });
+            pDialog.dismiss();
+            quantities = new int[result.size()];
+            LinearLayout layout = (LinearLayout)findViewById(R.id.scroll2);
+                  /* Advanced For Loop*/
+            System.out.println("Advanced For Loop");
+            int i =0;
+            for (Item num : result) {
+                //System.out.println(num);
+                Log.d("data", num.getName().toString());
+                TextView item = new TextView(BusinessViews.this);//find
+                item.setText("$" + num.getPrice() + " " + num.getName());
+                item.setId((i + 1) * 1000);
+                i++;
+                // Add everything to the view
+            layout.addView(item);
+                // Set the quantity to 0
+                TextView quantity = new TextView(BusinessViews.this);
+                quantity.setText("0");
+                quantity.setId((i + 1) * 2000);
+                final int id2_ = quantity.getId();
+
+                // Plus Button
+                Button plus = new Button(BusinessViews.this);
+                //plus.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                String text = "+";
+                plus.setText(text);
+                plus.setId(i + 1);
+                plus.setMaxWidth(20);
+                plus.setMaxHeight(20);
+                final int id3_ = plus.getId();
+
+                // Minus Button
+                Button minus = new Button(BusinessViews.this);
+                minus.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                text = "-";
+                minus.setText(text);
+                minus.setId((i + 1) * -1);
+                minus.setMaxWidth(20);
+                minus.setMaxWidth(20);
+                final int id4_ = minus.getId();
+
+                // add to quantity
+                plus.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        TextView x = (TextView) findViewById(id2_);
+                        int q = Integer.parseInt((String)x.getText());
+                        q = q + 1;
+                        quantities[id3_ - 1] = q;
+                        x.setText(q + "");
+                    }
+                });
+
+                // subtract from quantity
+                minus.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        TextView x = (TextView) findViewById(id2_);
+                        int q = Integer.parseInt((String)x.getText());
+                        if (q > 0) {
+                            q = q - 1;
+                            x.setText(q + "");
+                        }
+                        quantities[id3_ - 1] = q;
+
+                    }
+                });
+
+                // Add everything to the view
+
+                layout.addView(plus);
+                layout.addView(quantity);
+                layout.addView(minus);
+            }
+
+
+
+
+
        }
 
 }
