@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +35,8 @@ public class CreateUser extends AppCompatActivity {
     // Progress Dialog
     private ProgressDialog pDialog;
     Button button_makeUser;
-
+    String role ;
+    String gender;
     private static final String TAG_SUCCESS     = "success";
     private static final String TAG_PRODUCTS    = "products";
     private static final String TAG_PID         = "pid";
@@ -116,8 +118,11 @@ public class CreateUser extends AppCompatActivity {
         EditText inputLastName;
         EditText inputPassword;
         EditText inputEmail;
+        EditText inputDOB;
+        RadioButton radioRole;
+        RadioButton radioGender;
+
         EditText inputPhoneNumber;
-        EditText inputAddress;
         EditText inputRole;
         EditText inputABC123;
     @Override
@@ -138,6 +143,12 @@ public class CreateUser extends AppCompatActivity {
 //        inputLastName = (EditText)findViewById(R.id.input_userLastName);
         inputEmail    = (EditText)findViewById(R.id.input_email);
         inputPassword = (EditText)findViewById(R.id.input_password);
+        inputName     = (EditText)findViewById(R.id.input_userFirstName);
+        inputLastName = (EditText)findViewById(R.id.input_userLastName);
+        inputDOB      = (EditText)findViewById(R.id.input_DOB);
+        inputABC123   = (EditText)findViewById(R.id.input_userABC123);
+        radioGender   = (RadioButton) findViewById(R.id.radio_buyer_btn);
+        radioRole     = (RadioButton) findViewById(R.id.radio_runner_btn);
 
         button_makeUser.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -164,12 +175,47 @@ public class CreateUser extends AppCompatActivity {
         // while interacting with the UI.
        // findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
+    public void onRadioButtonClickedRole(View view){
+       boolean checked = ((RadioButton)view).isChecked();
+       switch(view.getId() ){
+           case R.id.radio_buyer_btn:
+               if(checked){
+                    role = "buyer";
+               }
+               break;
+           case R.id.radio_runner_btn:
+               if(checked){
+                   role = "runner";
+               }
+               break;
+       }
+    }
+    public void onRadioButtonClickedGender(View view){
+        boolean checked = ((RadioButton)view).isChecked();
+        HashMap<String, String> choice = new HashMap<String, String>();
+        switch(view.getId() ){
+            case R.id.female_radio_btn:
+                if(checked){
+                    gender = "female";
+                }
+                break;
+            case R.id.male_radio_btn:
+                if(checked){
+                    gender ="male";
+                }
+                break;
+        }
+    }
     /////////////////////////////////////////////////////////// Inner Class
 
 
     class UserCreated extends AsyncTask<String,String,String> {
         private  int answerReturned;
         @Override
+
+
+
+
         protected  void onPreExecute(){
             Log.d("DoInBack","onPreExecute");
 //            super.onPreExecute();
@@ -181,12 +227,13 @@ public class CreateUser extends AppCompatActivity {
         }
         //Required Abstract Method
         protected String doInBackground(String...params){
-//            final String  name    = inputName.getText().toString();
+            final String  name    = inputName.getText().toString();
             final String password = inputPassword.getText().toString();
-//            final String lastName = inputLastName.getText().toString();
+            final String lastName = inputLastName.getText().toString();
             final String email    = inputEmail.getText().toString();
 //            final String userRole = inputRole.getText().toString();
-//            final String abc123   = inputABC123.getText().toString();
+            final String ABC123   = inputABC123.getText().toString();
+            radioRole.getText().toString();
 //            final String phoneNumber = inputPhoneNumber.getText().toString();
 //            Log.d("DoInBack"," " + name);
 // {"abc123": "abc123",
@@ -206,14 +253,15 @@ public class CreateUser extends AppCompatActivity {
                     HashMap<String, String> choice = new HashMap<String, String>();
                     int answerReturned =0;
                     // enter convert input into a hashmap to be read by the php file, via POST
-//                     choice.put("name",name);
+                     choice.put("name",name);
+                     choice.put("last_name",lastName);  ///not yet using lastName
                      choice.put("password",password);
-//                     choice.put("  ",lastName);  ///not yet using lastName
                      choice.put("email",email);
-
-//                     choice.put("user_role",userRole);
-                     choice.put("abc123","hot321");
-//                     choice.put("user_role",phoneNumber);
+                     choice.put("abc123",ABC123);
+                     //choice.put("user_role",userRole);
+                     //choice.put("abc123","hot321");
+                     choice.put("user_role",role);
+                     choice.put("gender",gender);
                     try {
                         jsonObj = jsonParser.makeHttpRequest(urlCreate, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
