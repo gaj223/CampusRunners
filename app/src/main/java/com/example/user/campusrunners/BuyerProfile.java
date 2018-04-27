@@ -74,4 +74,10 @@ public class BuyerProfile extends AppCompatActivity {
         Intent i = new Intent(BuyerProfile.this, FAQBuyer.class);
         startActivity(i);
     }
+
+    public void logoutBuyer(View v) {
+
+        Intent i = new Intent(BuyerProfile.this, Login.class);
+        startActivity(i);
+    }
 }

@@ -50,17 +50,17 @@ public class RunnerProfile extends AppCompatActivity {
                 Intent i;
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        i = new Intent(RunnerProfile.this, BuyerHomes.class);
+                        i = new Intent(RunnerProfile.this, RunnerHome.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_orders:
-                        i = new Intent(RunnerProfile.this, ViewAllBuyerOrders.class);
+                        i = new Intent(RunnerProfile.this, ViewAllRunnerOrders.class);
                         startActivity(i);
                         break;
                     case R.id.navigation_profile:
                         // add later when Yadira creates profile page
                         // CJM: changed this to redirect back to the buyer home (ie it does nothing)
-                        i = new Intent(RunnerProfile.this, BuyerProfile.class);
+                        i = new Intent(RunnerProfile.this, RunnerProfile.class);
                         startActivity(i);
                         break;
                 }
@@ -72,6 +72,12 @@ public class RunnerProfile extends AppCompatActivity {
     public void goToFAQ(View v){
 
         Intent i = new Intent(RunnerProfile.this, FAQ.class);
+        startActivity(i);
+    }
+
+    public void logoutRunner(View v) {
+
+        Intent i = new Intent(RunnerProfile.this, Login.class);
         startActivity(i);
     }
 }

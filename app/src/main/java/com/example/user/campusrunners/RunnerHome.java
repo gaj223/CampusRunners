@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static com.example.user.campusrunners.Constants.*;
-
 public class RunnerHome extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -126,7 +124,7 @@ public class RunnerHome extends AppCompatActivity {
             final int id_ = btnTag.getId();
             btnTag.setWidth(1200);
             btnTag.setHeight(200);
-            btnTag.setTextSize(24);
+            btnTag.setTextSize(20);
 
             // Takes the runner to detail about the order when button is pressed
             btnTag.setOnClickListener(new View.OnClickListener() {

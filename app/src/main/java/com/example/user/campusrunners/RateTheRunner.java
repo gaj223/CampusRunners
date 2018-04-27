@@ -74,7 +74,7 @@ public class RateTheRunner extends AppCompatActivity {
         RatingBar runnerRate = (RatingBar) findViewById(R.id.ratingBar3);
         Float runnerRating = runnerRate.getRating();
 
-        Intent submit = new Intent(RateTheRunner.this, RunnerHome.class);
+        Intent submit = new Intent(RateTheRunner.this, BuyerHomes.class);
         startActivity(submit);
     }
 
