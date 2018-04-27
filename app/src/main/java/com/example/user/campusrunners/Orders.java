@@ -22,10 +22,30 @@ public class Orders implements Serializable {
     public String status; // active or completed or open
     public Timestamp timeCompleted;
     public int amountItems = 4; // Temporary
-    public String listItems[] = {"Pens, Pack of 8", "Pencils, Pack of 8",
+    public String businessNames[] = {"Chick-Fil-A", "Papa John's", "UTSA Bookstore", "POD"};
+    // Bookstore Info
+    public String listItemsBook[] = {"Pens, Pack of 8", "Pencils, Pack of 8",
             "Composition Notebook", "Spiral Notebook", "Red Scrantron, 100 questions",
             " Red Scrantron, 25 questions", "Bluebook"};
-    public float listPrices[] = {2.00f,1.50f,0.75f,1.00f,0.50f,0.25f,1.00f};
+    public float listPricesBook[] = {2.00f,1.50f,0.75f,1.00f,0.50f,0.25f,1.00f};
+    // Chick Fil A Info
+    public String listItemsChick[] = {"Spicy Chicken Sandwich", "Chick-fil-A Chicken Sandwich",
+            "Chick-fil-A Nuggets, 8ct", "Chick-fil-A Nuggets, 12ct", "Waffle Potato Fries, Medium",
+            " Waffle Potato Fries, Large", "Yogurt Parfait"};
+    public float listPricesChick[] = {3.29f,3.05f,3.05f,4.45f,1.65f,1.85f,2.45f};
+    // POD Info
+    public String listItemsPOD[] = {"Chocolate Chip Muffin", "Snickers",
+            "Cough Drop, Cherry", "Bottle of Water", "Mountain Dew",
+            "Pepsi", "Pack of spearmint"};
+    public float listPricesPOD[] = {2.00f,1.50f,1.75f,1.50f,1.75f,1.75f,1.00f};
+    // Papa Johns Info
+    public String listItemsPapa[] = {"Cheese Pizza", "Pepperoni Pizza",
+            "Meat Trio Pizza", "Hawaian Pizza", "Cheese BreadSticks", "Fountain Drink, Medium",
+            "Fountain Drink, Large"};
+    public float listPricesPapa[] = {4.00f,4.25f,4.50f,4.50f,2.50f,1.25f,1.75f};
+    // general info
+    public String listItems[];
+    public float listPrices[];
     public Random rand = new Random(); // temporary, chose random numbers from item list
 
     // constructor with API Calls
@@ -33,7 +53,6 @@ public class Orders implements Serializable {
         this.orderId = orderId;
         setOrder();
         this.buyerId = 5; // Add API Call to Database
-        this.businessName = "Bookstore"; // Add API Call to Database
         this.buyerNote = "Text When Here"; // Add API Call to Database (Not Sure)
         this.buyerLocation = "JPL Study Room 2";
         //this.timePlaced = ; //Add API Call
@@ -43,7 +62,21 @@ public class Orders implements Serializable {
     // Add API Call to Database here
     // add all the parts of an order to its own arraylist
     private void setOrder(){
-
+        int name = rand.nextInt(4);
+        this.businessName = businessNames[name];
+        if (name == 0){
+            listItems = listItemsChick;
+            listPrices = listPricesChick;
+        } else if (name == 1) {
+            listItems = listItemsPapa;
+            listPrices = listPricesPapa;
+        } else if (name == 2) {
+            listItems = listItemsBook;
+            listPrices = listPricesBook;
+        } else {
+            listItems = listItemsPOD;
+            listPrices = listPricesPOD;
+        }
         for(int i = 0; i < amountItems; i++){
 
             int n = rand.nextInt(7);
@@ -74,7 +107,9 @@ public class Orders implements Serializable {
     public float getFee(){
 
         float total = getTotal();
-        if (total > 15)
+        if (total > 20){
+            return 4;
+        } else if (total > 15)
             return 3;
         else if (total > 10 )
             return 2;

@@ -34,13 +34,15 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_registration">Registration</string>
+    <string name="title_logon">Log On</string>
+    <string name="title_signup">Sign Up</string>
 
     <string name="title_activity_create_user">CreateUser</string>
     <string name="hint_gender">Gender</string>
     <string name="hint_UserRoleStr">Role</string>
     <string name="hint_password">Password</string>
     <string name="male">male</string>
-    <string name="hint_dob">DOB...</string>
+    <string name="hint_dob">DOB(MM/DD/YYYY)</string>
     <string name="female">Female</string>
     <string name="btn_sign_up">Sign-Up</string>
     <string name="btn_link_login">Now Log In</string>
@@ -54,6 +56,8 @@
     <string name="title_activity_indvidual_completed_order_buyer">Completed Order</string>
     <string name="title_activity_faqbuyer">FAQ</string>
     <string name="title_activity_rate_the_runner">Rate The Runner</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_create_users">Create An Account</string>
     <!--<string name="dummy_button">Dummy Button</string>-->
     <!--<string name="dummy_content">DUMMY\nCONTENT</string>-->
 </resources>
