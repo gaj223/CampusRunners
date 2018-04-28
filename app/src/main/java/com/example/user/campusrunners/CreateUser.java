@@ -139,14 +139,13 @@ public class CreateUser extends AppCompatActivity {
         }
         JSONParser jsonParser = new JSONParser();
         button_makeUser = (Button) findViewById(R.id.btn_signup);
-//        inputName     = findViewById(R.id.input_userName);
-//        inputLastName = (EditText)findViewById(R.id.input_userLastName);
         inputEmail    = (EditText)findViewById(R.id.input_email);
         inputPassword = (EditText)findViewById(R.id.input_password);
         inputName     = (EditText)findViewById(R.id.input_userFirstName);
         inputLastName = (EditText)findViewById(R.id.input_userLastName);
         inputDOB      = (EditText)findViewById(R.id.input_DOB);
         inputABC123   = (EditText)findViewById(R.id.input_userABC123);
+        inputPhoneNumber = (EditText)findViewById(R.id.input_phoneNumber);
         radioGender   = (RadioButton) findViewById(R.id.radio_buyer_btn);
         radioRole     = (RadioButton) findViewById(R.id.radio_runner_btn);
 
@@ -213,9 +212,6 @@ public class CreateUser extends AppCompatActivity {
         private  int answerReturned;
         @Override
 
-
-
-
         protected  void onPreExecute(){
             Log.d("DoInBack","onPreExecute");
 //            super.onPreExecute();
@@ -233,7 +229,7 @@ public class CreateUser extends AppCompatActivity {
             final String email    = inputEmail.getText().toString();
 //            final String userRole = inputRole.getText().toString();
             final String ABC123   = inputABC123.getText().toString();
-            radioRole.getText().toString();
+            final String phoneNumber = inputPhoneNumber.getText().toString();
 //            final String phoneNumber = inputPhoneNumber.getText().toString();
 //            Log.d("DoInBack"," " + name);
 // {"abc123": "abc123",
@@ -253,21 +249,20 @@ public class CreateUser extends AppCompatActivity {
                     HashMap<String, String> choice = new HashMap<String, String>();
                     int answerReturned =0;
                     // enter convert input into a hashmap to be read by the php file, via POST
-                     choice.put("name",name);
+                     choice.put("first_name",name);
                      choice.put("last_name",lastName);  ///not yet using lastName
                      choice.put("password",password);
                      choice.put("email",email);
                      choice.put("abc123",ABC123);
-                     //choice.put("user_role",userRole);
-                     //choice.put("abc123","hot321");
+                     choice.put("phone_number",phoneNumber);
                      choice.put("user_role",role);
                      choice.put("gender",gender);
                     try {
                         jsonObj = jsonParser.makeHttpRequest(urlCreate, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
-
+///////ERROR IS HAPPENING HERE
                         answerReturned = jsonObj.getInt(TAG_SUCCESS);
-                        Log.d("DoInBack", "answerReturned "+ answerReturned  );
+                        Log.d("CAMPUSRUNNER_API", "answerReturned "+ answerReturned  );
                         jsonObj.getJSONArray("user");
                         //Catch needed to use jsonObj.getInt....
                         if(answerReturned == 1){
