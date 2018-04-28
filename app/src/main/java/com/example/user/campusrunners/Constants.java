@@ -21,7 +21,7 @@ public class Constants {
     public static final String get_all_open_orders_api="/order/get_all_open_orders.php";
     public static final String get_items_api ="/item/get_items.php";
     public static final String login_api ="/user/userlogin.php";
-
+    public static final String create_user_api = "/user/create_user.php";
     //Order status
     public static final String CLOSED = "CLOSED";
     public static final String OPEN = "OPEN";
