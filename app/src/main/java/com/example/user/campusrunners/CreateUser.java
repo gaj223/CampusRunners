@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import static com.example.user.campusrunners.Constants.*;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -31,7 +32,7 @@ public class CreateUser extends AppCompatActivity {
     JSONObject jsonObj;
     JSONParser jsonParser = new JSONParser();
     HashMap<String, String> userInfoMap;
-    private static String urlCreate ="http://13.59.142.19/CampusRunnerBack/updated_apis/user/create_user.php";
+    private static String urlCreate =SERVER_PATH+create_user_api;
     // Progress Dialog
     private ProgressDialog pDialog;
     Button button_makeUser;
@@ -43,6 +44,7 @@ public class CreateUser extends AppCompatActivity {
     private static final String TAG_USER_ID     = "userId";
     private static final String TAG_NAME_ARRAY  = "user";
     private static final String TAG_USER_ROLE   = "role";
+    //public Intent intentLogin;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -286,6 +288,13 @@ public class CreateUser extends AppCompatActivity {
         public int getAnswerReturned() {
             return answerReturned;
         }
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            intentLogIn = new Intent(getApplicationContext(), Login.class);
+            startActivity(intentLogIn);
+        }
+
     }
 
 
