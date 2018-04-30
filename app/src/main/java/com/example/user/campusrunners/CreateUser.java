@@ -14,11 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.view.View.OnClickListener;
 import java.util.HashMap;
 import static com.example.user.campusrunners.Constants.*;
 
@@ -36,8 +38,8 @@ public class CreateUser extends AppCompatActivity {
     // Progress Dialog
     private ProgressDialog pDialog;
     Button button_makeUser;
-    String role ;
-    String gender;
+    String role ="";
+    String gender="";
     private static final String TAG_SUCCESS     = "success";
     private static final String TAG_PRODUCTS    = "products";
     private static final String TAG_PID         = "pid";
@@ -121,6 +123,8 @@ public class CreateUser extends AppCompatActivity {
         EditText inputPassword;
         EditText inputEmail;
         EditText inputDOB;
+        RadioGroup roleSelected;
+        RadioGroup genderSelected;
         RadioButton radioRole;
         RadioButton radioGender;
 
@@ -131,6 +135,46 @@ public class CreateUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_users);
+
+        roleSelected = (RadioGroup) findViewById(R.id.role_radio_group);
+        genderSelected = (RadioGroup) findViewById(R.id.role_radio_group);
+
+        roleSelected.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.radio_runner_btn:
+                        role = "runner";
+                        // do operations specific to this selection
+                        break;
+                    case R.id.radio_buyer_btn:
+                        // do operations specific to this selection
+                        role = "buyer";
+                        break;
+
+                }
+            }
+        });
+
+//        genderSelected.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//        {
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                switch(checkedId){
+//                    case R.id.female_radio_btn:
+//                        gender = "female";
+//                        // do operations specific to this selection
+//                        break;
+//                    case R.id.male_radio_btn:
+//                        // do operations specific to this selection
+//                        gender = "male";
+//                        break;
+//
+//                }
+//            }
+//        });
+
+
+
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
         {
@@ -139,6 +183,9 @@ public class CreateUser extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
 
         }
+
+        //added to test if this is where listner needs to be
+        //onRadioButtonClickedRole();
         JSONParser jsonParser = new JSONParser();
         button_makeUser = (Button) findViewById(R.id.btn_signup);
         inputEmail    = (EditText)findViewById(R.id.input_email);
@@ -148,12 +195,19 @@ public class CreateUser extends AppCompatActivity {
         inputDOB      = (EditText)findViewById(R.id.input_DOB);
         inputABC123   = (EditText)findViewById(R.id.input_userABC123);
         inputPhoneNumber = (EditText)findViewById(R.id.input_phoneNumber);
-        radioGender   = (RadioButton) findViewById(R.id.radio_buyer_btn);
+        //radioGender   = (RadioButton) findViewById(R.id.male_radio_btn);
         radioRole     = (RadioButton) findViewById(R.id.radio_runner_btn);
+
 
         button_makeUser.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+              pDialog = new ProgressDialog(CreateUser.this);
+              pDialog.setMessage("Creating User. Please wait...");
+              pDialog.setIndeterminate(false);
+              pDialog.setCancelable(false);
+              pDialog.show();
+
                 new UserCreated().execute();
           }
         });
@@ -176,37 +230,64 @@ public class CreateUser extends AppCompatActivity {
         // while interacting with the UI.
        // findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
-    public void onRadioButtonClickedRole(View view){
-       boolean checked = ((RadioButton)view).isChecked();
-       switch(view.getId() ){
-           case R.id.radio_buyer_btn:
-               if(checked){
-                    role = "buyer";
-               }
-               break;
-           case R.id.radio_runner_btn:
-               if(checked){
-                   role = "runner";
-               }
-               break;
-       }
-    }
-    public void onRadioButtonClickedGender(View view){
-        boolean checked = ((RadioButton)view).isChecked();
-        HashMap<String, String> choice = new HashMap<String, String>();
-        switch(view.getId() ){
-            case R.id.female_radio_btn:
-                if(checked){
-                    gender = "female";
-                }
-                break;
-            case R.id.male_radio_btn:
-                if(checked){
-                    gender ="male";
-                }
-                break;
-        }
-    }
+
+//    public void onRadioButtonClickedRole() {
+//
+//        roleSelected = (RadioGroup) findViewById(R.id.gender_radio_group);
+//        button_makeUser = (Button) findViewById(R.id.btn_signup);
+//
+//        button_makeUser.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//                // get selected radio button from radioGroup
+//                int selectedId = roleSelected.getCheckedRadioButtonId();
+//
+//                // find the radiobutton by returned id
+//                radioGender = (RadioButton) findViewById(selectedId);
+//                gender= radioGender.getText().toString();
+//                Log.d("Gender is assigned",gender);
+//
+//                //Toast.makeText(MyAndroidAppActivity.this,
+//                      //  gender.getText(), Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        });
+//
+//    }
+//    public void onRadioButtonClickedRole(View view){
+//       boolean checked = ((RadioButton)view).isChecked();
+//       switch(view.getId() ){
+//           case R.id.radio_buyer_btn:
+//               if(checked){
+//                    role = "buyer";
+//               }
+//               break;
+//           case R.id.radio_runner_btn:
+//               if(checked){
+//                   role = "runner";
+//               }
+//               break;
+//       }
+//    }
+//    public void onRadioButtonClickedGender(View view){
+//        boolean checked = ((RadioButton)view).isChecked();
+//        HashMap<String, String> choice = new HashMap<String, String>();
+//        switch(view.getId() ){
+//            case R.id.female_radio_btn:
+//                if(checked){
+//                    gender = "female";
+//                }
+//                break;
+//            case R.id.male_radio_btn:
+//                if(checked){
+//                    gender ="male";
+//                }
+//                break;
+//        }
+//    }
     /////////////////////////////////////////////////////////// Inner Class
 
 
@@ -216,6 +297,10 @@ public class CreateUser extends AppCompatActivity {
 
         protected  void onPreExecute(){
             Log.d("DoInBack","onPreExecute");
+
+
+            //onRadioButtonClickedRole();
+
 //            super.onPreExecute();
 //            pDialog = new ProgressDialog(CreateUser.this);
 //            pDialog.setMessage("Creating Product..");
@@ -225,29 +310,26 @@ public class CreateUser extends AppCompatActivity {
         }
         //Required Abstract Method
         protected String doInBackground(String...params){
+
             final String  name    = inputName.getText().toString();
             final String password = inputPassword.getText().toString();
             final String lastName = inputLastName.getText().toString();
             final String email    = inputEmail.getText().toString();
-//            final String userRole = inputRole.getText().toString();
+//           final String userRole = inputRole.getText().toString();
             final String ABC123   = inputABC123.getText().toString();
             final String phoneNumber = inputPhoneNumber.getText().toString();
-//            final String phoneNumber = inputPhoneNumber.getText().toString();
-//            Log.d("DoInBack"," " + name);
-// {"abc123": "abc123",
-//     "email": "abc123@my.utsa.edu",
-//      "name": "Yadi",
-// "user_role": "runner",
-// "street_address": "1 UTSA Circle",
-// "phone_number": "7757209035",
-//     "password": "abc123"}
+
+
+
+
+
             Log.d("DoInBack","past the convert");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+            //runOnUiThread(new Runnable() {
+              //  @Override
+              //  public void run() {
                     Log.d("DoInBack","inside runOnUiThread()");
-                    String user_role = " ";
-                    String user_ID   = " ";
+                   // String user_role = " ";
+                   // String user_ID   = " ";
                     HashMap<String, String> choice = new HashMap<String, String>();
                     int answerReturned =0;
                     // enter convert input into a hashmap to be read by the php file, via POST
@@ -259,29 +341,31 @@ public class CreateUser extends AppCompatActivity {
                      choice.put("phone_number",phoneNumber);
                      choice.put("user_role",role);
                      choice.put("gender",gender);
-                    try {
+                    Log.d("Sending to api", choice.toString());
+                   // try {
                         jsonObj = jsonParser.makeHttpRequest(urlCreate, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
 ///////ERROR IS HAPPENING HERE
-                        answerReturned = jsonObj.getInt(TAG_SUCCESS);
-                        Log.d("CAMPUSRUNNER_API", "answerReturned "+ answerReturned  );
-                        jsonObj.getJSONArray("user");
+                       //answerReturned = jsonObj.getInt(TAG_SUCCESS);
+                       // Log.d("CAMPUSRUNNER_API", "answerReturned "+ answerReturned  );
+                        //get user logged in
+                        //jsonObj.getJSONArray("user");
                         //Catch needed to use jsonObj.getInt....
-                        if(answerReturned == 1){
-                            Log.d("logInReturn","should have return to home screen");
-                            intentLogIn = new Intent(getApplicationContext(), Login.class);
-                            startActivity(intentLogIn);
-                            //finish();
-                        }else{
-                            //throw a loop back, instance of correct creds not valid.
-
-                        }
-                    }catch (JSONException jError){
-                        jError.printStackTrace();
-                        jError.getLocalizedMessage();
-                    }
-                }
-            });
+//                        if(answerReturned == 1){
+//                            Log.d("logInReturn","should have return to home screen");
+//                            intentLogIn = new Intent(getApplicationContext(), Login.class);
+//                            startActivity(intentLogIn);
+//                            //finish();
+//                        }else{
+//                            //throw a loop back, instance of correct creds not valid.
+//
+////                        }
+//                    }catch (JSONException jError){
+//                        jError.printStackTrace();
+//                        jError.getLocalizedMessage();
+//                    }
+               // }
+           // });
             return "blk";
         }
 
@@ -291,6 +375,10 @@ public class CreateUser extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            // dismiss the dialog after getting all products
+            pDialog.dismiss();
+            Toast.makeText(getBaseContext(), "User created successfully!", Toast.LENGTH_SHORT).show();
+
             intentLogIn = new Intent(getApplicationContext(), Login.class);
             startActivity(intentLogIn);
         }

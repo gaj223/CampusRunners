@@ -141,6 +141,7 @@
                     android:paddingRight="15dp"
                     android:text="@string/hint_gender"
                     android:textSize="20dp" />
+
                 <RadioGroup
                     android:id="@+id/gender_radio_group"
                     android:layout_width="wrap_content"
@@ -154,15 +155,16 @@
                         android:layout_height="wrap_content"
                         android:autoText="true"
                         android:checked="true"
-                        android:text="@string/male"
-                        tools:onClick="onRadioButtonClickedGender" />
+                        android:text="@string/male"/>
+                        <!--tools:onClick="onRadioButtonClickedGender" -->
+
 
                     <RadioButton
                         android:id="@+id/female_radio_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/female"
-                        tools:onClick="onRadioButtonClickedGender" />
+                        android:text="@string/female"/>
+                        <!--tools:onClick="onRadioButtonClickedGender" />-->
                 </RadioGroup>
 
                 <TextView
