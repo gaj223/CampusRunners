@@ -38,8 +38,8 @@ public class CreateUser extends AppCompatActivity {
     // Progress Dialog
     private ProgressDialog pDialog;
     Button button_makeUser;
-    String role ="";
-    String gender="";
+    String role ="runner";
+    String gender="male";
     private static final String TAG_SUCCESS     = "success";
     private static final String TAG_PRODUCTS    = "products";
     private static final String TAG_PID         = "pid";
@@ -97,26 +97,7 @@ public class CreateUser extends AppCompatActivity {
         }
     };
     private boolean mVisible;
-//    private final Runnable mHideRunnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            hide();
-//        }
-//    };
-//    /**
-//     * Touch listener to use for in-layout UI controls to delay hiding the
-//     * system UI. This is to prevent the jarring behavior of controls going away
-//     * while interacting with activity UI.
-//     */
-//    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-//        @Override
-//        public boolean onTouch(View view, MotionEvent motionEvent) {
-//            if (AUTO_HIDE) {
-//                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-//            }
-//            return false;
-//        }
-//    };
+
 
         EditText inputName;
         EditText inputLastName;
@@ -216,82 +197,8 @@ public class CreateUser extends AppCompatActivity {
           }
         });
 
-//        mVisible = true;
-//        mControlsView = findViewById(R.id.fullscreen_content_controls);
-        //mContentView = findViewById(R.id.fullscreen_content);
-
-
-        // Set up the user interaction to manually show or hide the system UI.
-        /*mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });*/
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-       // findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
-//    public void onRadioButtonClickedRole() {
-//
-//        roleSelected = (RadioGroup) findViewById(R.id.gender_radio_group);
-//        button_makeUser = (Button) findViewById(R.id.btn_signup);
-//
-//        button_makeUser.setOnClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                // get selected radio button from radioGroup
-//                int selectedId = roleSelected.getCheckedRadioButtonId();
-//
-//                // find the radiobutton by returned id
-//                radioGender = (RadioButton) findViewById(selectedId);
-//                gender= radioGender.getText().toString();
-//                Log.d("Gender is assigned",gender);
-//
-//                //Toast.makeText(MyAndroidAppActivity.this,
-//                      //  gender.getText(), Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//        });
-//
-//    }
-//    public void onRadioButtonClickedRole(View view){
-//       boolean checked = ((RadioButton)view).isChecked();
-//       switch(view.getId() ){
-//           case R.id.radio_buyer_btn:
-//               if(checked){
-//                    role = "buyer";
-//               }
-//               break;
-//           case R.id.radio_runner_btn:
-//               if(checked){
-//                   role = "runner";
-//               }
-//               break;
-//       }
-//    }
-//    public void onRadioButtonClickedGender(View view){
-//        boolean checked = ((RadioButton)view).isChecked();
-//        HashMap<String, String> choice = new HashMap<String, String>();
-//        switch(view.getId() ){
-//            case R.id.female_radio_btn:
-//                if(checked){
-//                    gender = "female";
-//                }
-//                break;
-//            case R.id.male_radio_btn:
-//                if(checked){
-//                    gender ="male";
-//                }
-//                break;
-//        }
-//    }
     /////////////////////////////////////////////////////////// Inner Class
 
 
@@ -303,14 +210,7 @@ public class CreateUser extends AppCompatActivity {
             Log.d("DoInBack","onPreExecute");
 
 
-            //onRadioButtonClickedRole();
 
-//            super.onPreExecute();
-//            pDialog = new ProgressDialog(CreateUser.this);
-//            pDialog.setMessage("Creating Product..");
-//            pDialog.setIndeterminate(false);
-//            pDialog.setCancelable(true);
-//            pDialog.show();
         }
         //Required Abstract Method
         protected String doInBackground(String...params){
@@ -332,8 +232,7 @@ public class CreateUser extends AppCompatActivity {
               //  @Override
               //  public void run() {
                     Log.d("DoInBack","inside runOnUiThread()");
-                   // String user_role = " ";
-                   // String user_ID   = " ";
+
                     HashMap<String, String> choice = new HashMap<String, String>();
                     int answerReturned =0;
                     // enter convert input into a hashmap to be read by the php file, via POST
@@ -391,56 +290,4 @@ public class CreateUser extends AppCompatActivity {
 
 
 
-//    @Override
-//    protected void onPostCreate(Bundle savedInstanceState) {
-//        super.onPostCreate(savedInstanceState);
-//
-//        // Trigger the initial hide() shortly after the activity has been
-//        // created, to briefly hint to the user that UI controls
-//        // are available.
-//        delayedHide(100);
-//    }
-//
-//    private void toggle() {
-//        if (mVisible) {
-//            hide();
-//        } else {
-//            show();
-//        }
-//    }
-
-//    private void hide() {
-//        // Hide UI first
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.hide();
-//        }
-       // mControlsView.setVisibility(View.GONE);
-//        mVisible = false;
-//
-//        // Schedule a runnable to remove the status and navigation bar after a delay
-//        mHideHandler.removeCallbacks(mShowPart2Runnable);
-//        mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
-//    }
-//
-//    @SuppressLint("InlinedApi")
-//    private void show() {
-//        // Show the system bar
-//        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-//        mVisible = true;
-//
-//        // Schedule a runnable to display UI elements after a delay
-//        mHideHandler.removeCallbacks(mHidePart2Runnable);
-//        mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-//    }
-//
-//    /**
-//     * Schedules a call to hide() in delay milliseconds, canceling any
-//     * previously scheduled calls.
-//     */
-//    private void delayedHide(int delayMillis) {
-//        mHideHandler.removeCallbacks(mHideRunnable);
-//        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-//    }
 }
