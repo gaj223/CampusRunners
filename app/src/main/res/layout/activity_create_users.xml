@@ -38,6 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="@string/create_abc123"
                     android:hint="abc123" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -52,6 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="@string/create_FirstName"
                     android:hint="First Name" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -66,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="@string/create_LastName"
                     android:hint="Last Name" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -80,6 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="@string/create_Email"
                     android:hint="Email"
                     android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
@@ -96,6 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="@string/create_Password"
                     android:hint="@string/hint_password"
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
@@ -111,6 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="@string/create_Phonenumber"
                     android:hint="Phone Number (512)123-4567" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -125,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="@string/create_DOB"
                     android:hint="@string/hint_dob"/>
             </android.support.design.widget.TextInputLayout>
             <RelativeLayout
@@ -175,6 +182,7 @@
                     android:fontFamily="@string/hint_password"
                     android:fontFeatureSettings="@string/hint_password"
                     android:paddingRight="15dp"
+                    android:contentDescription="@string/create_user_role"
                     android:text="User Role"
                     android:textSize="20dp"
                     tools:ignore="InvalidId" />
@@ -192,6 +200,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
+                        android:contentDescription="@string/create_user_buyer_radio"
                         android:text="Runner"
                         tools:onClick="onRadioButtonClickedRole" />
 
@@ -199,6 +208,7 @@
                         android:id="@+id/radio_buyer_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/create_user_buyer_radio"
                         android:text="Buyer"
                         tools:onClick="onRadioButtonClickedRole" />
                 </RadioGroup>

@@ -21,6 +21,18 @@
     <string name="title_profile">Profile</string>
     <string name="title_cart">Cart</string>
 
+    <string name= "create_abc123">User abc 123</string>
+    <string name= "create_FirstName">First Name</string>
+    <string name= "create_LastName">Last Name</string>
+    <string name= "create_Email">Email</string>
+    <string name= "create_Password">Password</string>
+    <string name= "create_Phonenumber">Phone Number</string>
+    <string name= "create_DOB">Date of Birth MM/DD/YEAR</string>
+    <string name= "create_user_role">User Role, buyer or runner</string>
+    <string name= "create_user_buyer_radio">Buyer Role</string>
+    <string name= "create_user_runner_radio">Runner Role</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_accept_job">Accept Job</string>
     <string name="title_dashboard">Dashboard</string>
