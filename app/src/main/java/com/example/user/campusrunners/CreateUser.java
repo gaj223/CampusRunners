@@ -136,6 +136,10 @@ public class CreateUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_users);
 
+//        if (inputName.length() > 0) {
+//            inputName.getText().clear();
+//        }
+
         roleSelected = (RadioGroup) findViewById(R.id.role_radio_group);
         genderSelected = (RadioGroup) findViewById(R.id.role_radio_group);
 
