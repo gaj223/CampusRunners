@@ -5,7 +5,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffcf9e"
     tools:context="com.example.user.campusrunners.BuyerPlaceOrder">
 
     <android.support.design.widget.BottomNavigationView
@@ -113,7 +112,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Enter your location (Example MH 3.202)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,6 +122,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/inputbuyerlocation"
             android:hint="Enter your location (e.g. MH 3.202) "
+            android:contentDescription="Enter your location (Example MH 3.202)"
             android:imeOptions="actionDone"/>
     </android.support.design.widget.TextInputLayout>
 
@@ -151,7 +150,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Enter any notes you may have, Example Call when here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -163,6 +161,7 @@
             android:id="@+id/inputbuyernote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="Enter any notes you may have, Example Call when here"
             android:hint="e.g. Call when here"
             android:imeOptions="actionDone"/>
     </android.support.design.widget.TextInputLayout>

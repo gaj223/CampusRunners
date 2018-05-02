@@ -38,6 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="Enter User abc123"
                     android:hint="abc123" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -52,6 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="Enter First Name"
                     android:hint="First Name" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -66,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="Enter Last Name"
                     android:hint="Last Name" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -80,6 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="Enter Email"
                     android:hint="Email"
                     android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
@@ -96,6 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="Enter a Password"
                     android:hint="@string/hint_password"
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
@@ -111,6 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="Enter a phonenumber, example 512 444 4444"
                     android:hint="Phone Number (512)123-4567" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -125,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:contentDescription="DOB, MM/DD/YYYY"
                     android:hint="@string/hint_dob"/>
             </android.support.design.widget.TextInputLayout>
             <RelativeLayout
@@ -147,6 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/gender_textview"
+                    android:contentDescription="Select your gender"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -154,6 +162,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:autoText="true"
+                        android:contentDescription="male"
                         android:checked="true"
                         android:text="@string/male"/>
 
@@ -162,6 +171,7 @@
                         android:id="@+id/female_radio_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="female"
                         android:text="@string/female"/>
                 </RadioGroup>
 
@@ -185,6 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignTop="@+id/user_Btn_role"
+                    android:contentDescription="Choose a role, you may only pick one"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -192,15 +203,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="Runner"
-                        tools:onClick="onRadioButtonClickedRole" />
+                        android:contentDescription="Runner, a runner fetchs items order"
+                        android:text="Runner"/>
 
                     <RadioButton
                         android:id="@+id/radio_buyer_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Buyer"
-                        tools:onClick="onRadioButtonClickedRole" />
+                        android:contentDescription="Buyer, a buyer orders items"
+                        android:text="Buyer"/>
                 </RadioGroup>
             </RelativeLayout>
 
@@ -210,16 +221,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:background="@color/login_button_background"
+                android:contentDescription="Sign Up"
                 android:text="@string/btn_sign_up"
                 android:textColor="@android:color/black" />
             <Button android:id="@+id/btn_link_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:contentDescription="Log In"
                 android:text="@string/btn_link_login"
                 android:background="@null"
                 android:layout_marginTop="3dp"
                 android:textColor="@android:color/black"/>
-
 
         </LinearLayout>
     </ScrollView>

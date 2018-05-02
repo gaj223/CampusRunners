@@ -117,8 +117,9 @@ public class RunnerHome extends AppCompatActivity {
 
             Button btnTag = new Button(this);
             btnTag.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+            String total = String.format("%.2f", current.getTotal());
             String text = current.businessName + "\t\t\t$"
-                    + current.getTotal() + " | $" + current.getFee() + "\n 03/15/2018" ;//+ current.date;
+                    + total + " | $" + current.getFee() + "\n 03/15/2018" ;//+ current.date;
             btnTag.setText(text);
             btnTag.setId(i);
             final int id_ = btnTag.getId();

@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:text="210-234-5454"
+        android:text="210-111-1111"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline5"
@@ -92,7 +92,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/ic_email_orange_24dp" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -106,7 +106,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:srcCompat="@drawable/ic_white_home" />
+        app:srcCompat="@drawable/ic_home_orange_24dp" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -208,7 +208,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5"
-        app:srcCompat="@android:drawable/stat_sys_phone_call" />
+        app:srcCompat="@drawable/ic_phone_orange_24dp" />
 
     <Button
         android:id="@+id/button2"

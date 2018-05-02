@@ -2,6 +2,7 @@ package com.example.user.campusrunners;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -191,21 +192,25 @@ public class BusinessViews extends AppCompatActivity {
             // Plus Button
             Button plus = new Button(this);
             //plus.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            String text = "+";
-            plus.setText(text);
+            String textp = "+";
+            plus.setText(textp);
             plus.setId(i + 1);
             plus.setMaxWidth(20);
             plus.setMaxHeight(20);
+            plus.setBackgroundColor(Color.rgb(255,140,0));
+
             final int id3_ = plus.getId();
 
             // Minus Button
             Button minus = new Button(this);
             minus.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            text = "-";
-            minus.setText(text);
+            String textm = "-";
+            minus.setText(textm);
             minus.setId((i + 1) * -1);
             minus.setMaxWidth(20);
             minus.setMaxWidth(20);
+            minus.setBackgroundColor(Color.rgb(255,140,0));
+
             final int id4_ = minus.getId();
 
             // add to quantity
