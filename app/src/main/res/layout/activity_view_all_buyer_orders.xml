@@ -5,7 +5,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffcf9e"
     tools:context="com.example.user.campusrunners.ViewAllBuyerOrders">
 
     <android.support.design.widget.BottomNavigationView

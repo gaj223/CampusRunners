@@ -113,6 +113,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:text="Enter your location (Example MH 3.202)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +123,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/inputbuyerlocation"
-            android:hint="Enter your location (e.g. MH 3.202) " />
+            android:hint="Enter your location (e.g. MH 3.202) "
+            android:imeOptions="actionDone"/>
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -149,6 +151,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:text="Enter any notes you may have, Example Call when here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -160,7 +163,8 @@
             android:id="@+id/inputbuyernote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="e.g. Call when here" />
+            android:hint="e.g. Call when here"
+            android:imeOptions="actionDone"/>
     </android.support.design.widget.TextInputLayout>
 
 

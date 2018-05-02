@@ -94,8 +94,8 @@ public class Orders implements Serializable {
 
 
     // Returns the Total for the Order
-    public float getTotal(){
-        float total = 0;
+    public double getTotal(){
+        double total = 0;
         for (int i=0; i<items.size(); i++){
             total = total + quantities.get(i) * prices.get(i);
         }
@@ -106,7 +106,7 @@ public class Orders implements Serializable {
     // Calculates the fee for the runner
     public float getFee(){
 
-        float total = getTotal();
+        float total = (float) getTotal();
         if (total > 20){
             return 4;
         } else if (total > 15)
