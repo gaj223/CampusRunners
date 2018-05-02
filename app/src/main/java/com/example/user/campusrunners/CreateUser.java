@@ -13,12 +13,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.view.View.OnClickListener;
 import java.util.HashMap;
+import static com.example.user.campusrunners.Constants.*;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -30,17 +34,19 @@ public class CreateUser extends AppCompatActivity {
     JSONObject jsonObj;
     JSONParser jsonParser = new JSONParser();
     HashMap<String, String> userInfoMap;
-    private static String urlCreate ="http://13.59.142.19/CampusRunnerBack/updated_apis/user/create_user.php";
+    private static String urlCreate =SERVER_PATH+create_user_api;
     // Progress Dialog
     private ProgressDialog pDialog;
     Button button_makeUser;
-
+    String role ="runner";
+    String gender="male";
     private static final String TAG_SUCCESS     = "success";
     private static final String TAG_PRODUCTS    = "products";
     private static final String TAG_PID         = "pid";
     private static final String TAG_USER_ID     = "userId";
     private static final String TAG_NAME_ARRAY  = "user";
     private static final String TAG_USER_ROLE   = "role";
+    //public Intent intentLogin;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -91,39 +97,69 @@ public class CreateUser extends AppCompatActivity {
         }
     };
     private boolean mVisible;
-//    private final Runnable mHideRunnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            hide();
-//        }
-//    };
-//    /**
-//     * Touch listener to use for in-layout UI controls to delay hiding the
-//     * system UI. This is to prevent the jarring behavior of controls going away
-//     * while interacting with activity UI.
-//     */
-//    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-//        @Override
-//        public boolean onTouch(View view, MotionEvent motionEvent) {
-//            if (AUTO_HIDE) {
-//                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-//            }
-//            return false;
-//        }
-//    };
+
 
         EditText inputName;
         EditText inputLastName;
         EditText inputPassword;
         EditText inputEmail;
+        EditText inputDOB;
+        RadioGroup roleSelected;
+        RadioGroup genderSelected;
+        RadioButton radioRole;
+        RadioButton radioGender;
+
         EditText inputPhoneNumber;
-        EditText inputAddress;
         EditText inputRole;
         EditText inputABC123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_users);
+
+//        if (inputName.length() > 0) {
+//            inputName.getText().clear();
+//        }
+
+        roleSelected = (RadioGroup) findViewById(R.id.role_radio_group);
+        genderSelected = (RadioGroup) findViewById(R.id.role_radio_group);
+
+        roleSelected.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.radio_runner_btn:
+                        role = "runner";
+                        // do operations specific to this selection
+                        break;
+                    case R.id.radio_buyer_btn:
+                        // do operations specific to this selection
+                        role = "buyer";
+                        break;
+
+                }
+            }
+        });
+
+//        genderSelected.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//        {
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                switch(checkedId){
+//                    case R.id.female_radio_btn:
+//                        gender = "female";
+//                        // do operations specific to this selection
+//                        break;
+//                    case R.id.male_radio_btn:
+//                        // do operations specific to this selection
+//                        gender = "male";
+//                        break;
+//
+//                }
+//            }
+//        });
+
+
+
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8)
         {
@@ -132,170 +168,126 @@ public class CreateUser extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
 
         }
+
+        //added to test if this is where listner needs to be
+        //onRadioButtonClickedRole();
         JSONParser jsonParser = new JSONParser();
         button_makeUser = (Button) findViewById(R.id.btn_signup);
-//        inputName     = findViewById(R.id.input_userName);
-//        inputLastName = (EditText)findViewById(R.id.input_userLastName);
         inputEmail    = (EditText)findViewById(R.id.input_email);
         inputPassword = (EditText)findViewById(R.id.input_password);
+        inputName     = (EditText)findViewById(R.id.input_userFirstName);
+        inputLastName = (EditText)findViewById(R.id.input_userLastName);
+        inputDOB      = (EditText)findViewById(R.id.input_DOB);
+        inputABC123   = (EditText)findViewById(R.id.input_userABC123);
+        inputPhoneNumber = (EditText)findViewById(R.id.input_phoneNumber);
+        //radioGender   = (RadioButton) findViewById(R.id.male_radio_btn);
+        radioRole     = (RadioButton) findViewById(R.id.radio_runner_btn);
+
 
         button_makeUser.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+              pDialog = new ProgressDialog(CreateUser.this);
+              pDialog.setMessage("Creating User. Please wait...");
+              pDialog.setIndeterminate(false);
+              pDialog.setCancelable(false);
+              pDialog.show();
+
                 new UserCreated().execute();
           }
         });
 
-//        mVisible = true;
-//        mControlsView = findViewById(R.id.fullscreen_content_controls);
-        //mContentView = findViewById(R.id.fullscreen_content);
-
-
-        // Set up the user interaction to manually show or hide the system UI.
-        /*mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });*/
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-       // findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
+
     /////////////////////////////////////////////////////////// Inner Class
 
 
     class UserCreated extends AsyncTask<String,String,String> {
         private  int answerReturned;
         @Override
+
         protected  void onPreExecute(){
             Log.d("DoInBack","onPreExecute");
-//            super.onPreExecute();
-//            pDialog = new ProgressDialog(CreateUser.this);
-//            pDialog.setMessage("Creating Product..");
-//            pDialog.setIndeterminate(false);
-//            pDialog.setCancelable(true);
-//            pDialog.show();
+
+
+
         }
         //Required Abstract Method
         protected String doInBackground(String...params){
-//            final String  name    = inputName.getText().toString();
+
+            final String  name    = inputName.getText().toString();
             final String password = inputPassword.getText().toString();
-//            final String lastName = inputLastName.getText().toString();
+            final String lastName = inputLastName.getText().toString();
             final String email    = inputEmail.getText().toString();
-//            final String userRole = inputRole.getText().toString();
-//            final String abc123   = inputABC123.getText().toString();
-//            final String phoneNumber = inputPhoneNumber.getText().toString();
-//            Log.d("DoInBack"," " + name);
-// {"abc123": "abc123",
-//     "email": "abc123@my.utsa.edu",
-//      "name": "Yadi",
-// "user_role": "runner",
-// "street_address": "1 UTSA Circle",
-// "phone_number": "7757209035",
-//     "password": "abc123"}
+//           final String userRole = inputRole.getText().toString();
+            final String ABC123   = inputABC123.getText().toString();
+            final String phoneNumber = inputPhoneNumber.getText().toString();
+
+
+
+
+
             Log.d("DoInBack","past the convert");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+            //runOnUiThread(new Runnable() {
+              //  @Override
+              //  public void run() {
                     Log.d("DoInBack","inside runOnUiThread()");
-                    String user_role = " ";
-                    String user_ID   = " ";
+
                     HashMap<String, String> choice = new HashMap<String, String>();
                     int answerReturned =0;
                     // enter convert input into a hashmap to be read by the php file, via POST
-//                     choice.put("name",name);
+                     choice.put("first_name",name);
+                     choice.put("last_name",lastName);  ///not yet using lastName
                      choice.put("password",password);
-//                     choice.put("  ",lastName);  ///not yet using lastName
                      choice.put("email",email);
-
-//                     choice.put("user_role",userRole);
-                     choice.put("abc123","hot321");
-//                     choice.put("user_role",phoneNumber);
-                    try {
+                     choice.put("abc123",ABC123);
+                     choice.put("phone_number",phoneNumber);
+                     choice.put("user_role",role);
+                     choice.put("gender",gender);
+                    Log.d("Sending to api", choice.toString());
+                   // try {
                         jsonObj = jsonParser.makeHttpRequest(urlCreate, "POST", choice);
                         Log.d("DoInBack", "jsonObj is good i think"  );
-
-                        answerReturned = jsonObj.getInt(TAG_SUCCESS);
-                        Log.d("DoInBack", "answerReturned "+ answerReturned  );
-                        jsonObj.getJSONArray("user");
+///////ERROR IS HAPPENING HERE
+                       //answerReturned = jsonObj.getInt(TAG_SUCCESS);
+                       // Log.d("CAMPUSRUNNER_API", "answerReturned "+ answerReturned  );
+                        //get user logged in
+                        //jsonObj.getJSONArray("user");
                         //Catch needed to use jsonObj.getInt....
-                        if(answerReturned == 1){
-                            intentLogIn = new Intent(getApplicationContext(), Login.class);
-                            startActivity(intentLogIn);
-                            //finish();
-                        }else{
-                            //throw a loop back, instance of correct creds not valid.
-
-                        }
-                    }catch (JSONException jError){
-                        jError.printStackTrace();
-                        jError.getLocalizedMessage();
-                    }
-                }
-            });
+//                        if(answerReturned == 1){
+//                            Log.d("logInReturn","should have return to home screen");
+//                            intentLogIn = new Intent(getApplicationContext(), Login.class);
+//                            startActivity(intentLogIn);
+//                            //finish();
+//                        }else{
+//                            //throw a loop back, instance of correct creds not valid.
+//
+////                        }
+//                    }catch (JSONException jError){
+//                        jError.printStackTrace();
+//                        jError.getLocalizedMessage();
+//                    }
+               // }
+           // });
             return "blk";
         }
 
         public int getAnswerReturned() {
             return answerReturned;
         }
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            // dismiss the dialog after getting all products
+            pDialog.dismiss();
+            Toast.makeText(getBaseContext(), "User created successfully!", Toast.LENGTH_SHORT).show();
+
+            intentLogIn = new Intent(getApplicationContext(), Login.class);
+            startActivity(intentLogIn);
+        }
+
     }
 
 
 
-//    @Override
-//    protected void onPostCreate(Bundle savedInstanceState) {
-//        super.onPostCreate(savedInstanceState);
-//
-//        // Trigger the initial hide() shortly after the activity has been
-//        // created, to briefly hint to the user that UI controls
-//        // are available.
-//        delayedHide(100);
-//    }
-//
-//    private void toggle() {
-//        if (mVisible) {
-//            hide();
-//        } else {
-//            show();
-//        }
-//    }
-
-//    private void hide() {
-//        // Hide UI first
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.hide();
-//        }
-       // mControlsView.setVisibility(View.GONE);
-//        mVisible = false;
-//
-//        // Schedule a runnable to remove the status and navigation bar after a delay
-//        mHideHandler.removeCallbacks(mShowPart2Runnable);
-//        mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
-//    }
-//
-//    @SuppressLint("InlinedApi")
-//    private void show() {
-//        // Show the system bar
-//        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-//        mVisible = true;
-//
-//        // Schedule a runnable to display UI elements after a delay
-//        mHideHandler.removeCallbacks(mHidePart2Runnable);
-//        mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-//    }
-//
-//    /**
-//     * Schedules a call to hide() in delay milliseconds, canceling any
-//     * previously scheduled calls.
-//     */
-//    private void delayedHide(int delayMillis) {
-//        mHideHandler.removeCallbacks(mHideRunnable);
-//        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-//    }
 }
